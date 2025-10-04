@@ -18,14 +18,19 @@
     "react-icons": "^4.10.1"
   },
   "devDependencies": {
-    "typescript": "^5.3.0",
-    "@types/node": "^20.5.1",
-    "@types/react": "^19.2.13",
-    "@types/react-dom": "^19.2.3",    
-    "@tailwindcss/postcss": "^4.3.3",
-    "eslint": "^9.9.0",
-    "eslint-config-next": "15.5.4",
-    "@eslint/eslintrc": "^3.2.1"
-  }
+  "tailwindcss": "^3.3.3",
+  "@tailwindcss/postcss7-compat": "^3.3.3",
+  "postcss": "^8.4.30",
+  "autoprefixer": "^10.4.14",
+  "typescript": "^5",
+  "@types/node": "^20",
+  "@types/react": "^19",
+  "@types/react-dom": "^19",
+  "eslint": "^9",
+  "eslint-config-next": "15.5.4",
+  "@eslint/eslintrc": "^3"
 }
+
+}
+
 
