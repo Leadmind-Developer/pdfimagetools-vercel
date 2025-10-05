@@ -1,93 +1,70 @@
 "use client";
-
-import React, { useState, useRef } from 'react';
-import axios from 'axios';
+import React, { useState, useRef } from "react";
+import axios from "axios";
 
 const WordToPdfUploader = () => {
   const [files, setFiles] = useState([]);
   const [uploads, setUploads] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const dropRef = useRef(null);
-
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
   const handleFilesSelect = (selectedFiles) => {
-    const validFiles = Array.from(selectedFiles).filter(file =>
-      file.name.toLowerCase().endsWith('.docx')
+    const validFiles = Array.from(selectedFiles).filter(
+      (file) => file.name.endsWith(".docx")
     );
     if (validFiles.length === 0) {
-      setError('Please select valid Word (.docx) files.');
+      setError("Please select valid Word (.docx) files.");
       return;
     }
     setFiles(validFiles);
-    setError('');
+    setError("");
   };
-
-  const handleFileChange = (e) => handleFilesSelect(e.target.files);
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    handleFilesSelect(e.dataTransfer.files);
-    dropRef.current.classList.remove('drag-over');
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    dropRef.current.classList.add('drag-over');
-  };
-
-  const handleDragLeave = () => dropRef.current.classList.remove('drag-over');
 
   const handleUpload = async () => {
-    if (files.length === 0) return;
-
-    setError('');
+    setError("");
     setUploads([]);
 
     for (const file of files) {
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
-      const uploadData = {
-        name: file.name,
-        progress: 0,
-        status: 'uploading',
-        downloadUrl: '',
-      };
-      setUploads(prev => [...prev, uploadData]);
+      const uploadData = { name: file.name, progress: 0, status: "uploading" };
+      setUploads((prev) => [...prev, uploadData]);
 
       try {
         const response = await axios.post(
-          `${API_BASE}/convert/word-to-pdf`,
+          `${API_BASE}/convert/office-to-pdf`,
           formData,
           {
-            responseType: 'blob',
-            headers: { 'Content-Type': 'multipart/form-data' },
+            responseType: "blob",
+            headers: { "Content-Type": "multipart/form-data" },
             onUploadProgress: (event) => {
               const percent = Math.round((event.loaded * 100) / event.total);
-              setUploads(prev =>
-                prev.map(u => u.name === file.name ? { ...u, progress: percent } : u)
+              setUploads((prev) =>
+                prev.map((u) =>
+                  u.name === file.name ? { ...u, progress: percent } : u
+                )
               );
             },
           }
         );
 
-        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const blob = new Blob([response.data], { type: "application/pdf" });
         const url = URL.createObjectURL(blob);
-        setUploads(prev =>
-          prev.map(u =>
+
+        setUploads((prev) =>
+          prev.map((u) =>
             u.name === file.name
-              ? { ...u, status: 'done', downloadUrl: url }
+              ? { ...u, status: "done", downloadUrl: url }
               : u
           )
         );
       } catch (err) {
-        console.error('Upload failed:', err);
-        setUploads(prev =>
-          prev.map(u =>
-            u.name === file.name
-              ? { ...u, status: 'error' }
-              : u
+        console.error("Upload failed:", err);
+        setUploads((prev) =>
+          prev.map((u) =>
+            u.name === file.name ? { ...u, status: "error" } : u
           )
         );
       }
@@ -101,26 +78,32 @@ const WordToPdfUploader = () => {
       <div
         ref={dropRef}
         className="drop-zone"
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
+        onDrop={(e) => {
+          e.preventDefault();
+          handleFilesSelect(e.dataTransfer.files);
+        }}
+        onDragOver={(e) => e.preventDefault()}
       >
-        <p>Drag & drop Word (.docx) files here, or click to browse</p>
+        <p>Drag & drop DOCX files here, or click to browse</p>
         <input
           type="file"
           accept=".docx"
           id="fileInput"
           multiple
-          onChange={handleFileChange}
-          style={{ display: 'none' }}
+          onChange={(e) => handleFilesSelect(e.target.files)}
+          style={{ display: "none" }}
         />
-        <label htmlFor="fileInput" className="upload-label">Browse</label>
+        <label htmlFor="fileInput" className="upload-label">
+          Browse
+        </label>
       </div>
 
       {files.length > 0 && (
         <ul className="file-list">
           {files.map((file, idx) => (
-            <li key={idx}><strong>{file.name}</strong></li>
+            <li key={idx}>
+              <strong>{file.name}</strong>
+            </li>
           ))}
         </ul>
       )}
@@ -134,17 +117,25 @@ const WordToPdfUploader = () => {
       {uploads.map((upload, idx) => (
         <div key={idx} className="upload-status">
           <p>{upload.name}</p>
-          {upload.status === 'uploading' && (
+          {upload.status === "uploading" && (
             <div className="progress-bar">
-              <div className="progress" style={{ width: `${upload.progress}%` }}></div>
+              <div
+                className="progress"
+                style={{ width: `${upload.progress}%` }}
+              ></div>
             </div>
           )}
-          {upload.status === 'done' && upload.downloadUrl && (
-            <a href={upload.downloadUrl} download={upload.name.replace('.docx', '.pdf')}>
-              Download Converted File
+          {upload.status === "done" && upload.downloadUrl && (
+            <a
+              href={upload.downloadUrl}
+              download={upload.name.replace(".docx", ".pdf")}
+            >
+              Download Converted PDF
             </a>
           )}
-          {upload.status === 'error' && <p className="error">Conversion failed.</p>}
+          {upload.status === "error" && (
+            <p className="error">Conversion failed.</p>
+          )}
         </div>
       ))}
 
@@ -163,9 +154,6 @@ const WordToPdfUploader = () => {
           border-radius: 8px;
           margin-bottom: 15px;
         }
-        .drop-zone.drag-over {
-          background-color: #f0f8ff;
-        }
         .upload-label {
           display: inline-block;
           margin-top: 10px;
@@ -174,17 +162,6 @@ const WordToPdfUploader = () => {
           color: #fff;
           border-radius: 4px;
           cursor: pointer;
-        }
-        .file-list {
-          list-style: none;
-          padding: 0;
-          margin-bottom: 10px;
-        }
-        .file-list li {
-          margin-bottom: 5px;
-        }
-        .upload-status {
-          margin-top: 15px;
         }
         .progress-bar {
           width: 100%;
@@ -200,11 +177,6 @@ const WordToPdfUploader = () => {
         .error {
           color: red;
           margin-top: 10px;
-        }
-        a {
-          color: #28a745;
-          font-weight: bold;
-          text-decoration: none;
         }
       `}</style>
     </div>
