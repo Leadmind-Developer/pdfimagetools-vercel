@@ -15,7 +15,7 @@ const Features = () => (
         <Link href="/pdf-to-word" className="feature-card">
           Convert PDF to Word
         </Link>
-        <Link href="/pdf-to-powerpoint" className="feature-card">
+        <Link href="/pdf-to-ppt" className="feature-card">
           Convert PDF to PowerPoint
         </Link>
         <Link href="/pdf-to-image" className="feature-card">
@@ -58,4 +58,5 @@ const Features = () => (
 );
 
 export default Features;
+
 
