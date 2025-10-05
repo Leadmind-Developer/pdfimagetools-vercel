@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import {
-  FaFileWord, FaFilePowerpoint, FaImage, FaFilePdf, FaFileArchive,
+  FaFileWord, FaFilePowerpoint, FaFileExcel, FaImage, FaFilePdf, FaFileArchive,
   FaEraser, FaIdCard, FaMagic, FaChevronDown, FaChevronUp, FaSyncAlt
 } from 'react-icons/fa';
 
@@ -14,28 +14,42 @@ import PdfToImageUploader from './PdfToImageUploader';
 import ImageToPdfUploader from './ImageToPdfUploader';
 import PdfCombineUploader from './PdfCombineUploader';
 import ImageConverter from './ImageConverter';
+import PptToPdfUploader from './PptToPdfUploader';
+import ExcelToPdfUploader from './ExcelToPdfUploader';
+import WordToPdfUploader from './WordToPdfUploader';
+import PdfToExcelUploader from './PdfToExcelUploader';
 
 const tools = {
   "PDF to Word": { component: <PdfToWordUploader />, icon: <FaFileWord /> },
-  "PDF to PPT": { component: <PdfToPptxUploader />, icon: <FaFilePowerpoint /> },
+  "PDF to PowerPoint": { component: <PdfToPptxUploader />, icon: <FaFilePowerpoint /> },
   "PDF to Image": { component: <PdfToImageUploader />, icon: <FaImage /> },
   "Image to PDF": { component: <ImageToPdfUploader />, icon: <FaFilePdf /> },
   "Combine PDFs": { component: <PdfCombineUploader />, icon: <FaFileArchive /> },
   "Remove Image Background": { component: <RemoveBgUploader />, icon: <FaEraser /> },
   "Resize Passport Photo": { component: <PassportPhotoUploader />, icon: <FaIdCard /> },
   "Image Converter": { component: <ImageConverter />, icon: <FaSyncAlt /> },
+  "PowerPoint to PDF": { component: <PptToPdfUploader />, icon: <FaFilePowerpoint /> },
+  "Word to PDF": { component: <WordToPdfUploader />, icon: <FaFileWord /> },
+  "Excel to PDF": { component: <ExcelToPdfUploader />, icon: <FaFileExcel /> },
+  "PDF to Excel": { component: <PdfToExcelUploader />, icon: <FaFileExcel /> },
 };
 
 const tips = {
   "PDF to Word": "💡 Tip: Upload multiple PDFs for batch conversion.",
-  "PDF to PPT": "💡 Tip: Best for slide-based PDF content.",
-  "PDF to Image": "💡 Tip: Each page will be saved as a separate high-resolution image.",
-  "Image to PDF": "💡 Tip: You can reorder the images before converting.",
-  "Combine PDFs": "💡 Tip: Drag to reorder files before merging.",
-  "Remove Image Background": "💡 Tip: PNG output supports transparent backgrounds.",
-  "Resize Passport Photo": "💡 Tip: Use white background for compliance with standards.",
-  "Image Converter": "💡 Tip: Convert images to or from SVG, PNG, JPG, or WebP formats."
+  "PDF to PowerPoint": "💡 Tip: Ideal for turning presentation-style PDFs into editable slides.",
+  "PDF to Image": "💡 Tip: Each page is exported as a high-resolution image.",
+  "Image to PDF": "💡 Tip: You can reorder images before converting to a single PDF.",
+  "Combine PDFs": "💡 Tip: Drag and drop files to reorder them before merging.",
+  "Remove Image Background": "💡 Tip: PNG output keeps transparent backgrounds for design flexibility.",
+  "Resize Passport Photo": "💡 Tip: Use a white background for better compliance with visa standards.",
+  "Image Converter": "💡 Tip: Quickly convert between PNG, JPG, WebP, or SVG formats.",
+  "PowerPoint to PDF": "💡 Tip: Perfect for sharing presentations as read-only PDFs.",
+  "Word to PDF": "💡 Tip: Maintain formatting consistency when sharing Word documents.",
+  "Excel to PDF": "💡 Tip: Ideal for exporting tables and reports for distribution.",
+  "PDF to Excel": "💡 Tip: Extract data tables into editable Excel sheets easily.",
 };
+
+export { tools, tips };
 
 const ToolSelector = () => {
   const [selected, setSelected] = useState("PDF to Word");
@@ -152,3 +166,4 @@ const ToolSelector = () => {
 };
 
 export default ToolSelector;
+
