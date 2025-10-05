@@ -3,10 +3,10 @@ import Link from "next/link";
 
 const Footer = () => (
   <footer className="footer bg-gray-50 border-t border-gray-200 py-10 mt-16" id="contact">
-    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left text-gray-700">
-      
+    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-700">
+
       {/* Left column */}
-      <div>
+      <div className="text-center md:text-left">
         <h4 className="text-lg font-semibold mb-3 text-gray-900">Convert PDFs</h4>
         <ul className="space-y-2">
           <li><Link href="/pdf-to-word" className="hover:text-blue-600">PDF to Word</Link></li>
@@ -17,7 +17,7 @@ const Footer = () => (
       </div>
 
       {/* Center column */}
-      <div className="flex flex-col items-center justify-center">
+      <div className="text-center md:text-center flex flex-col justify-center">
         <p className="text-sm text-gray-600 mb-2">
           &copy; {new Date().getFullYear()} <strong>Leadmind Developer</strong>. All rights reserved.
         </p>
@@ -34,7 +34,7 @@ const Footer = () => (
       </div>
 
       {/* Right column */}
-      <div>
+      <div className="text-center md:text-right">
         <h4 className="text-lg font-semibold mb-3 text-gray-900">Image & File Tools</h4>
         <ul className="space-y-2">
           <li><Link href="/combine-pdfs" className="hover:text-blue-600">Combine PDFs</Link></li>
