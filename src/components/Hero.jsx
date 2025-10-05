@@ -16,7 +16,7 @@ const Hero = () => (
 
       <Link
         href="/tools"
-        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg shadow-md transition-all duration-200"
+        className="inline-block bg-white hover:bg-gray-100 text-blue-600 font-semibold px-8 py-4 rounded-lg shadow-md transition-all duration-200"
       >
         Start Converting Now — Free
       </Link>
