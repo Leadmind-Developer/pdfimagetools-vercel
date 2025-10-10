@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pdfimagetools.web.app/sitemap.xml
+Sitemap: https://pdfimagetools.app/sitemap.xml
