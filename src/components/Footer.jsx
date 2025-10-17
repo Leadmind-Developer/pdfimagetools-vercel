@@ -17,17 +17,21 @@ const Footer = () => (
       </div>
 
       {/* Center column */}
-      <div className="text-center md:text-center flex flex-col justify-center">
+      <div className="text-center flex flex-col justify-center">
         <p className="text-sm text-gray-600 mb-2">
-          &copy; {new Date().getFullYear()} <strong>Leadmind Developer</strong>. All rights reserved.
+          © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
         </p>
-        <p className="text-sm">
-          <Link href="/privacy" className="hover:text-blue-600">Privacy Policy</Link> &nbsp;|&nbsp; 
-          <Link href="/terms" className="hover:text-blue-600">Terms of Service</Link> &nbsp;|&nbsp; 
-          <a href="mailto:support@pdfimagetools.com" className="hover:text-blue-600">Contact</a>
-        </p>
-        <p className="text-sm mt-2">
-          📧 <a href="mailto:support@thetechtrep.com" className="hover:text-blue-600 font-medium">
+
+        <nav aria-label="Legal links" className="text-sm">
+          <Link href="/privacy" className="hover:text-blue-600">Privacy Policy</Link>
+          <span className="mx-2 text-gray-400">|</span>
+          <Link href="/terms" className="hover:text-blue-600">Terms of Service</Link>
+          <span className="mx-2 text-gray-400">|</span>
+          <a href="mailto:support@pdfimagetools.app" className="hover:text-blue-600">Contact</a>
+        </nav>
+
+        <p className="text-sm mt-3 text-gray-500">
+          📧 <a href="mailto:support@pdfimagetools.app" className="hover:text-blue-600 font-medium">
             support@pdfimagetools.app
           </a>
         </p>
