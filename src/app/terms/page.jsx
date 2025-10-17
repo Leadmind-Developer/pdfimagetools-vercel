@@ -79,10 +79,10 @@ export default function TermsPage() {
           <p>
             For any questions, reach out at{" "}
             <a
-              href="mailto:support@thetechtrep.com"
+              href="mailto:support@pdfimagetool.app"
               className="text-blue-600 hover:underline"
             >
-              support@thetechtrep.com
+              support@pdfimagetool.app
             </a>
             .
           </p>
@@ -91,3 +91,4 @@ export default function TermsPage() {
     </main>
   );
 }
+
