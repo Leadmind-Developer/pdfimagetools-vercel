@@ -72,19 +72,21 @@ const WordToPdfUploader = () => {
   };
 
   return (
-    <div className="pdf-uploader">
-      <h2>Convert Word to PDF (Batch Upload)</h2>
+    <div className="pdf-uploader max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4 text-gray-900">Convert Word to PDF (Batch Upload)</h2>
 
+      {/* Dropzone */}
       <div
         ref={dropRef}
-        className="drop-zone"
+        className="drop-zone border-2 border-dashed border-gray-400 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition"
         onDrop={(e) => {
           e.preventDefault();
           handleFilesSelect(e.dataTransfer.files);
         }}
         onDragOver={(e) => e.preventDefault()}
+        onClick={() => document.getElementById("fileInput").click()}
       >
-        <p>Drag & drop DOCX files here, or click to browse</p>
+        <p className="text-gray-700 mb-2">Drag & drop DOCX files here, or click to browse</p>
         <input
           type="file"
           accept=".docx"
@@ -93,90 +95,70 @@ const WordToPdfUploader = () => {
           onChange={(e) => handleFilesSelect(e.target.files)}
           style={{ display: "none" }}
         />
-        <label htmlFor="fileInput" className="upload-label">
-          Browse
-        </label>
       </div>
 
+      {error && <p className="text-red-500 mt-3">{error}</p>}
+
+      {/* Upload Button */}
       {files.length > 0 && (
-        <ul className="file-list">
-          {files.map((file, idx) => (
-            <li key={idx}>
-              <strong>{file.name}</strong>
-            </li>
-          ))}
-        </ul>
+        <button
+          onClick={handleUpload}
+          className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+        >
+          Upload and Convert
+        </button>
       )}
 
-      {error && <p className="error">{error}</p>}
-
-      <button onClick={handleUpload} disabled={files.length === 0}>
-        Upload and Convert
-      </button>
-
-      {uploads.map((upload, idx) => (
-        <div key={idx} className="upload-status">
-          <p>{upload.name}</p>
-          {upload.status === "uploading" && (
-            <div className="progress-bar">
-              <div
-                className="progress"
-                style={{ width: `${upload.progress}%` }}
-              ></div>
-            </div>
-          )}
-          {upload.status === "done" && upload.downloadUrl && (
-            <a
-              href={upload.downloadUrl}
-              download={upload.name.replace(".docx", ".pdf")}
+      {/* Upload Previews */}
+      {uploads.length > 0 && (
+        <div className="mt-8 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {uploads.map((upload, idx) => (
+            <div
+              key={idx}
+              className="upload-card border rounded-lg shadow p-4 flex flex-col justify-between bg-white hover:shadow-lg transition"
             >
-              Download Converted PDF
-            </a>
-          )}
-          {upload.status === "error" && (
-            <p className="error">Conversion failed.</p>
-          )}
+              <div>
+                <h4 className="font-semibold text-gray-800 mb-2 truncate">{upload.name}</h4>
+
+                {/* Progress Bar */}
+                {upload.status === "uploading" && (
+                  <div className="w-full bg-gray-200 rounded h-3 mt-2">
+                    <div
+                      className="bg-green-500 h-3 rounded transition-all"
+                      style={{ width: `${upload.progress}%` }}
+                    ></div>
+                  </div>
+                )}
+
+                {/* Success */}
+                {upload.status === "done" && upload.downloadUrl && (
+                  <p className="text-green-600 font-medium mt-2">Conversion complete!</p>
+                )}
+
+                {/* Error */}
+                {upload.status === "error" && (
+                  <p className="text-red-500 mt-2">Conversion failed.</p>
+                )}
+              </div>
+
+              {/* Actions */}
+              {upload.status === "done" && upload.downloadUrl && (
+                <a
+                  href={upload.downloadUrl}
+                  download={upload.name.replace(".docx", ".pdf")}
+                  className="mt-3 inline-block text-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                >
+                  Download PDF
+                </a>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
+      )}
 
       <style jsx>{`
-        .pdf-uploader {
-          max-width: 500px;
-          margin: 0 auto;
-          padding: 20px;
-          font-family: Arial, sans-serif;
-        }
-        .drop-zone {
-          border: 2px dashed #aaa;
-          padding: 20px;
-          text-align: center;
-          cursor: pointer;
-          border-radius: 8px;
-          margin-bottom: 15px;
-        }
-        .upload-label {
-          display: inline-block;
-          margin-top: 10px;
-          padding: 6px 12px;
-          background: #007bff;
-          color: #fff;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-        .progress-bar {
-          width: 100%;
-          background: #e0e0e0;
-          border-radius: 4px;
-          margin-top: 5px;
-        }
-        .progress {
-          height: 10px;
-          background: #28a745;
-          border-radius: 4px;
-        }
-        .error {
-          color: red;
-          margin-top: 10px;
+        .drop-zone p {
+          font-size: 16px;
         }
       `}</style>
     </div>
