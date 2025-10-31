@@ -4,66 +4,56 @@ import Footer from "../../components/Footer";
 import WordToPdfUploader from "../../components/WordToPdfUploader";
 
 export const metadata = {
-  title: "Free Word to PDF Converter — High Quality, No Watermark | PDFImageTools",
+  title: "Free Word to PDF Converter | PDFImageTools",
   description:
-    "Convert Word (DOC/DOCX) to PDF online for free. Preserve layout, fonts, and images. Fast, secure, no signup required.",
+    "Quickly convert Word documents (DOC/DOCX) to PDF online. Maintain layouts, fonts, and images. No signup required, fast and secure.",
   alternates: { canonical: "https://pdfimagetools.app/word-to-pdf" },
 };
 
 export default function WordToPdfPage() {
   return (
-    <div className="word-to-pdf-page">
+    <div className="flex flex-col min-h-screen">
       <Header />
 
       {/* Hero Section */}
-      <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900">DOC to PDF</h1>
-        <p className="mb-6 text-lg text-gray-600">
-          Use our free online tool to convert your DOC/DOCX files to PDF while keeping document formatting intact. Upload up to 20 files, no email required, and get results instantly.
+      <main className="flex-1 container mx-auto px-4 py-12">
+        <h1 className="text-4xl font-bold mb-4 text-gray-900">
+          Convert Word Files to PDF
+        </h1>
+        <p className="mb-6 text-lg text-gray-700">
+          Instantly transform your Word documents into high-quality PDF files. Upload multiple DOCX files at once and get perfectly formatted PDFs without any watermarks.
         </p>
 
         {/* File Uploader */}
         <WordToPdfUploader />
 
-        {/* Instructions Section */}
+        {/* Step-by-Step Guide */}
         <section className="mt-12">
-          <h2 className="text-2xl font-semibold mb-4">How to Convert DOC to PDF</h2>
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+            How It Works
+          </h2>
           <p className="text-gray-700 mb-4">
-            Follow these simple steps to convert your Word documents to PDF:
+            Follow these simple steps to convert your Word documents:
           </p>
           <ol className="list-decimal list-inside space-y-3 text-gray-700">
-            <li>
-              Click the <strong>UPLOAD FILES</strong> button or drag your DOC/DOCX files to the drop area.
-            </li>
-            <li>
-              Upload up to 20 files at a time. Conversion starts immediately.
-            </li>
-            <li>
-              Download individual PDFs using the file download button or all files at once with <strong>DOWNLOAD ALL</strong>.
-            </li>
-            <li>
-              If you have more than 20 files, click <strong>CLEAR QUEUE</strong> and repeat the process.
-            </li>
+            <li>Select DOCX files from your computer or drag them into the upload area.</li>
+            <li>Our system converts your files instantly while preserving fonts, images, and layout.</li>
+            <li>Download each PDF individually or use the batch download option for all files.</li>
+            <li>If needed, clear the current files and upload a new batch of Word documents.</li>
           </ol>
         </section>
 
-        {/* Thumbnails / Downloads Section */}
-        <section className="mt-12 bg-gray-50 py-8 px-4 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Download Your PDFs</h2>
-          <p className="text-gray-700 mb-3">
-            After conversion, use the thumbnails to download individual PDFs. For convenience, click <strong>DOWNLOAD ALL</strong> to receive all files in a compressed ZIP format.
-          </p>
-        </section>
-
-        {/* Languages Section */}
-        <section className="mt-12 py-8 px-4">
-          <h2 className="text-2xl font-semibold mb-4">Available Languages</h2>
+        {/* Languages */}
+        <section className="mt-12">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+            Supported Languages
+          </h2>
           <div className="flex flex-wrap gap-2 text-gray-700">
             {[
               "English", "Deutsch", "Español", "Français", "Indonesia",
               "Italiano", "日本語", "한국어", "Nederlands", "Polski",
               "Português", "Русский", "Türkçe", "Українська",
-              "Tiếng việt", "中文"
+              "Tiếng Việt", "中文"
             ].map((lang) => (
               <span key={lang} className="px-3 py-1 bg-gray-200 rounded-full">
                 {lang}
@@ -72,64 +62,67 @@ export default function WordToPdfPage() {
           </div>
         </section>
 
-        {/* About Word & PDF Section */}
-        <section className="mt-12 bg-gray-50 py-8 px-4 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">About DOC and PDF</h2>
+        {/* About Word and PDF */}
+        <section className="mt-12 bg-gray-50 py-8 px-6 rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+            Understanding Word and PDF
+          </h2>
           <p className="text-gray-700 mb-3">
-            A DOC or DOCX file is a Word document created in Microsoft Word or Google Docs. It contains text, images, and formatting information pulled from your system to create a page layout. DOC files are relatively small and easy to edit.
+            Word documents (DOC/DOCX) store your text, images, and formatting. They are editable and ideal for content creation.
           </p>
           <p className="text-gray-700 mb-3">
-            A PDF (Portable Document Format) preserves the document layout and fonts regardless of device or software. PDFs are self-contained, which makes them harder to edit but ideal for sharing or printing.
+            PDFs, on the other hand, are designed to preserve the exact layout and appearance across all devices. They are ideal for sharing and printing documents while ensuring consistency.
           </p>
           <p className="text-gray-700">
-            Our tool preserves formatting, fonts, images, and layout in your PDFs. Rare fonts may be replaced with similar ones.
+            Our tool carefully maintains your document formatting, but uncommon fonts may be substituted for the closest available alternatives.
           </p>
         </section>
 
-        {/* Safety Section */}
-        <section className="mt-12 py-8 px-4">
-          <h2 className="text-2xl font-semibold mb-4">Is it Safe?</h2>
+        {/* Privacy */}
+        <section className="mt-12 py-8 px-6">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900">Privacy & Security</h2>
           <p className="text-gray-700 mb-3">
-            All uploads are automatically deleted after 60 minutes. Conversions are done on our server copies — your original files remain safe on your device.
+            All uploaded files are automatically deleted after one hour. Conversion is performed on server copies; your original files remain on your device.
           </p>
           <p className="text-gray-700">
-            You never need to provide an email. Privacy is guaranteed.
+            No email or account is required. Your privacy is our priority.
           </p>
         </section>
 
-        {/* FAQ Section */}
+        {/* FAQ */}
         <section className="mt-12 py-8">
-          <h2 className="text-2xl font-semibold mb-8 text-center text-gray-800">Frequently Asked Questions</h2>
+          <h2 className="text-2xl font-semibold mb-8 text-center text-gray-900">
+            Frequently Asked Questions
+          </h2>
           <div className="space-y-6 max-w-3xl mx-auto text-gray-700">
             <div>
-              <h4 className="text-lg font-semibold text-gray-900">Is this tool free?</h4>
-              <p>Yes — fully free with no watermarks or subscription.</p>
+              <h4 className="text-lg font-semibold text-gray-900">Is this service free?</h4>
+              <p>Yes, you can convert Word files to PDF without any charge or watermark.</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold text-gray-900">Do I need an account?</h4>
-              <p>No account or sign-up is needed. Start converting immediately.</p>
+              <p>No account or registration is required to use this tool.</p>
             </div>
             <div>
-              <h4 className="text-lg font-semibold text-gray-900">Are my files secure?</h4>
-              <p>Files are deleted automatically after 1 hour. Conversion uses server copies only.</p>
+              <h4 className="text-lg font-semibold text-gray-900">Are my files safe?</h4>
+              <p>Files are automatically deleted after 60 minutes. Conversions use copies on the server only.</p>
             </div>
             <div>
-              <h4 className="text-lg font-semibold text-gray-900">Which formats are supported?</h4>
-              <p>Upload DOC or DOCX files. You can process up to 20 files at a time.</p>
+              <h4 className="text-lg font-semibold text-gray-900">Which file types are supported?</h4>
+              <p>You can upload DOC and DOCX files, up to 20 files per batch.</p>
             </div>
           </div>
         </section>
 
-        {/* Related Tools / Discover More */}
-        <section className="mt-12 py-8 px-4 bg-gray-50 rounded-lg">
-          <h2 className="text-2xl font-semibold mb-4">Discover More</h2>
+        {/* Related Tools */}
+        <section className="mt-12 py-8 px-6 bg-gray-50 rounded-lg">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-900">Other Tools You May Like</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
-            <li>Google Docs</li>
-            <li>PDF editing software</li>
-            <li>Word processor tools</li>
-            <li>Conversion and cloud storage</li>
-            <li>Document management systems</li>
-            <li>Document formatting tips and templates</li>
+            <li>Convert Excel to PDF</li>
+            <li>PowerPoint to PDF</li>
+            <li>PDF editing tools</li>
+            <li>Image to PDF converter</li>
+            <li>Document merging and splitting</li>
           </ul>
         </section>
       </main>
