@@ -16,6 +16,7 @@
     "jszip": "^3.10.1",
     "file-saver": "^2.0.5",
     "konva": "^9.3.20",
+    "helmet": "^8.1.0",
     "react-konva": "^19.0.6",
     "react-icons": "^5.5.0",
     "react-helmet": "^6.1.0",
@@ -33,3 +34,4 @@
     "autoprefixer": "^10.4.14"
   }
 }
+
