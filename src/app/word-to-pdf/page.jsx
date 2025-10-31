@@ -12,20 +12,21 @@ export const metadata = {
 };
 
 export default function WordToPdfPage() {
-  const containerStyle: React.CSSProperties = {
+  // Inline styles
+  const containerStyle = {
     maxWidth: "1200px",
     margin: "0 auto",
     padding: "2rem",
   };
 
-  const sectionStyle: React.CSSProperties = {
+  const sectionStyle = {
     marginBottom: "4rem",
     padding: "2rem",
     borderRadius: "8px",
     backgroundColor: "#f9f9f9",
   };
 
-  const headingStyle: React.CSSProperties = {
+  const headingStyle = {
     fontSize: "2.5rem",
     fontWeight: 700,
     marginBottom: "1rem",
@@ -33,7 +34,7 @@ export default function WordToPdfPage() {
     textAlign: "center",
   };
 
-  const subHeadingStyle: React.CSSProperties = {
+  const subHeadingStyle = {
     fontSize: "1.25rem",
     marginBottom: "1.5rem",
     color: "#555",
@@ -41,12 +42,15 @@ export default function WordToPdfPage() {
     textAlign: "center",
   };
 
-  const listStyle: React.CSSProperties = {
+  const listStyle = {
     paddingLeft: "1.5rem",
     marginBottom: "1rem",
+    color: "#555",
+    fontSize: "1.1rem",
+    lineHeight: 1.6,
   };
 
-  const badgeStyle: React.CSSProperties = {
+  const badgeStyle = {
     display: "inline-block",
     padding: "0.5rem 1rem",
     margin: "0.25rem",
@@ -56,7 +60,7 @@ export default function WordToPdfPage() {
     color: "#333",
   };
 
-  const homeButtonStyle: React.CSSProperties = {
+  const homeButtonStyle = {
     display: "inline-block",
     padding: "0.5rem 1rem",
     marginBottom: "2rem",
@@ -92,7 +96,7 @@ export default function WordToPdfPage() {
           {/* Step-by-Step Guide */}
           <section style={sectionStyle}>
             <h2 style={headingStyle}>How It Works</h2>
-            <ol style={{ ...listStyle, marginLeft: "1rem", color: "#555", fontSize: "1.1rem" }}>
+            <ol style={listStyle}>
               <li>Select DOCX files from your computer or drag them into the upload area.</li>
               <li>Our system converts your files instantly while preserving fonts, images, and layout.</li>
               <li>Download each PDF individually or use the batch download option for all files.</li>
