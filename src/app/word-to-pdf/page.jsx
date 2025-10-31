@@ -15,8 +15,11 @@ export default function WordToPdfPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
 
-      {/* Hero / Intro */}
+      {/* HERO / INTRO */}
       <section className="container mx-auto px-4 py-12 text-center md:text-left">
+        <div className="bg-green-200 text-green-900 p-2 mb-4 text-center font-bold rounded">
+          HERO SECTION RENDERED
+        </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
           Convert Word Files to PDF
         </h1>
@@ -25,13 +28,19 @@ export default function WordToPdfPage() {
         </p>
       </section>
 
-      {/* Uploader in simple main container */}
+      {/* UPLOADER */}
       <main className="container mx-auto px-4 py-12">
+        <div className="bg-blue-200 text-blue-900 p-2 mb-4 text-center font-bold rounded">
+          UPLOADER SECTION RENDERED
+        </div>
         <WordToPdfUploader />
       </main>
 
-      {/* Remaining content: Guides, FAQ, Languages */}
+      {/* HOW IT WORKS */}
       <section className="container mx-auto px-4 py-12 bg-gray-50 rounded-lg max-w-5xl mb-12">
+        <div className="bg-yellow-200 text-yellow-900 p-2 mb-4 text-center font-bold rounded">
+          HOW IT WORKS SECTION RENDERED
+        </div>
         <h2 className="text-3xl font-semibold mb-6 text-gray-900 text-center">
           How It Works
         </h2>
@@ -43,7 +52,11 @@ export default function WordToPdfPage() {
         </ol>
       </section>
 
+      {/* SUPPORTED LANGUAGES */}
       <section className="container mx-auto px-4 py-12 max-w-5xl mb-12">
+        <div className="bg-purple-200 text-purple-900 p-2 mb-4 text-center font-bold rounded">
+          SUPPORTED LANGUAGES SECTION RENDERED
+        </div>
         <h2 className="text-3xl font-semibold mb-6 text-gray-900 text-center">
           Supported Languages
         </h2>
@@ -61,7 +74,11 @@ export default function WordToPdfPage() {
         </div>
       </section>
 
+      {/* FAQ */}
       <section className="container mx-auto px-4 py-12 bg-gray-50 rounded-lg max-w-5xl mb-12">
+        <div className="bg-pink-200 text-pink-900 p-2 mb-4 text-center font-bold rounded">
+          FAQ SECTION RENDERED
+        </div>
         <h2 className="text-3xl font-semibold mb-6 text-gray-900 text-center">
           Frequently Asked Questions
         </h2>
