@@ -1,9 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+// src/app/image-converter/page.tsx
+import React from "react";
 import Footer from "../../components/Footer";
 import ImageConverter from "../../components/ImageConverter";
-import LanguageSelector from "../../components/LanguageSelector";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,104 +11,59 @@ export const metadata = {
   alternates: { canonical: "https://pdfimagetools.app/image-converter" },
 };
 
-const translations = {
-  en: {
-    heroTitle: "Convert Images Online",
-    heroSubtitle:
-      "Easily convert, resize, and optimize images in popular formats including JPG, PNG, WEBP, and SVG. Add watermarks and fine-tune image quality effortlessly — fast, secure, and free.",
-    stepsTitle: "How It Works",
-    steps: [
-      "Upload an image in JPG, PNG, WEBP, or SVG format.",
-      "Choose the desired output format, resize, or optimize as needed.",
-      "Click the convert button to generate the new image.",
-      "Download your converted image instantly or convert another file.",
-    ],
-    supportedTitle: "Supported Languages",
-    aboutTitle: "Why Use Our Image Converter?",
-    aboutText: [
-      "Converting images online allows you to work without installing software.",
-      "Optimize images for web or print while keeping quality intact.",
-      "Supports multiple formats and allows batch conversion for efficiency.",
-    ],
-    privacyTitle: "Privacy & Security",
-    privacyText: [
-      "All uploaded images are deleted automatically after one hour. Nothing is stored permanently.",
-      "Conversions happen securely using temporary files. No login or email required.",
-    ],
-    faqTitle: "Frequently Asked Questions",
-    faq: [
-      {
-        question: "Is the image converter free?",
-        answer: "Yes, it’s completely free — no limits, no watermarks, no hidden fees.",
-      },
-      {
-        question: "Which formats are supported?",
-        answer: "JPG, PNG, WEBP, and SVG are supported for upload and conversion.",
-      },
-      {
-        question: "Are my images safe?",
-        answer: "Absolutely. Files are deleted automatically after 60 minutes.",
-      },
-      {
-        question: "Can I resize or optimize images?",
-        answer: "Yes, you can resize, compress, and apply watermarks before downloading.",
-      },
-    ],
-    relatedTitle: "Other Tools You May Like",
-    relatedTools: [
-      "PDF to Word",
-      "PDF to Images",
-      "Compress PDF",
-      "Image to PDF",
-      "PDF Merge",
-    ],
-  },
-
-  yo: {
-    heroTitle: "Yi Aworan Pada Online",
-    heroSubtitle:
-      "Gbe awọn aworan soke lati JPG, PNG, WEBP, tabi SVG ki o si yi wọn pada, ṣe iwọn, tabi ṣe atunṣe didara. Fikun omi-ami ati ṣe atunṣe didara aworan ni rọọrun — yara, ailewu, ati ọfẹ.",
-    stepsTitle: "Bá A Ṣe Nṣiṣẹ́",
-    steps: [
-      "Gbe aworan kan soke ni JPG, PNG, WEBP, tabi SVG.",
-      "Yan ọna kika ti o fẹ, ṣe iwọn tabi ṣe atunṣe bi o ṣe nilo.",
-      "Tẹ bọtini yí padà lati gba aworan tuntun.",
-      "Gba aworan rẹ silẹ lẹsẹkẹsẹ tabi yipada miiran.",
-    ],
-    supportedTitle: "Àwọn Èdè Tí A Ṣe Atilẹ́yìn",
-    aboutTitle: "Kí Ló Dé Tí A Fi N Lo Oluyipada Aworan Wa?",
-    aboutText: [
-      "Yí awọn aworan pada lori ayelujara ki o le ṣiṣẹ laisi fifi software sori ẹrọ.",
-      "Ṣe atunṣe ati dinku iwọn faili fun wẹẹbu tabi titẹ laisi pipadanu didara.",
-      "Ṣe atilẹyin awọn ọna kika pupọ ati awọn iyipada ẹgbẹ fun ṣiṣe daradara.",
-    ],
-    privacyTitle: "Àṣírí & Aàbò",
-    privacyText: [
-      "Gbogbo awọn aworan ti a gbe soke ni a paarẹ laifọwọyi lẹ́yìn wákàtí kan.",
-      "Awọn iyipada naa ṣẹlẹ ni aabo pẹlu awọn faili igba diẹ. Ko si ìforúkọsílẹ̀ tàbí imeeli ti a beere.",
-    ],
-    faqTitle: "Ìbéèrè Tí A Máa N Béèrè",
-    faq: [
-      { question: "Ṣe ọ̀fẹ́ ni?", answer: "Bẹ́ẹ̀ni — ko si awọn aala, omi-ami, tabi owo t’akiyesi." },
-      {
-        question: "Àwọn ọna kika wo ni a ṣe atilẹyin?",
-        answer: "JPG, PNG, WEBP, ati SVG ni a ṣe atilẹyin fun gbigba ati iyipada.",
-      },
-      { question: "Ṣe awọn aworan mi wa ni aabo?", answer: "Bẹ́ẹ̀ni — a pa wọn lẹ́yìn iṣẹ́ju 60." },
-      {
-        question: "Ṣe mo le ṣe iwọn tabi dinku aworan?",
-        answer: "Bẹ́ẹ̀ni, o le ṣe iwọn, dinku, ati fi omi-ami kun ṣaaju gbigba silẹ.",
-      },
-    ],
-    relatedTitle: "Àwọn Ọpa Míì",
-    relatedTools: ["PDF sí Word", "PDF sí Aworan", "Kíkó PDF kù", "Aworan sí PDF", "Darapọ PDF"],
-  },
+const t = {
+  heroTitle: "Convert Images Online",
+  heroSubtitle:
+    "Easily convert, resize, and optimize images in popular formats including JPG, PNG, WEBP, and SVG. Add watermarks and fine-tune image quality effortlessly — fast, secure, and free.",
+  stepsTitle: "How It Works",
+  steps: [
+    "Upload an image in JPG, PNG, WEBP, or SVG format.",
+    "Choose the desired output format, resize, or optimize as needed.",
+    "Click the convert button to generate the new image.",
+    "Download your converted image instantly or convert another file.",
+  ],
+  supportedTitle: "Supported Languages",
+  aboutTitle: "Why Use Our Image Converter?",
+  aboutText: [
+    "Converting images online allows you to work without installing software.",
+    "Optimize images for web or print while keeping quality intact.",
+    "Supports multiple formats and allows batch conversion for efficiency.",
+  ],
+  privacyTitle: "Privacy & Security",
+  privacyText: [
+    "All uploaded images are deleted automatically after one hour. Nothing is stored permanently.",
+    "Conversions happen securely using temporary files. No login or email required.",
+  ],
+  faqTitle: "Frequently Asked Questions",
+  faq: [
+    {
+      question: "Is the image converter free?",
+      answer: "Yes, it’s completely free — no limits, no watermarks, no hidden fees.",
+    },
+    {
+      question: "Which formats are supported?",
+      answer: "JPG, PNG, WEBP, and SVG are supported for upload and conversion.",
+    },
+    {
+      question: "Are my images safe?",
+      answer: "Absolutely. Files are deleted automatically after 60 minutes.",
+    },
+    {
+      question: "Can I resize or optimize images?",
+      answer: "Yes, you can resize, compress, and apply watermarks before downloading.",
+    },
+  ],
+  relatedTitle: "Other Tools You May Like",
+  relatedTools: [
+    "PDF to Word",
+    "PDF to Images",
+    "Compress PDF",
+    "Image to PDF",
+    "PDF Merge",
+  ],
 };
 
 export default function ImageConverterPage() {
-  const [lang, setLang] = useState("en");
-  const t = translations[lang] || translations["en"];
-
   const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
   const sectionStyle = {
     marginBottom: "4rem",
@@ -163,12 +116,11 @@ export default function ImageConverterPage() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <main style={{ flex: 1 }}>
         <div style={containerStyle}>
-          {/* Home + Language Selector */}
+          {/* Home Link */}
           <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
             <Link href="/" style={homeButtonStyle}>
               PDFImageTools Home
             </Link>
-            <LanguageSelector currentLang={lang} onChange={setLang} />
           </div>
 
           {/* Hero */}
@@ -194,20 +146,7 @@ export default function ImageConverterPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t.supportedTitle}</h2>
             <div style={{ textAlign: "center" }}>
-              {[
-                "English",
-                "Yoruba",
-                "Hausa",
-                "Igbo",
-                "French",
-                "Spanish",
-                "Hindi",
-                "Chinese",
-                "Italian",
-                "Portuguese",
-                "Korean",
-                "Japanese",
-              ].map((lang) => (
+              {["English", "Spanish", "French", "German", "Chinese", "Japanese"].map((lang) => (
                 <span key={lang} style={badgeStyle}>
                   {lang}
                 </span>
@@ -259,7 +198,6 @@ export default function ImageConverterPage() {
           </section>
         </div>
       </main>
-
       <Footer />
     </div>
   );
