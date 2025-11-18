@@ -1,22 +1,269 @@
-// src/app/image-to-pdf/page.tsx
-import React from 'react';
-import ImageToPdfUploader from '../../components/ImageToPdfUploader'; // adjust path if needed
+"use client";
+
+import React, { useState } from "react";
+import Footer from "../../components/Footer";
+import ImageToPdfUploader from "../../components/ImageToPdfUploader";
+import LanguageSelector from "../../components/LanguageSelector";
+import Link from "next/link";
 
 export const metadata = {
-  title: 'Free Image to PDF Converter — JPG, PNG to PDF Online | PDFImageTools',
-  description: 'Convert images (JPG, PNG, and more) to a single PDF. Free online tool to reorder, combine, and generate PDFs from images easily and securely.',
-  alternates: { canonical: 'https://pdfimagetools.app/image-to-pdf' },
+  title: "Free Image to PDF Converter — JPG, PNG to PDF Online | PDFImageTools",
+  description:
+    "Convert images (JPG, PNG, and more) to a single PDF. Free online tool to reorder, combine, and generate PDFs from images easily and securely.",
+  alternates: { canonical: "https://pdfimagetools.app/image-to-pdf" },
+};
+
+const translations = {
+  en: {
+    heroTitle: "Convert Images to PDF Online",
+    heroSubtitle:
+      "Quickly convert JPG, PNG, and other image formats into a single PDF file. Upload, reorder, and generate PDFs with ease — free, secure, and no signup required.",
+    stepsTitle: "How It Works",
+    steps: [
+      "Upload one or more images (JPG, PNG, or other supported formats).",
+      "Reorder the images as desired using drag-and-drop.",
+      "Click the convert button to generate a PDF.",
+      "Download your PDF instantly or start a new conversion.",
+    ],
+    supportedTitle: "Supported Languages",
+    aboutTitle: "Why Convert Images to PDF?",
+    aboutText: [
+      "Combining multiple images into a single PDF keeps your files organized and easy to share.",
+      "PDFs preserve image quality and layout for professional presentations, reports, and portfolios.",
+      "Our tool allows easy reordering and merging without software installation.",
+    ],
+    privacyTitle: "Privacy & Security",
+    privacyText: [
+      "All uploaded images are deleted automatically after one hour. Nothing is stored permanently.",
+      "PDF generation is secure and handled via temporary files. No login or email required.",
+    ],
+    faqTitle: "Frequently Asked Questions",
+    faq: [
+      {
+        question: "Is the image-to-PDF converter free?",
+        answer: "Yes, it’s completely free — no limits, no watermarks, and no hidden fees.",
+      },
+      {
+        question: "Which image formats are supported?",
+        answer: "JPG, PNG, and several other common image formats are supported.",
+      },
+      {
+        question: "Can I reorder images before conversion?",
+        answer: "Yes, the tool allows you to drag and reorder images before generating the PDF.",
+      },
+      {
+        question: "Are my files safe?",
+        answer: "Absolutely. Files are deleted automatically after 60 minutes and are never shared.",
+      },
+    ],
+    relatedTitle: "Other Tools You May Like",
+    relatedTools: [
+      "PDF to Word",
+      "PDF to Images",
+      "Compress PDF",
+      "Image to PDF",
+      "PDF Merge",
+    ],
+  },
+
+  yo: {
+    heroTitle: "Yi Aworan Sí PDF Online",
+    heroSubtitle:
+      "Yi JPG, PNG, ati awọn ọna kika aworan miiran pada sí PDF kan. Gbe soke, ṣeto lẹsẹsẹ, ki o si ṣẹda PDF pẹlu irọrun — ọfẹ, ailewu, ko si ìforúkọsílẹ̀.",
+    stepsTitle: "Bá A Ṣe Nṣiṣẹ́",
+    steps: [
+      "Gbe ọkan tabi diẹ ẹ sii awọn aworan soke (JPG, PNG, tabi awọn ọna kika atilẹyin miiran).",
+      "Ṣeto awọn aworan ni aṣẹ ti o fẹ nipa lilo fa ati ju silẹ.",
+      "Tẹ bọtini yí padà lati ṣẹda PDF kan.",
+      "Gba PDF rẹ silẹ lẹsẹkẹsẹ tabi bẹrẹ iyipada tuntun.",
+    ],
+    supportedTitle: "Àwọn Èdè Tí A Ṣe Atilẹ́yìn",
+    aboutTitle: "Kí Ló Dé Tí A Fi N Yí Aworan Sí PDF?",
+    aboutText: [
+      "Darapọ̀ ọpọlọpọ awọn aworan sinu PDF kan ṣe iranlọwọ lati ṣeto awọn faili rẹ ki o rọrùn lati pin.",
+      "PDF ṣetọju didara aworan ati àtẹ̀jáde fun awọn ìwé iṣẹ́, ìròyìn, àti àfihàn.",
+      "Ọpa yii gba ọ laaye lati ṣeto lẹsẹsẹ ati darapọ laisi fifi sọfitiwia sori ẹrọ.",
+    ],
+    privacyTitle: "Àṣírí & Aàbò",
+    privacyText: [
+      "Gbogbo awọn aworan ti a gbe soke ni a paarẹ laifọwọyi lẹ́yìn wákàtí kan.",
+      "Ṣiṣẹda PDF jẹ́ ailewu ati pẹlu awọn faili igba diẹ. Ko si ìforúkọsílẹ̀ tàbí imeeli ti a beere.",
+    ],
+    faqTitle: "Ìbéèrè Tí A Máa N Béèrè",
+    faq: [
+      { question: "Ṣe ọ̀fẹ́ ni?", answer: "Bẹ́ẹ̀ni — ko si awọn aala, omi-ami, tabi owo t’akiyesi." },
+      {
+        question: "Àwọn ọna kika wo ni a ṣe atilẹyin?",
+        answer: "JPG, PNG, ati awọn ọna kika aworan olokiki miiran ni a ṣe atilẹyin.",
+      },
+      {
+        question: "Ṣe mo le ṣeto lẹsẹsẹ awọn aworan?",
+        answer: "Bẹ́ẹ̀ni — o le fa ki o ṣeto awọn aworan ṣaaju ki o ṣẹda PDF.",
+      },
+      {
+        question: "Ṣe awọn faili mi wa ni aabo?",
+        answer: "Bẹ́ẹ̀ni — a pa wọn lẹ́yìn iṣẹ́ju 60 ati ko pin pẹlu ẹnikẹni.",
+      },
+    ],
+    relatedTitle: "Àwọn Ọpa Míì",
+    relatedTools: ["PDF sí Word", "PDF sí Aworan", "Kíkó PDF kù", "Aworan sí PDF", "Darapọ PDF"],
+  },
 };
 
 export default function ImageToPdfPage() {
+  const [lang, setLang] = useState("en");
+  const t = translations[lang] || translations["en"];
+
+  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
+  const sectionStyle = {
+    marginBottom: "4rem",
+    padding: "2rem",
+    borderRadius: "8px",
+    backgroundColor: "#f9f9f9",
+  };
+  const headingStyle = {
+    fontSize: "2.5rem",
+    fontWeight: 700,
+    marginBottom: "1rem",
+    color: "#222",
+    textAlign: "center",
+  };
+  const subHeadingStyle = {
+    fontSize: "1.25rem",
+    marginBottom: "1.5rem",
+    color: "#555",
+    lineHeight: 1.6,
+    textAlign: "center",
+  };
+  const listStyle = {
+    paddingLeft: "1.5rem",
+    marginBottom: "1rem",
+    color: "#555",
+    fontSize: "1.1rem",
+    lineHeight: 1.6,
+  };
+  const badgeStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    margin: "0.25rem",
+    borderRadius: "999px",
+    backgroundColor: "#e0e0e0",
+    fontSize: "0.9rem",
+    color: "#333",
+  };
+  const homeButtonStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    marginBottom: "2rem",
+    borderRadius: "5px",
+    backgroundColor: "#0070f3",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: 600,
+  };
+
   return (
-    <main>
-      <h1>Convert Images to PDF</h1>
-      <p>
-        Quickly convert JPG, PNG, and other image formats into a single PDF file. 
-        Upload, reorder, and generate PDFs with ease — free, secure, and no signup required.
-      </p>
-      <ImageToPdfUploader />
-    </main>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <main style={{ flex: 1 }}>
+        <div style={containerStyle}>
+          {/* Home + Language Selector */}
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
+            <Link href="/" style={homeButtonStyle}>
+              PDFImageTools Home
+            </Link>
+            <LanguageSelector currentLang={lang} onChange={setLang} />
+          </div>
+
+          {/* Hero */}
+          <section style={{ marginBottom: "4rem", textAlign: "center" }}>
+            <h1 style={headingStyle}>{t.heroTitle}</h1>
+            <p style={subHeadingStyle}>{t.heroSubtitle}</p>
+            <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+              <ImageToPdfUploader />
+            </div>
+          </section>
+
+          {/* Steps */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.stepsTitle}</h2>
+            <ol style={listStyle}>
+              {t.steps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </section>
+
+          {/* Supported Languages */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.supportedTitle}</h2>
+            <div style={{ textAlign: "center" }}>
+              {[
+                "English",
+                "Yoruba",
+                "Hausa",
+                "Igbo",
+                "French",
+                "Spanish",
+                "Hindi",
+                "Chinese",
+                "Italian",
+                "Portuguese",
+                "Korean",
+                "Japanese",
+              ].map((lang) => (
+                <span key={lang} style={badgeStyle}>
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          {/* About */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.aboutTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.aboutText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          {/* Privacy */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.privacyTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.privacyText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.faqTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.faq.map((item, idx) => (
+                <div key={idx}>
+                  <h4 style={{ fontWeight: 600 }}>{item.question}</h4>
+                  <p>{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Related Tools */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.relatedTitle}</h2>
+            <ul style={listStyle}>
+              {t.relatedTools.map((tool, idx) => (
+                <li key={idx}>{tool}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
