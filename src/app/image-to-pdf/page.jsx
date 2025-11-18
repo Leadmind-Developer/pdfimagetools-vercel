@@ -1,9 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+// src/app/image-to-pdf/page.tsx
+import React from "react";
 import Footer from "../../components/Footer";
 import ImageToPdfUploader from "../../components/ImageToPdfUploader";
-import LanguageSelector from "../../components/LanguageSelector";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,107 +11,59 @@ export const metadata = {
   alternates: { canonical: "https://pdfimagetools.app/image-to-pdf" },
 };
 
-const translations = {
-  en: {
-    heroTitle: "Convert Images to PDF Online",
-    heroSubtitle:
-      "Quickly convert JPG, PNG, and other image formats into a single PDF file. Upload, reorder, and generate PDFs with ease — free, secure, and no signup required.",
-    stepsTitle: "How It Works",
-    steps: [
-      "Upload one or more images (JPG, PNG, or other supported formats).",
-      "Reorder the images as desired using drag-and-drop.",
-      "Click the convert button to generate a PDF.",
-      "Download your PDF instantly or start a new conversion.",
-    ],
-    supportedTitle: "Supported Languages",
-    aboutTitle: "Why Convert Images to PDF?",
-    aboutText: [
-      "Combining multiple images into a single PDF keeps your files organized and easy to share.",
-      "PDFs preserve image quality and layout for professional presentations, reports, and portfolios.",
-      "Our tool allows easy reordering and merging without software installation.",
-    ],
-    privacyTitle: "Privacy & Security",
-    privacyText: [
-      "All uploaded images are deleted automatically after one hour. Nothing is stored permanently.",
-      "PDF generation is secure and handled via temporary files. No login or email required.",
-    ],
-    faqTitle: "Frequently Asked Questions",
-    faq: [
-      {
-        question: "Is the image-to-PDF converter free?",
-        answer: "Yes, it’s completely free — no limits, no watermarks, and no hidden fees.",
-      },
-      {
-        question: "Which image formats are supported?",
-        answer: "JPG, PNG, and several other common image formats are supported.",
-      },
-      {
-        question: "Can I reorder images before conversion?",
-        answer: "Yes, the tool allows you to drag and reorder images before generating the PDF.",
-      },
-      {
-        question: "Are my files safe?",
-        answer: "Absolutely. Files are deleted automatically after 60 minutes and are never shared.",
-      },
-    ],
-    relatedTitle: "Other Tools You May Like",
-    relatedTools: [
-      "PDF to Word",
-      "PDF to Images",
-      "Compress PDF",
-      "Image to PDF",
-      "PDF Merge",
-    ],
-  },
-
-  yo: {
-    heroTitle: "Yi Aworan Sí PDF Online",
-    heroSubtitle:
-      "Yi JPG, PNG, ati awọn ọna kika aworan miiran pada sí PDF kan. Gbe soke, ṣeto lẹsẹsẹ, ki o si ṣẹda PDF pẹlu irọrun — ọfẹ, ailewu, ko si ìforúkọsílẹ̀.",
-    stepsTitle: "Bá A Ṣe Nṣiṣẹ́",
-    steps: [
-      "Gbe ọkan tabi diẹ ẹ sii awọn aworan soke (JPG, PNG, tabi awọn ọna kika atilẹyin miiran).",
-      "Ṣeto awọn aworan ni aṣẹ ti o fẹ nipa lilo fa ati ju silẹ.",
-      "Tẹ bọtini yí padà lati ṣẹda PDF kan.",
-      "Gba PDF rẹ silẹ lẹsẹkẹsẹ tabi bẹrẹ iyipada tuntun.",
-    ],
-    supportedTitle: "Àwọn Èdè Tí A Ṣe Atilẹ́yìn",
-    aboutTitle: "Kí Ló Dé Tí A Fi N Yí Aworan Sí PDF?",
-    aboutText: [
-      "Darapọ̀ ọpọlọpọ awọn aworan sinu PDF kan ṣe iranlọwọ lati ṣeto awọn faili rẹ ki o rọrùn lati pin.",
-      "PDF ṣetọju didara aworan ati àtẹ̀jáde fun awọn ìwé iṣẹ́, ìròyìn, àti àfihàn.",
-      "Ọpa yii gba ọ laaye lati ṣeto lẹsẹsẹ ati darapọ laisi fifi sọfitiwia sori ẹrọ.",
-    ],
-    privacyTitle: "Àṣírí & Aàbò",
-    privacyText: [
-      "Gbogbo awọn aworan ti a gbe soke ni a paarẹ laifọwọyi lẹ́yìn wákàtí kan.",
-      "Ṣiṣẹda PDF jẹ́ ailewu ati pẹlu awọn faili igba diẹ. Ko si ìforúkọsílẹ̀ tàbí imeeli ti a beere.",
-    ],
-    faqTitle: "Ìbéèrè Tí A Máa N Béèrè",
-    faq: [
-      { question: "Ṣe ọ̀fẹ́ ni?", answer: "Bẹ́ẹ̀ni — ko si awọn aala, omi-ami, tabi owo t’akiyesi." },
-      {
-        question: "Àwọn ọna kika wo ni a ṣe atilẹyin?",
-        answer: "JPG, PNG, ati awọn ọna kika aworan olokiki miiran ni a ṣe atilẹyin.",
-      },
-      {
-        question: "Ṣe mo le ṣeto lẹsẹsẹ awọn aworan?",
-        answer: "Bẹ́ẹ̀ni — o le fa ki o ṣeto awọn aworan ṣaaju ki o ṣẹda PDF.",
-      },
-      {
-        question: "Ṣe awọn faili mi wa ni aabo?",
-        answer: "Bẹ́ẹ̀ni — a pa wọn lẹ́yìn iṣẹ́ju 60 ati ko pin pẹlu ẹnikẹni.",
-      },
-    ],
-    relatedTitle: "Àwọn Ọpa Míì",
-    relatedTools: ["PDF sí Word", "PDF sí Aworan", "Kíkó PDF kù", "Aworan sí PDF", "Darapọ PDF"],
-  },
+const t = {
+  heroTitle: "Convert Images to PDF Online",
+  heroSubtitle:
+    "Quickly convert JPG, PNG, and other image formats into a single PDF file. Upload, reorder, and generate PDFs with ease — free, secure, and no signup required.",
+  stepsTitle: "How It Works",
+  steps: [
+    "Upload one or more images (JPG, PNG, or other supported formats).",
+    "Reorder the images as desired using drag-and-drop.",
+    "Click the convert button to generate a PDF.",
+    "Download your PDF instantly or start a new conversion.",
+  ],
+  supportedTitle: "Supported Languages",
+  aboutTitle: "Why Convert Images to PDF?",
+  aboutText: [
+    "Combining multiple images into a single PDF keeps your files organized and easy to share.",
+    "PDFs preserve image quality and layout for professional presentations, reports, and portfolios.",
+    "Our tool allows easy reordering and merging without software installation.",
+  ],
+  privacyTitle: "Privacy & Security",
+  privacyText: [
+    "All uploaded images are deleted automatically after one hour. Nothing is stored permanently.",
+    "PDF generation is secure and handled via temporary files. No login or email required.",
+  ],
+  faqTitle: "Frequently Asked Questions",
+  faq: [
+    {
+      question: "Is the image-to-PDF converter free?",
+      answer: "Yes, it’s completely free — no limits, no watermarks, and no hidden fees.",
+    },
+    {
+      question: "Which image formats are supported?",
+      answer: "JPG, PNG, and several other common image formats are supported.",
+    },
+    {
+      question: "Can I reorder images before conversion?",
+      answer: "Yes, the tool allows you to drag and reorder images before generating the PDF.",
+    },
+    {
+      question: "Are my files safe?",
+      answer: "Absolutely. Files are deleted automatically after 60 minutes and are never shared.",
+    },
+  ],
+  relatedTitle: "Other Tools You May Like",
+  relatedTools: [
+    "PDF to Word",
+    "PDF to Images",
+    "Compress PDF",
+    "Image to PDF",
+    "PDF Merge",
+  ],
 };
 
 export default function ImageToPdfPage() {
-  const [lang, setLang] = useState("en");
-  const t = translations[lang] || translations["en"];
-
   const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
   const sectionStyle = {
     marginBottom: "4rem",
@@ -166,12 +116,11 @@ export default function ImageToPdfPage() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <main style={{ flex: 1 }}>
         <div style={containerStyle}>
-          {/* Home + Language Selector */}
+          {/* Home Link */}
           <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
             <Link href="/" style={homeButtonStyle}>
               PDFImageTools Home
             </Link>
-            <LanguageSelector currentLang={lang} onChange={setLang} />
           </div>
 
           {/* Hero */}
@@ -197,20 +146,7 @@ export default function ImageToPdfPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t.supportedTitle}</h2>
             <div style={{ textAlign: "center" }}>
-              {[
-                "English",
-                "Yoruba",
-                "Hausa",
-                "Igbo",
-                "French",
-                "Spanish",
-                "Hindi",
-                "Chinese",
-                "Italian",
-                "Portuguese",
-                "Korean",
-                "Japanese",
-              ].map((lang) => (
+              {["English", "Spanish", "French", "German", "Chinese", "Japanese"].map((lang) => (
                 <span key={lang} style={badgeStyle}>
                   {lang}
                 </span>
