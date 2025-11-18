@@ -1,9 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+// src/app/excel-to-pdf/page.tsx
+import React from "react";
 import Footer from "../../components/Footer";
 import ExcelToPdfUploader from "../../components/ExcelToPdfUploader";
-import LanguageSelector from "../../components/LanguageSelector";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,117 +11,63 @@ export const metadata = {
   alternates: { canonical: "https://pdfimagetools.app/excel-to-pdf" },
 };
 
-const translations = {
-  en: {
-    heroTitle: "Convert Excel to PDF Online",
-    heroSubtitle:
-      "Upload any XLS or XLSX file and convert it to a clean, print-ready PDF. Tables, formatting, fonts, and layout are preserved perfectly.",
-    stepsTitle: "How It Works",
-    steps: [
-      "Upload your Excel file (XLS or XLSX).",
-      "Review the preview and ensure your data looks correct.",
-      "Click the convert button to generate a PDF version.",
-      "Download your PDF instantly or convert another file.",
-    ],
-    supportedTitle: "Supported Languages",
-    aboutTitle: "Why Convert Excel to PDF?",
-    aboutText: [
-      "PDF is the best format for sharing spreadsheets without losing formatting, alignment, column sizing, or styling.",
-      "Converting Excel to PDF ensures your data displays the same way on every device, even if the recipient doesn’t have Excel.",
-      "This tool preserves all tables, colors, borders, merged cells, and layout to maintain a professional look.",
-    ],
-    privacyTitle: "Privacy & Security",
-    privacyText: [
-      "Your Excel files are deleted automatically after one hour. Nothing is stored permanently.",
-      "Conversions happen securely using temporary files. No login or email required.",
-    ],
-    faqTitle: "Frequently Asked Questions",
-    faq: [
-      {
-        question: "Is the Excel to PDF converter free?",
-        answer:
-          "Yes, it’s completely free—no limits, no watermarks, and no hidden fees.",
-      },
-      {
-        question: "Will my tables and formatting be preserved?",
-        answer:
-          "Yes. We maintain your layout exactly as it appears in Excel.",
-      },
-      {
-        question: "Are my files safe?",
-        answer:
-          "Absolutely. Files are deleted automatically after 60 minutes.",
-      },
-      {
-        question: "Can I convert multiple sheets?",
-        answer:
-          "Yes. All sheets are included in your PDF unless your Excel settings specify otherwise.",
-      },
-    ],
-    relatedTitle: "Other Tools You May Like",
-    relatedTools: [
-      "PDF to Word",
-      "PDF to Images",
-      "Compress PDF",
-      "Word to PDF",
-      "PPT to PDF",
-    ],
-  },
-
-  yo: {
-    heroTitle: "Yi Excel Sí PDF",
-    heroSubtitle:
-      "Gbe faili XLS tàbí XLSX rẹ soke, kí o sí yí padà sí PDF tí ó dáa fún títẹ jáde. Àtẹ̀jáde, tábìlì, àti àṣà-ọ̀nà wa bíi ti Excel.",
-    stepsTitle: "Bá A Ṣe Nṣiṣẹ́",
-    steps: [
-      "Gbe faili Excel (XLS tàbí XLSX) rẹ soke.",
-      "Wo àwòrán àkọ́kọ́ láti jẹ́rìí pé gbogbo tábìlì rẹ dáa.",
-      "Tẹ bọtini yí padà sí PDF.",
-      "Gba PDF rẹ silẹ lẹsẹkẹsẹ tàbí bẹrẹ tuntun.",
-    ],
-    supportedTitle: "Àwọn Èdè Tí A Ṣe Atilẹ́yìn",
-    aboutTitle: "Kí Ló Dé Tí A Fi N Yí Excel Sí PDF?",
-    aboutText: [
-      "PDF jẹ́ ọna tó péye fún pípín tábìlì Excel lai jẹ́ kí àtẹ̀jáde tàbí àṣà rẹ yí padà.",
-      "Gbogbo ẹnikẹ́ni lè ka PDF — bó tilẹ̀ jẹ́ pé wọn kò ní Excel.",
-      "A tọju gbogbo tábìlì, ÀWỌ, bọ́ọ̀dà, sẹẹli tí a darapọ̀, àti àtẹ̀jáde gẹ́gẹ́ bí ti Excel.",
-    ],
-    privacyTitle: "Àṣírí & Aàbò",
-    privacyText: [
-      "Gbogbo faili Excel ti a gbe soke ni a máa pa rẹ̀ laifọwọyi lẹ́yìn wákàtí kan.",
-      "A kò béèrè fún àkọọ́lẹ̀ tàbí imeeli. Ilana naa jẹ́ ailewu patapata.",
-    ],
-    faqTitle: "Ìbéèrè Tí A Máa N Béèrè",
-    faq: [
-      { question: "Ṣe ọ̀fẹ́ ni?", answer: "Bẹ́ẹ̀ni — ó jẹ́ ọfẹ ní gbogbo ọ̀nà." },
-      {
-        question: "Ṣe tábìlì mi yóò wa ní àṣà rẹ?",
-        answer: "Bẹ́ẹ̀ni. Àtẹ̀jáde wa tọju gbogbo àṣà Excel.",
-      },
-      {
-        question: "Ṣe faili mi ní aabo?",
-        answer: "Bẹ́ẹ̀ni, a pa wọn rẹ lẹ́yìn iṣẹ́ju 60.",
-      },
-      {
-        question: "Ṣe mo lè yí ọpọlọpọ shiti padà?",
-        answer: "Bẹ́ẹ̀ni — gbogbo shiti ni a fi sí PDF ayafi ti o yan bibẹẹkọ.",
-      },
-    ],
-    relatedTitle: "Àwọn Ọpa Míì",
-    relatedTools: [
-      "PDF sí Word",
-      "PDF sí Aworan",
-      "Kíkó PDF kù",
-      "Word sí PDF",
-      "PPT sí PDF",
-    ],
-  },
+const t = {
+  heroTitle: "Convert Excel to PDF Online",
+  heroSubtitle:
+    "Upload any XLS or XLSX file and convert it to a clean, print-ready PDF. Tables, formatting, fonts, and layout are preserved perfectly.",
+  stepsTitle: "How It Works",
+  steps: [
+    "Upload your Excel file (XLS or XLSX).",
+    "Review the preview and ensure your data looks correct.",
+    "Click the convert button to generate a PDF version.",
+    "Download your PDF instantly or convert another file.",
+  ],
+  supportedTitle: "Supported Languages",
+  aboutTitle: "Why Convert Excel to PDF?",
+  aboutText: [
+    "PDF is the best format for sharing spreadsheets without losing formatting, alignment, column sizing, or styling.",
+    "Converting Excel to PDF ensures your data displays the same way on every device, even if the recipient doesn’t have Excel.",
+    "This tool preserves all tables, colors, borders, merged cells, and layout to maintain a professional look.",
+  ],
+  privacyTitle: "Privacy & Security",
+  privacyText: [
+    "Your Excel files are deleted automatically after one hour. Nothing is stored permanently.",
+    "Conversions happen securely using temporary files. No login or email required.",
+  ],
+  faqTitle: "Frequently Asked Questions",
+  faq: [
+    {
+      question: "Is the Excel to PDF converter free?",
+      answer:
+        "Yes, it’s completely free—no limits, no watermarks, and no hidden fees.",
+    },
+    {
+      question: "Will my tables and formatting be preserved?",
+      answer:
+        "Yes. We maintain your layout exactly as it appears in Excel.",
+    },
+    {
+      question: "Are my files safe?",
+      answer:
+        "Absolutely. Files are deleted automatically after 60 minutes.",
+    },
+    {
+      question: "Can I convert multiple sheets?",
+      answer:
+        "Yes. All sheets are included in your PDF unless your Excel settings specify otherwise.",
+    },
+  ],
+  relatedTitle: "Other Tools You May Like",
+  relatedTools: [
+    "PDF to Word",
+    "PDF to Images",
+    "Compress PDF",
+    "Word to PDF",
+    "PPT to PDF",
+  ],
 };
 
 export default function ExcelToPdfPage() {
-  const [lang, setLang] = useState("en");
-  const t = translations[lang] || translations["en"];
-
   const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
   const sectionStyle = {
     marginBottom: "4rem",
@@ -176,12 +120,11 @@ export default function ExcelToPdfPage() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <main style={{ flex: 1 }}>
         <div style={containerStyle}>
-          {/* Home + Language Selector */}
+          {/* Home Link */}
           <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
             <Link href="/" style={homeButtonStyle}>
               PDFImageTools Home
             </Link>
-            <LanguageSelector currentLang={lang} onChange={setLang} />
           </div>
 
           {/* Hero */}
@@ -209,16 +152,10 @@ export default function ExcelToPdfPage() {
             <div style={{ textAlign: "center" }}>
               {[
                 "English",
-                "Yoruba",
-                "Hausa",
-                "Igbo",
-                "French",
                 "Spanish",
-                "Hindi",
+                "French",
+                "German",
                 "Chinese",
-                "Italian",
-                "Portuguese",
-                "Korean",
                 "Japanese",
               ].map((lang) => (
                 <span key={lang} style={badgeStyle}>
