@@ -1,21 +1,278 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import Footer from "../../components/Footer";
 import ExcelToPdfUploader from "../../components/ExcelToPdfUploader";
+import LanguageSelector from "../../components/LanguageSelector";
+import Link from "next/link";
 
 export const metadata = {
   title: "Free Excel to PDF Converter — Keep Formatting & Tables | PDFImageTools",
   description:
-    "Convert Excel (XLS, XLSX) to PDF online for free. Preserve tables, formulas, and cell formatting. Fast, secure, no signup required.",
+    "Convert Excel (XLS, XLSX) to PDF online for free. Preserve tables, formatting, and layout. Fast, secure, no signup required.",
   alternates: { canonical: "https://pdfimagetools.app/excel-to-pdf" },
 };
 
+const translations = {
+  en: {
+    heroTitle: "Convert Excel to PDF Online",
+    heroSubtitle:
+      "Upload any XLS or XLSX file and convert it to a clean, print-ready PDF. Tables, formatting, fonts, and layout are preserved perfectly.",
+    stepsTitle: "How It Works",
+    steps: [
+      "Upload your Excel file (XLS or XLSX).",
+      "Review the preview and ensure your data looks correct.",
+      "Click the convert button to generate a PDF version.",
+      "Download your PDF instantly or convert another file.",
+    ],
+    supportedTitle: "Supported Languages",
+    aboutTitle: "Why Convert Excel to PDF?",
+    aboutText: [
+      "PDF is the best format for sharing spreadsheets without losing formatting, alignment, column sizing, or styling.",
+      "Converting Excel to PDF ensures your data displays the same way on every device, even if the recipient doesn’t have Excel.",
+      "This tool preserves all tables, colors, borders, merged cells, and layout to maintain a professional look.",
+    ],
+    privacyTitle: "Privacy & Security",
+    privacyText: [
+      "Your Excel files are deleted automatically after one hour. Nothing is stored permanently.",
+      "Conversions happen securely using temporary files. No login or email required.",
+    ],
+    faqTitle: "Frequently Asked Questions",
+    faq: [
+      {
+        question: "Is the Excel to PDF converter free?",
+        answer:
+          "Yes, it’s completely free—no limits, no watermarks, and no hidden fees.",
+      },
+      {
+        question: "Will my tables and formatting be preserved?",
+        answer:
+          "Yes. We maintain your layout exactly as it appears in Excel.",
+      },
+      {
+        question: "Are my files safe?",
+        answer:
+          "Absolutely. Files are deleted automatically after 60 minutes.",
+      },
+      {
+        question: "Can I convert multiple sheets?",
+        answer:
+          "Yes. All sheets are included in your PDF unless your Excel settings specify otherwise.",
+      },
+    ],
+    relatedTitle: "Other Tools You May Like",
+    relatedTools: [
+      "PDF to Word",
+      "PDF to Images",
+      "Compress PDF",
+      "Word to PDF",
+      "PPT to PDF",
+    ],
+  },
+
+  yo: {
+    heroTitle: "Yi Excel Sí PDF",
+    heroSubtitle:
+      "Gbe faili XLS tàbí XLSX rẹ soke, kí o sí yí padà sí PDF tí ó dáa fún títẹ jáde. Àtẹ̀jáde, tábìlì, àti àṣà-ọ̀nà wa bíi ti Excel.",
+    stepsTitle: "Bá A Ṣe Nṣiṣẹ́",
+    steps: [
+      "Gbe faili Excel (XLS tàbí XLSX) rẹ soke.",
+      "Wo àwòrán àkọ́kọ́ láti jẹ́rìí pé gbogbo tábìlì rẹ dáa.",
+      "Tẹ bọtini yí padà sí PDF.",
+      "Gba PDF rẹ silẹ lẹsẹkẹsẹ tàbí bẹrẹ tuntun.",
+    ],
+    supportedTitle: "Àwọn Èdè Tí A Ṣe Atilẹ́yìn",
+    aboutTitle: "Kí Ló Dé Tí A Fi N Yí Excel Sí PDF?",
+    aboutText: [
+      "PDF jẹ́ ọna tó péye fún pípín tábìlì Excel lai jẹ́ kí àtẹ̀jáde tàbí àṣà rẹ yí padà.",
+      "Gbogbo ẹnikẹ́ni lè ka PDF — bó tilẹ̀ jẹ́ pé wọn kò ní Excel.",
+      "A tọju gbogbo tábìlì, ÀWỌ, bọ́ọ̀dà, sẹẹli tí a darapọ̀, àti àtẹ̀jáde gẹ́gẹ́ bí ti Excel.",
+    ],
+    privacyTitle: "Àṣírí & Aàbò",
+    privacyText: [
+      "Gbogbo faili Excel ti a gbe soke ni a máa pa rẹ̀ laifọwọyi lẹ́yìn wákàtí kan.",
+      "A kò béèrè fún àkọọ́lẹ̀ tàbí imeeli. Ilana naa jẹ́ ailewu patapata.",
+    ],
+    faqTitle: "Ìbéèrè Tí A Máa N Béèrè",
+    faq: [
+      { question: "Ṣe ọ̀fẹ́ ni?", answer: "Bẹ́ẹ̀ni — ó jẹ́ ọfẹ ní gbogbo ọ̀nà." },
+      {
+        question: "Ṣe tábìlì mi yóò wa ní àṣà rẹ?",
+        answer: "Bẹ́ẹ̀ni. Àtẹ̀jáde wa tọju gbogbo àṣà Excel.",
+      },
+      {
+        question: "Ṣe faili mi ní aabo?",
+        answer: "Bẹ́ẹ̀ni, a pa wọn rẹ lẹ́yìn iṣẹ́ju 60.",
+      },
+      {
+        question: "Ṣe mo lè yí ọpọlọpọ shiti padà?",
+        answer: "Bẹ́ẹ̀ni — gbogbo shiti ni a fi sí PDF ayafi ti o yan bibẹẹkọ.",
+      },
+    ],
+    relatedTitle: "Àwọn Ọpa Míì",
+    relatedTools: [
+      "PDF sí Word",
+      "PDF sí Aworan",
+      "Kíkó PDF kù",
+      "Word sí PDF",
+      "PPT sí PDF",
+    ],
+  },
+};
+
 export default function ExcelToPdfPage() {
+  const [lang, setLang] = useState("en");
+  const t = translations[lang] || translations["en"];
+
+  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
+  const sectionStyle = {
+    marginBottom: "4rem",
+    padding: "2rem",
+    borderRadius: "8px",
+    backgroundColor: "#f9f9f9",
+  };
+  const headingStyle = {
+    fontSize: "2.5rem",
+    fontWeight: 700,
+    marginBottom: "1rem",
+    color: "#222",
+    textAlign: "center",
+  };
+  const subHeadingStyle = {
+    fontSize: "1.25rem",
+    marginBottom: "1.5rem",
+    color: "#555",
+    lineHeight: 1.6,
+    textAlign: "center",
+  };
+  const listStyle = {
+    paddingLeft: "1.5rem",
+    marginBottom: "1rem",
+    color: "#555",
+    fontSize: "1.1rem",
+    lineHeight: 1.6,
+  };
+  const badgeStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    margin: "0.25rem",
+    borderRadius: "999px",
+    backgroundColor: "#e0e0e0",
+    fontSize: "0.9rem",
+    color: "#333",
+  };
+  const homeButtonStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    marginBottom: "2rem",
+    borderRadius: "5px",
+    backgroundColor: "#0070f3",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: 600,
+  };
+
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Convert Excel to PDF</h1>
-      <p className="mb-6 text-lg text-gray-600">
-        Upload your Excel files (XLS or XLSX) and convert them to professional, print-ready PDF files instantly.
-      </p>
-      <ExcelToPdfUploader />
-    </main>
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <main style={{ flex: 1 }}>
+        <div style={containerStyle}>
+          {/* Home + Language Selector */}
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
+            <Link href="/" style={homeButtonStyle}>
+              PDFImageTools Home
+            </Link>
+            <LanguageSelector currentLang={lang} onChange={setLang} />
+          </div>
+
+          {/* Hero */}
+          <section style={{ marginBottom: "4rem", textAlign: "center" }}>
+            <h1 style={headingStyle}>{t.heroTitle}</h1>
+            <p style={subHeadingStyle}>{t.heroSubtitle}</p>
+            <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+              <ExcelToPdfUploader />
+            </div>
+          </section>
+
+          {/* Steps */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.stepsTitle}</h2>
+            <ol style={listStyle}>
+              {t.steps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </section>
+
+          {/* Supported Languages */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.supportedTitle}</h2>
+            <div style={{ textAlign: "center" }}>
+              {[
+                "English",
+                "Yoruba",
+                "Hausa",
+                "Igbo",
+                "French",
+                "Spanish",
+                "Hindi",
+                "Chinese",
+                "Italian",
+                "Portuguese",
+                "Korean",
+                "Japanese",
+              ].map((lang) => (
+                <span key={lang} style={badgeStyle}>
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </section>
+
+          {/* About */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.aboutTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.aboutText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          {/* Privacy */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.privacyTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.privacyText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.faqTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.faq.map((item, idx) => (
+                <div key={idx}>
+                  <h4 style={{ fontWeight: 600 }}>{item.question}</h4>
+                  <p>{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Related Tools */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.relatedTitle}</h2>
+            <ul style={listStyle}>
+              {t.relatedTools.map((tool, idx) => (
+                <li key={idx}>{tool}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </main>
+      <Footer />
+    </div>
   );
 }
