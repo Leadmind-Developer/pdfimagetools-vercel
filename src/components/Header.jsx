@@ -1,3 +1,4 @@
+// src/components/Header.jsx
 import React from "react";
 import Link from "next/link";
 
@@ -9,6 +10,9 @@ const Header = () => (
         <a href="#features">Features</a>
         <Link href="/tools">Tools</Link>
         <a href="#contact">Contact</a>
+        <a href="https://pdfimagetools.app/blog/pdfimagetools" target="_blank" rel="noopener noreferrer">
+          Blog
+        </a>
       </nav>
     </div>
   </header>
