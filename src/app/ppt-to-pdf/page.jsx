@@ -1,5 +1,8 @@
+// src/app/ppt-to-pdf/page.tsx
 import React from "react";
+import Footer from "../../components/Footer";
 import PptToPdfUploader from "../../components/PptToPdfUploader";
+import Link from "next/link";
 
 export const metadata = {
   title: "Free PowerPoint to PDF Converter — Preserve Slides & Design | PDFImageTools",
@@ -8,64 +11,199 @@ export const metadata = {
   alternates: { canonical: "https://pdfimagetools.app/ppt-to-pdf" },
 };
 
+const t = {
+  heroTitle: "Convert PowerPoint to PDF Online",
+  heroSubtitle:
+    "Easily convert PPT and PPTX presentations into high-quality PDFs while preserving slide layouts, images, and designs — fast, secure, and free.",
+  stepsTitle: "How It Works",
+  steps: [
+    "Upload your PowerPoint file(s) (PPT or PPTX).",
+    "The system converts your slides into PDFs instantly while keeping layouts and designs intact.",
+    "Download individual PDFs or all files in a batch.",
+    "Clear files and upload a new batch whenever needed.",
+  ],
+  supportedTitle: "Supported Languages",
+  aboutTitle: "Why Convert PowerPoint to PDF?",
+  aboutText: [
+    "Preserve your presentation's formatting, images, and layout in a universally compatible PDF format.",
+    "Share or print presentations easily without worrying about software compatibility.",
+    "No installation required — convert everything online securely in your browser.",
+  ],
+  privacyTitle: "Privacy & Security",
+  privacyText: [
+    "All uploaded PPT/PPTX and generated PDFs are automatically deleted after one hour.",
+    "Conversions use temporary server files only; your original files never leave your device.",
+    "No account or email is required. Your privacy is fully protected.",
+  ],
+  faqTitle: "Frequently Asked Questions",
+  faq: [
+    {
+      question: "Is this PowerPoint to PDF converter free?",
+      answer: "Yes, conversion is completely free with no watermarks or limits.",
+    },
+    {
+      question: "Do I need an account?",
+      answer: "No account or registration is required to use this tool.",
+    },
+    {
+      question: "Are my files secure?",
+      answer: "Absolutely. Files are deleted automatically after 60 minutes and are never shared.",
+    },
+    {
+      question: "Which file formats are supported?",
+      answer: "You can upload PPT and PPTX files. Multiple files are supported for batch conversion.",
+    },
+  ],
+  relatedTitle: "Other Tools You May Like",
+  relatedTools: ["PDF to Word", "PDF to Excel", "PDF to Image", "PDF Merge", "Image to PDF"],
+};
+
 export default function PptToPdfPage() {
+  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
+  const sectionStyle = {
+    marginBottom: "4rem",
+    padding: "2rem",
+    borderRadius: "8px",
+    backgroundColor: "#f9f9f9",
+  };
+  const headingStyle = {
+    fontSize: "2.5rem",
+    fontWeight: 700,
+    marginBottom: "1rem",
+    color: "#222",
+    textAlign: "center",
+  };
+  const subHeadingStyle = {
+    fontSize: "1.25rem",
+    marginBottom: "1.5rem",
+    color: "#555",
+    lineHeight: 1.6,
+    textAlign: "center",
+  };
+  const listStyle = {
+    paddingLeft: "1.5rem",
+    marginBottom: "1rem",
+    color: "#555",
+    fontSize: "1.1rem",
+    lineHeight: 1.6,
+  };
+  const badgeStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    margin: "0.25rem",
+    borderRadius: "999px",
+    backgroundColor: "#e0e0e0",
+    fontSize: "0.9rem",
+    color: "#333",
+  };
+  const homeButtonStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    marginBottom: "2rem",
+    borderRadius: "5px",
+    backgroundColor: "#0070f3",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: 600,
+  };
+
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-4">Convert PowerPoint to PDF</h1>
-      <p className="mb-6 text-lg text-gray-600">
-        Upload your PowerPoint presentations (PPT or PPTX) and convert them into
-        high-quality, print-ready PDFs in seconds.
-      </p>
-      <PptToPdfUploader />
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <main style={{ flex: 1 }}>
+        <div style={containerStyle}>
+          {/* Home Link */}
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
+            <Link href="/" style={homeButtonStyle}>
+              PDFImageTools Home
+            </Link>
+          </div>
 
-      {/* How It Works Section */}
-      <section className="mt-12">
-        <h2 className="text-2xl font-semibold mb-4">How It Works</h2>
-        <ol className="list-decimal list-inside space-y-2 text-gray-700">
-          <li>Select DOCX files from your computer or drag them into the upload area.</li>
-          <li>Our system converts your files instantly while preserving fonts, images, and layout.</li>
-          <li>Download each PDF individually or use the batch download option for all files.</li>
-          <li>If needed, clear the current files and upload a new batch of Word documents.</li>
-        </ol>
-      </section>
+          {/* Hero */}
+          <section style={{ marginBottom: "4rem", textAlign: "center" }}>
+            <h1 style={headingStyle}>{t.heroTitle}</h1>
+            <p style={subHeadingStyle}>{t.heroSubtitle}</p>
+            <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+              <PptToPdfUploader />
+            </div>
+          </section>
 
-      {/* Supported Languages */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-2">Supported Languages</h2>
-        <p className="text-gray-700">
-          English, Deutsch, Español, Français, Indonesia, Italiano, 日本語, 한국어, Nederlands, Polski, Português, Русский, Türkçe, Українська, Tiếng Việt, 中文
-        </p>
-      </section>
+          {/* Steps */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.stepsTitle}</h2>
+            <ol style={listStyle}>
+              {t.steps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </section>
 
-      {/* Privacy & Security */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-2">Privacy & Security</h2>
-        <p className="text-gray-700 mb-2">
-          All uploaded files are automatically deleted after one hour. Conversion is performed on server copies; your original files remain on your device.
-        </p>
-        <p className="text-gray-700">
-          No email or account is required. Your privacy is our priority.
-        </p>
-      </section>
+          {/* Supported Languages */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.supportedTitle}</h2>
+            <div style={{ textAlign: "center" }}>
+              {[
+                "English",
+                "Spanish",
+                "French",
+                "German",
+                "Chinese",
+                "Japanese",
+                "Italian",
+                "Portuguese",
+              ].map((lang) => (
+                <span key={lang} style={badgeStyle}>
+                  {lang}
+                </span>
+              ))}
+            </div>
+          </section>
 
-      {/* Frequently Asked Questions */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
-        <ul className="space-y-2 text-gray-700 list-disc list-inside">
-          <li>
-            <strong>Is this service free?</strong> Yes, you can convert Word files to PDF without any charge or watermark.
-          </li>
-          <li>
-            <strong>Do I need an account?</strong> No account or registration is required to use this tool.
-          </li>
-          <li>
-            <strong>Are my files safe?</strong> Files are automatically deleted after 60 minutes. Conversions use copies on the server only.
-          </li>
-          <li>
-            <strong>Which file types are supported?</strong> You can upload DOC and DOCX files, up to 20 files per batch.
-          </li>
-        </ul>
-      </section>
-    </main>
+          {/* About */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.aboutTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.aboutText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          {/* Privacy */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.privacyTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.privacyText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.faqTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.faq.map((item, idx) => (
+                <div key={idx}>
+                  <h4 style={{ fontWeight: 600 }}>{item.question}</h4>
+                  <p>{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Related Tools */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.relatedTitle}</h2>
+            <ul style={listStyle}>
+              {t.relatedTools.map((tool, idx) => (
+                <li key={idx}>{tool}</li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
