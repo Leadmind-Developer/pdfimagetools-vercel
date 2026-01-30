@@ -9,16 +9,23 @@ export default function DonationSupport() {
         If this tool helped you, please consider supporting us to keep it online.
       </p>
 
-      <div className="flex flex-wrap justify-center gap-4">
-        {/* Paystack */}
-        <a
-          href="https://paystack.shop/pay/pdfimagetools"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition"
-        >
-          Donate via Paystack
-        </a>
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+        {/* PayPal QR and Link */}
+        <div className="flex flex-col items-center">
+          <img
+            src="/public/Paypal-qrcode.png"
+            alt="PayPal QR Code"
+            className="w-32 h-32 mb-2"
+          />
+          <a
+            href="https://paypal.me/teemmiej"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+          >
+            Donate via PayPal
+          </a>
+        </div>
 
         {/* Flutterwave */}
         <a
@@ -30,14 +37,14 @@ export default function DonationSupport() {
           Donate via Flutterwave
         </a>
 
-        {/* PayPal */}
+        {/* Paystack */}
         <a
-          href="paypal.me/teemmiej"
+          href="https://paystack.shop/pay/pdfimagetools"
           target="_blank"
           rel="noopener noreferrer"
-          className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+          className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition"
         >
-          Donate via PayPal
+          Donate via Paystack
         </a>
       </div>
 
