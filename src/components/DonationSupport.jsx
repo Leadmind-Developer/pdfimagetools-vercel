@@ -12,7 +12,7 @@ export default function DonationSupport() {
       <div className="flex flex-wrap justify-center gap-4">
         {/* Paystack */}
         <a
-          href="#PAYSTACK_LINK"
+          href="https://paystack.shop/pay/pdfimagetools"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition"
@@ -22,7 +22,7 @@ export default function DonationSupport() {
 
         {/* Flutterwave */}
         <a
-          href="#FLUTTERWAVE_LINK"
+          href="https://flutterwave.com/pay/enkl6s6cpibf"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-medium transition"
@@ -32,7 +32,7 @@ export default function DonationSupport() {
 
         {/* PayPal */}
         <a
-          href="#PAYPAL_LINK"
+          href="paypal.me/teemmiej"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
