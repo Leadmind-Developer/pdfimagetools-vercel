@@ -1,6 +1,7 @@
 // src/app/pdf-to-ppt/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import PdfToPptxUploader from "../../components/PdfToPptxUploader";
 import Link from "next/link";
 
@@ -124,6 +125,11 @@ export default function PdfToPptPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <PdfToPptxUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+            <div style={{ marginTop: "3rem" }}>
+              <DonationSupport />
+            </div>
           </section>
 
           {/* Steps */}
@@ -197,3 +203,4 @@ export default function PdfToPptPage() {
     </div>
   );
 }
+
