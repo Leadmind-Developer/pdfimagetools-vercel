@@ -1,6 +1,7 @@
 // src/app/image-to-pdf/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import ImageToPdfUploader from "../../components/ImageToPdfUploader";
 import Link from "next/link";
 
@@ -130,6 +131,11 @@ export default function ImageToPdfPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <ImageToPdfUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+             <div style={{ marginTop: "3rem" }}>
+               <DonationSupport />
+              </div>
           </section>
 
           {/* Steps */}
@@ -203,3 +209,4 @@ export default function ImageToPdfPage() {
     </div>
   );
 }
+
