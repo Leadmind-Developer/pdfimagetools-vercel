@@ -11,18 +11,18 @@ export default function DonationSupport() {
 
       <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
 
-        {/* PayPal QR + Logo + Link */}
+        {/* PayPal QR + Logo + Donate */}
         <div className="flex flex-col items-center">
           {/* QR Code */}
           <img
-            src="/public/Paypal-qrcode.png"
-            alt="PayPal QR Code"
+            src="/Paypal-qrcode.png" // Correct path in Next.js public folder
+            alt="Scan to PayPal"
             className="w-32 h-32 mb-2"
           />
 
-          {/* PayPal Logo with link */}
+          {/* PayPal Logo linking to PayPal.me */}
           <a
-            href="https://www.paypal.com/us/digital-wallet/ways-to-pay/add-payment-method"
+            href="https://paypal.me/teemmiej"
             target="_blank"
             rel="noopener noreferrer"
             className="mb-2"
@@ -32,16 +32,6 @@ export default function DonationSupport() {
               alt="Secured by PayPal"
               className="mx-auto"
             />
-          </a>
-
-          {/* How PayPal Works link */}
-          <a
-            href="https://www.paypal.com/us/brc/article/how-paypal-works"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 text-sm font-semibold"
-          >
-            How PayPal Works
           </a>
 
           {/* Donate button */}
