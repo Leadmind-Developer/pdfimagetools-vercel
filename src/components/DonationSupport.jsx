@@ -10,18 +10,46 @@ export default function DonationSupport() {
       </p>
 
       <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-        {/* PayPal QR and Link */}
+
+        {/* PayPal QR + Logo + Link */}
         <div className="flex flex-col items-center">
+          {/* QR Code */}
           <img
             src="/public/Paypal-qrcode.png"
             alt="PayPal QR Code"
             className="w-32 h-32 mb-2"
           />
+
+          {/* PayPal Logo with link */}
+          <a
+            href="https://www.paypal.com/us/digital-wallet/ways-to-pay/add-payment-method"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-2"
+          >
+            <img
+              src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_secured_by_pp_2line.png"
+              alt="Secured by PayPal"
+              className="mx-auto"
+            />
+          </a>
+
+          {/* How PayPal Works link */}
+          <a
+            href="https://www.paypal.com/us/brc/article/how-paypal-works"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 text-sm font-semibold"
+          >
+            How PayPal Works
+          </a>
+
+          {/* Donate button */}
           <a
             href="https://paypal.me/teemmiej"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition"
+            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium mt-2 transition"
           >
             Donate via PayPal
           </a>
