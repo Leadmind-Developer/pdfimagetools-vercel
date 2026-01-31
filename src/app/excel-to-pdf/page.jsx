@@ -1,6 +1,7 @@
 // src/app/excel-to-pdf/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import Footer from "../../components/DonationSupport";
 import ExcelToPdfUploader from "../../components/ExcelToPdfUploader";
 import Link from "next/link";
 
@@ -133,6 +134,11 @@ export default function ExcelToPdfPage() {
             <p style={subHeadingStyle}>{t.heroSubtitle}</p>
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <ExcelToPdfUploader />
+            </div>
+
+            {/* DonationSupport placed here */}
+            <div style={{ marginTop: "3rem" }}>
+              <DonationSupport />
             </div>
           </section>
 
