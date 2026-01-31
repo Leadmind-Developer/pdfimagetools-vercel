@@ -36,7 +36,7 @@ export default function Footer() {
       <DonationSupport />
 
       <div className="footer-note">
-        Built with ❤️ for privacy-friendly online conversions.
+        Built with Love ❤️ for privacy-friendly online conversions.
       </div>
 
       {/* Link sections */}
@@ -145,3 +145,4 @@ export default function Footer() {
     </footer>
   );
 }
+
