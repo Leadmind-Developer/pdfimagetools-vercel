@@ -10,8 +10,8 @@ export default function DonationSupport() {
         This platform is free to use but costs money to run. If this tool helped you, please consider supporting us.
       </p>
 
-      {/* "Donate via" small paragraph */}
-      <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">
+      {/* "Donate via" bigger and noticeable */}
+      <p className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-6">
         Donate via:
       </p>
 
