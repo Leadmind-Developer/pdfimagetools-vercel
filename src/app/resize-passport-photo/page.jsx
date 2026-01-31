@@ -1,6 +1,7 @@
 // src/app/resize-passport-photo/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import PassportPhotoUploader from "../../components/PassportPhotoUploader";
 import Link from "next/link";
 
@@ -124,6 +125,11 @@ export default function ResizePassportPhotoPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <PassportPhotoUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+            <div style={{ marginTop: "3rem" }}>
+               <DonationSupport />
+             </div>
           </section>
 
           {/* Steps */}
@@ -206,3 +212,4 @@ export default function ResizePassportPhotoPage() {
     </div>
   );
 }
+
