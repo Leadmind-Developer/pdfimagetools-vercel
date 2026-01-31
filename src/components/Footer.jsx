@@ -26,7 +26,8 @@ export default function Footer() {
   const legalLinks = [
     { href: "/privacy", label: "Privacy Policy" },
     { href: "/terms", label: "Terms of Service" },
-    { href: "mailto:support@pdfimagetools.app", label: "Support" },
+    { href: "/contact", label: "Contact Us" }, // SEO friendly page
+    { href: "mailto:support@pdfimagetools.app", label: "Support Email" },
   ];
 
   return (
@@ -76,7 +77,7 @@ export default function Footer() {
 
       </div>
 
-      {/* Copyright LAST */}
+      {/* Copyright last */}
       <div className="footer-copyright">
         © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
       </div>
