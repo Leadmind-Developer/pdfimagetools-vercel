@@ -1,7 +1,7 @@
 // src/app/combine-pdfs/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
-import Footer from "../../components/DonationSupport";
+import DonationSupport from "../../components/DonationSupport";
 import PdfCombineUploader from "../../components/PdfCombineUploader";
 import Link from "next/link";
 
@@ -197,5 +197,6 @@ export default function CombinePdfsPage() {
     </div>
   );
 }
+
 
 
