@@ -1,4 +1,4 @@
-"use client"; // Needed if you use any client-side code
+"use client";
 
 import React from "react";
 import Link from "next/link";
@@ -41,20 +41,31 @@ export default function Footer() {
         © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
       </div>
 
-      <div className="footer-links">
-        {pdfLinks.map((link) =>
-          <Link key={link.href} href={link.href}>{link.label}</Link>
-        )}
-        {imageToolsLinks.map((link) =>
-          <Link key={link.href} href={link.href}>{link.label}</Link>
-        )}
-        {legalLinks.map((link) =>
-          link.href.startsWith("mailto:") ? (
-            <a key={link.href} href={link.href}>{link.label}</a>
-          ) : (
+      <div className="footer-sections">
+        <div className="footer-section">
+          <h4>PDF Tools</h4>
+          {pdfLinks.map((link) => (
             <Link key={link.href} href={link.href}>{link.label}</Link>
-          )
-        )}
+          ))}
+        </div>
+
+        <div className="footer-section">
+          <h4>Image & File Tools</h4>
+          {imageToolsLinks.map((link) => (
+            <Link key={link.href} href={link.href}>{link.label}</Link>
+          ))}
+        </div>
+
+        <div className="footer-section">
+          <h4>Legal</h4>
+          {legalLinks.map((link) =>
+            link.href.startsWith("mailto:") ? (
+              <a key={link.href} href={link.href}>{link.label}</a>
+            ) : (
+              <Link key={link.href} href={link.href}>{link.label}</Link>
+            )
+          )}
+        </div>
       </div>
 
       <div className="footer-email">
@@ -70,55 +81,47 @@ export default function Footer() {
           text-align: center;
         }
 
-        .footer-note {
+        .footer-note, .footer-copyright, .footer-email {
           font-size: 0.85rem;
-          margin-top: 2rem;
-          color: #555;
-        }
-
-        .footer-copyright {
-          margin-top: 0.5rem;
-          font-size: 0.85rem;
-          color: #555;
-        }
-
-        .footer-links {
           margin-top: 1rem;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 0.75rem;
-          font-size: 0.9rem;
+          color: #555;
         }
 
-        .footer-links a {
-          color: var(--foreground);
+        .footer-sections {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 2rem;
+          margin-top: 1.5rem;
+        }
+
+        .footer-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .footer-section h4 {
+          margin-bottom: 0.5rem;
+          font-size: 0.95rem;
+        }
+
+        .footer-section a {
+          margin: 2px 0;
+          font-size: 0.85rem;
           text-decoration: none;
+          color: var(--foreground);
           transition: color 0.2s;
         }
 
-        .footer-links a:hover {
+        .footer-section a:hover {
           color: #0079cd;
         }
 
-        .footer-email {
-          margin-top: 0.75rem;
-          font-size: 0.85rem;
-        }
-
-        .footer-email a {
-          color: var(--foreground);
-          text-decoration: none;
-        }
-
-        .footer-email a:hover {
-          color: #0079cd;
-        }
-
-        @media (max-width: 500px) {
-          .footer-links {
+        @media (max-width: 600px) {
+          .footer-sections {
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 1.5rem;
           }
         }
       `}</style>
