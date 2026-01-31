@@ -1,6 +1,7 @@
 // src/app/word-to-pdf/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import WordToPdfUploader from "../../components/WordToPdfUploader";
 import Link from "next/link";
 
@@ -69,6 +70,11 @@ export default function WordToPdfPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <WordToPdfUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+            <div style={{ marginTop: "3rem" }}>
+               <DonationSupport />
+             </div>
           </section>
 
           {/* Steps */}
