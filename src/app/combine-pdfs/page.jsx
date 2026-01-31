@@ -127,6 +127,11 @@ export default function CombinePdfsPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <PdfCombineUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+            <div style={{ marginTop: "3rem" }}>
+              <DonationSupport />
+            </div>
           </section>
 
           {/* Steps */}
@@ -191,3 +196,4 @@ export default function CombinePdfsPage() {
     </div>
   );
 }
+
