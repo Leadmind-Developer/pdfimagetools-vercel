@@ -26,8 +26,7 @@ export const metadata = {
       },
     ],
     type: 'website',
-    siteName: 'PDFImageTools',
-    **appId: '914988614312614',
+    siteName: 'PDFImageTools',   
   },
   twitter: {
     card: 'summary_large_image',
@@ -51,6 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Favicon (drop pdfdoc.webp into /public) */}
         <link rel="icon" href="/pdfdoc.webp" />
+
+        {/* Facebook App ID */}
+        <meta property="fb:app_id" content="914988614312614" />
       </head>
       <body>
         {/* Google Analytics (client-side only) */}
