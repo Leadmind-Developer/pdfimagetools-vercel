@@ -11,59 +11,75 @@ export default function DonationSupport() {
 
       <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
 
-        {/* PayPal QR + Logo + Donate */}
+        {/* PayPal */}
         <div className="flex flex-col items-center">
-          {/* QR Code */}
-          <img
-            src="/Paypal-qrcode.png" // Correct path in Next.js public folder
-            alt="Scan to PayPal"
-            className="w-32 h-32 mb-2"
-          />
-
-          {/* PayPal Logo linking to PayPal.me */}
           <a
             href="https://paypal.me/teemmiej"
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-2"
+            className="text-blue-600 font-medium mb-2"
+          >
+            Donate via PayPal
+          </a>
+          <a
+            href="https://paypal.me/teemmiej"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_secured_by_pp_2line.png"
               alt="Secured by PayPal"
-              className="mx-auto"
+              className="w-32 mx-auto"
             />
-          </a>
-
-          {/* Donate button */}
-          <a
-            href="https://paypal.me/teemmiej"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium mt-2 transition"
-          >
-            Donate via PayPal
           </a>
         </div>
 
         {/* Flutterwave */}
-        <a
-          href="https://flutterwave.com/pay/enkl6s6cpibf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-medium transition"
-        >
-          Donate via Flutterwave
-        </a>
+        <div className="flex flex-col items-center">
+          <a
+            href="https://flutterwave.com/pay/enkl6s6cpibf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-orange-500 font-medium mb-2"
+          >
+            Donate via Flutterwave
+          </a>
+          <a
+            href="https://flutterwave.com/pay/enkl6s6cpibf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/flutterwave.png"
+              alt="Flutterwave"
+              className="w-32 mx-auto"
+            />
+          </a>
+        </div>
 
         {/* Paystack */}
-        <a
-          href="https://paystack.shop/pay/pdfimagetools"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition"
-        >
-          Donate via Paystack
-        </a>
+        <div className="flex flex-col items-center">
+          <a
+            href="https://paystack.shop/pay/pdfimagetools"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-600 font-medium mb-2"
+          >
+            Donate via Paystack
+          </a>
+          <a
+            href="https://paystack.shop/pay/pdfimagetools"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/Paystack-Logo.jpg"
+              alt="Paystack"
+              className="w-32 mx-auto"
+            />
+          </a>
+        </div>
+
       </div>
 
       <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
