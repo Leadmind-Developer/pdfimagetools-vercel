@@ -26,6 +26,8 @@ export const metadata = {
       },
     ],
     type: 'website',
+    siteName: 'PDFImageTools',
+    **appId: '914988614312614',
   },
   twitter: {
     card: 'summary_large_image',
