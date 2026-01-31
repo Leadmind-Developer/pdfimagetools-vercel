@@ -17,13 +17,13 @@ export default function DonationSupport() {
 
       <div className="payment-gateways">
         <a href="https://paypal.me/teemmiej" target="_blank" rel="noopener noreferrer">
-          <img src="/paypal_PDFTools.png" alt="PayPal" />
+          <img src="/logo/paypal_PDFTools.png" alt="PayPal" />
         </a>
         <a href="https://flutterwave.com/pay/enkl6s6cpibf" target="_blank" rel="noopener noreferrer">
-          <img src="/flutterwave.png" alt="Flutterwave" />
+          <img src="/logo/flutterwave.png" alt="Flutterwave" />
         </a>
         <a href="https://paystack.shop/pay/pdfimagetools" target="_blank" rel="noopener noreferrer">
-          <img src="/Paystack-Logo.jpg" alt="Paystack" />
+          <img src="/logo/Paystack-Logo.jpg" alt="Paystack" />
         </a>
       </div>
 
