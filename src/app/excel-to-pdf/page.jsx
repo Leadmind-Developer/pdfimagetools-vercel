@@ -1,7 +1,7 @@
 // src/app/excel-to-pdf/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
-import Footer from "../../components/DonationSupport";
+import DonationSupport from "../../components/DonationSupport";
 import ExcelToPdfUploader from "../../components/ExcelToPdfUploader";
 import Link from "next/link";
 
