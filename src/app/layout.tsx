@@ -19,7 +19,7 @@ export const metadata = {
     url: 'https://pdfimagetools.app/',
     images: [
       {
-        url: 'https://pdfimagetools.app/pdfdoc.png',
+        url: 'https://pdfimagetools.app/OGimage.png',
         width: 1200,
         height: 630,
         alt: 'PDFImageTools',
