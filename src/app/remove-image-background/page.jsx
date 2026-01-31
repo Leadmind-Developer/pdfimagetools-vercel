@@ -1,6 +1,7 @@
 // src/app/remove-image-background/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import RemoveBgUploader from "../../components/RemoveBgUploader";
 import Link from "next/link";
 
@@ -124,6 +125,11 @@ export default function RemoveImageBackgroundPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <RemoveBgUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+             <div style={{ marginTop: "3rem" }}>
+               <DonationSupport />
+             </div>
           </section>
 
           {/* Steps */}
@@ -206,3 +212,4 @@ export default function RemoveImageBackgroundPage() {
     </div>
   );
 }
+
