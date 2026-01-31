@@ -1,6 +1,7 @@
 // src/app/image-converter/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import ImageConverter from "../../components/ImageConverter";
 import Link from "next/link";
 
@@ -130,6 +131,11 @@ export default function ImageConverterPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <ImageConverter />
             </div>
+
+            {/* DonationSupport placed here */}
+             <div style={{ marginTop: "3rem" }}>
+                <DonationSupport />
+               </div>
           </section>
 
           {/* Steps */}
@@ -202,3 +208,4 @@ export default function ImageConverterPage() {
     </div>
   );
 }
+
