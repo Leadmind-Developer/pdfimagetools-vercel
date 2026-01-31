@@ -9,7 +9,7 @@ const Header = () => (
       <nav>
         <a href="#features">Features</a>
         <Link href="/tools">Tools</Link>
-        <a href="#contact">Contact</a>
+        <Link href="/contact">Contact</Link>
         <a href="https://pdfimagetools.app/blog/pdfimagetools" target="_blank" rel="noopener noreferrer">
           Blog
         </a>
@@ -19,3 +19,4 @@ const Header = () => (
 );
 
 export default Header;
+
