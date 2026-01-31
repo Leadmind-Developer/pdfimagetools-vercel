@@ -1,6 +1,7 @@
 // src/app/pdf-to-word/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
+import DonationSupport from "../../components/DonationSupport";
 import PdfToWordUploader from "../../components/PdfToWordUploader";
 import Link from "next/link";
 
@@ -124,6 +125,11 @@ export default function PdfToWordPage() {
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
               <PdfToWordUploader />
             </div>
+
+            {/* DonationSupport placed here */}
+            <div style={{ marginTop: "3rem" }}>
+              <DonationSupport />
+            </div>
           </section>
 
           {/* Steps */}
@@ -197,3 +203,4 @@ export default function PdfToWordPage() {
     </div>
   );
 }
+
