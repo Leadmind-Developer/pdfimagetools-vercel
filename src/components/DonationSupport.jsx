@@ -25,7 +25,7 @@ export default function DonationSupport() {
           className="w-32"
         >
           <img
-            src="https://www.paypalobjects.com/webstatic/mktg/logo/bdg_secured_by_pp_2line.png"
+            src="/paypal_PDFTools.png"
             alt="PayPal"
             className="w-full rounded-lg shadow hover:scale-105 transition-transform"
           />
