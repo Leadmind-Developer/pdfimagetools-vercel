@@ -22,6 +22,7 @@ export default function BlogIndexPage() {
     { name: "Remove Image Background", slug: "remove-image-background" },
     { name: "Resize Passport Photo", slug: "resize-passport-photo" },
     { name: "Image Converter", slug: "image-converter" }
+    { name: "pdfimagetools", slug: "pdfimagetools" }
   ];
 
   const breadcrumbItems = [
