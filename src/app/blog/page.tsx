@@ -11,6 +11,7 @@ import {
   FaMagic,
   FaUserEdit,
   FaExchangeAlt,
+  FaNewspaper, // for PDFImageTools blog
 } from "react-icons/fa";
 
 export const metadata = {
@@ -20,6 +21,7 @@ export const metadata = {
 };
 
 const tools = [
+  { name: "Overview", slug: "pdfimagetools", icon: FaNewspaper }, // added main blog page
   { name: "Merge PDF", slug: "mergepdf", icon: FaFilePdf },
   { name: "PDF to Word", slug: "pdf-to-word", icon: FaFileWord },
   { name: "PDF to Excel", slug: "pdf-to-excel", icon: FaFileExcel },
