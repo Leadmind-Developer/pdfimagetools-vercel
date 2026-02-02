@@ -1,6 +1,5 @@
 // src/app/blog/image-to-pdf/page.tsx
 import React from "react";
-import Footer from "../../components/Footer";
 import Link from "next/link";
 import ImageToPdfUploader from "../../components/ImageToPdfUploader"; // assume you have this uploader component
 import DonationSupport from "../../components/DonationSupport";
@@ -226,7 +225,6 @@ export default function ImageToPdfBlog() {
           </section>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
