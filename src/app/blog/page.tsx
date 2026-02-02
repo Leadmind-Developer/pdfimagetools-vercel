@@ -21,7 +21,7 @@ export default function BlogIndexPage() {
     { name: "PPT to PDF", slug: "ppt-to-pdf" },
     { name: "Remove Image Background", slug: "remove-image-background" },
     { name: "Resize Passport Photo", slug: "resize-passport-photo" },
-    { name: "Image Converter", slug: "image-converter" }
+    { name: "Image Converter", slug: "image-converter" },
     { name: "pdfimagetools", slug: "pdfimagetools" }
   ];
 
