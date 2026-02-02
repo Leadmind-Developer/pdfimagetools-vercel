@@ -22,7 +22,6 @@ export default function BlogIndexPage() {
     { name: "Remove Image Background", slug: "remove-image-background" },
     { name: "Resize Passport Photo", slug: "resize-passport-photo" },
     { name: "Image Converter", slug: "image-converter" }
-    { name: "pdfimagetools", slug: "pdfimagetools" }
   ];
 
   const breadcrumbItems = [
@@ -31,7 +30,7 @@ export default function BlogIndexPage() {
   ];
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-12 leading-relaxed">
+    <article className="max-w-6xl mx-auto px-4 py-12">
 
       {/* ================= Breadcrumb JSON-LD ================= */}
       <script
@@ -66,24 +65,38 @@ export default function BlogIndexPage() {
 
       <h1 className="text-3xl font-bold mb-6">PDF & Image Tools Blog</h1>
 
-      <p className="mb-6">
-        Welcome to PDFImageTools Blog! Find detailed guides, tutorials, and tips for using all our tools. Learn how to merge PDFs, convert documents, resize photos, remove image backgrounds, and more.
+      <p className="mb-8">
+        Welcome to PDFImageTools Blog! Explore guides, tutorials, and tips for using all our tools. Learn how to merge PDFs, convert documents, resize photos, remove image backgrounds, and more.
       </p>
 
-      <h2 className="text-2xl font-semibold mb-4">Tool Guides</h2>
-
-      <ul className="list-disc list-inside space-y-2">
+      {/* ================= Card Grid Layout ================= */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map(tool => (
-          <li key={tool.slug}>
-            <Link href={`/blog/${tool.slug}`} className="text-blue-600 hover:underline">
-              {tool.name}
-            </Link>
-          </li>
+          <Link
+            key={tool.slug}
+            href={`/blog/${tool.slug}`}
+            className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300"
+          >
+            <div className="w-full h-40 relative">
+              <img
+                src="/OGimage.png"
+                alt={tool.name}
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div className="p-4">
+              <h2 className="text-xl font-semibold mb-2 text-gray-800">
+                {tool.name}
+              </h2>
+              <p className="text-gray-600 text-sm">
+                Read our detailed guide for {tool.name} and learn step-by-step instructions, FAQs, and tips.
+              </p>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
 
-      <h2 className="text-2xl font-semibold mt-8 mb-4">Why Read Our Blog?</h2>
-
+      <h2 className="text-2xl font-semibold mt-12 mb-4">Why Read Our Blog?</h2>
       <ul className="list-disc list-inside space-y-2">
         <li>Step-by-step instructions for all PDF & image tools</li>
         <li>Tips to optimize workflow and productivity</li>
@@ -92,9 +105,8 @@ export default function BlogIndexPage() {
       </ul>
 
       <h2 className="text-2xl font-semibold mt-8 mb-4">Get Started</h2>
-
       <p>
-        Pick a tool from the list above and explore its detailed guide. Every page includes FAQs, step-by-step instructions, and helpful tips to maximize your experience.
+        Pick a tool from the cards above and explore its detailed guide. Every page includes FAQs, step-by-step instructions, and helpful tips to maximize your experience.
       </p>
 
     </article>
