@@ -1,102 +1,232 @@
+// src/app/blog/image-to-pdf/page.tsx
 import React from "react";
+import Footer from "../../components/Footer";
 import Link from "next/link";
+import ImageToPdfUploader from "../../components/ImageToPdfUploader"; // assume you have this uploader component
+import DonationSupport from "../../components/DonationSupport";
 
 export const metadata = {
   title: "Convert Images to PDF Online for Free | PDFImageTools",
   description:
-    "Combine JPG and PNG images into a single PDF easily and securely using PDFImageTools."
+    "Convert images (JPG, PNG, etc.) into PDF documents online for free with PDFImageTools.",
+};
+
+const t = {
+  heroTitle: "Convert Images to PDF Online",
+  heroSubtitle:
+    "Turn your JPG, PNG, or other image files into high-quality PDF documents instantly. Preserve layout, download fast, and no signup required.",
+  stepsTitle: "How It Works",
+  steps: [
+    "Upload one or more image files (JPG, PNG, etc.).",
+    "Arrange images in the order you want them in the PDF.",
+    "Click 'Convert to PDF' to generate your document.",
+    "Download your PDF or start a new conversion.",
+  ],
+  aboutTitle: "Why Convert Images to PDF?",
+  aboutText: [
+    "Converting images to PDF makes it easy to share multiple images as a single document.",
+    "PDF preserves image quality, ensures consistent layout, and is universally readable across devices.",
+  ],
+  privacyTitle: "Privacy & Security",
+  privacyText: [
+    "All uploaded images are deleted automatically after one hour.",
+    "Your files are processed securely; no login or email required.",
+  ],
+  faqTitle: "Frequently Asked Questions",
+  faq: [
+    {
+      question: "Is Image to PDF free?",
+      answer: "Yes — this conversion tool is completely free with no watermark.",
+    },
+    {
+      question: "Can I upload multiple images?",
+      answer: "Yes, you can upload multiple images and arrange them in your preferred order.",
+    },
+    {
+      question: "Are my images secure?",
+      answer: "All files are processed securely and deleted automatically after one hour.",
+    },
+  ],
+  relatedTitle: "Other Tools You May Like",
+  relatedTools: [
+    { name: "PDF to Image", slug: "pdf-to-image" },
+    { name: "Merge PDFs", slug: "combine-pdfs" },
+    { name: "Word to PDF", slug: "word-to-pdf" },
+    { name: "Image Converter", slug: "image-converter" },
+  ],
 };
 
 export default function ImageToPdfBlog() {
+  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
+  const sectionStyle = {
+    marginBottom: "4rem",
+    padding: "2rem",
+    borderRadius: "8px",
+    backgroundColor: "#f9f9f9",
+  };
+  const headingStyle = {
+    fontSize: "2.5rem",
+    fontWeight: 700,
+    marginBottom: "1rem",
+    color: "#222",
+    textAlign: "center",
+  };
+  const subHeadingStyle = {
+    fontSize: "1.25rem",
+    marginBottom: "1.5rem",
+    color: "#555",
+    lineHeight: 1.6,
+    textAlign: "center",
+  };
+  const listStyle = {
+    paddingLeft: "1.5rem",
+    marginBottom: "1rem",
+    color: "#555",
+    fontSize: "1.1rem",
+    lineHeight: 1.6,
+  };
+  const badgeStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    margin: "0.25rem",
+    borderRadius: "999px",
+    backgroundColor: "#e0e0e0",
+    fontSize: "0.9rem",
+    color: "#333",
+  };
+  const homeButtonStyle = {
+    display: "inline-block",
+    padding: "0.5rem 1rem",
+    marginBottom: "2rem",
+    borderRadius: "5px",
+    backgroundColor: "#0070f3",
+    color: "#fff",
+    textDecoration: "none",
+    fontWeight: 600,
+  };
 
-const faq = [
-  {
+  // JSON-LD structured data
+  const faqStructured = t.faq.map(f => ({
     "@type": "Question",
-    "name": "Is Image to PDF free?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, converting images to PDF is completely free with no watermark."
-    }
-  },
-  {
-    "@type": "Question",
-    "name": "Can I upload multiple images?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, you can combine multiple JPG or PNG images into one PDF file."
-    }
-  },
-  {
-    "@type": "Question",
-    "name": "Are my images secure?",
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "All files are processed securely and deleted automatically."
-    }
-  }
-];
+    name: f.question,
+    acceptedAnswer: { "@type": "Answer", text: f.answer },
+  }));
 
-return (
-<article className="max-w-4xl mx-auto px-4 py-12 leading-relaxed">
+  return (
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <main style={{ flex: 1 }}>
+        <div style={containerStyle}>
+          {/* Home Link */}
+          <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
+            <Link href="/" style={homeButtonStyle}>
+              PDFImageTools Home
+            </Link>
+          </div>
 
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "How to Convert Images to PDF Online",
-      "author": { "@type": "Organization", "name": "PDFImageTools" },
-      "mainEntityOfPage": {
-        "@id": "https://pdfimagetools.app/blog/image-to-pdf"
-      }
-    })
-  }}
-/>
+          {/* JSON-LD */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Article",
+                headline: t.heroTitle,
+                author: { "@type": "Organization", name: "PDFImageTools" },
+                mainEntityOfPage: { "@id": "https://pdfimagetools.app/blog/image-to-pdf" },
+              }),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: faqStructured,
+              }),
+            }}
+          />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                itemListElement: [
+                  { "@type": "ListItem", position: 1, name: "Home", item: "https://pdfimagetools.app/" },
+                  { "@type": "ListItem", position: 2, name: "Blog", item: "https://pdfimagetools.app/blog" },
+                  { "@type": "ListItem", position: 3, name: "Image to PDF", item: "https://pdfimagetools.app/blog/image-to-pdf" },
+                ],
+              }),
+            }}
+          />
 
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faq
-    })
-  }}
-/>
+          {/* Hero */}
+          <section style={{ marginBottom: "4rem", textAlign: "center" }}>
+            <h1 style={headingStyle}>{t.heroTitle}</h1>
+            <p style={subHeadingStyle}>{t.heroSubtitle}</p>
+            <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+              <ImageToPdfUploader />
+            </div>
 
-<script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pdfimagetools.app/" },
-        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://pdfimagetools.app/blog" },
-        { "@type": "ListItem", "position": 3, "name": "Image to PDF", "item": "https://pdfimagetools.app/blog/image-to-pdf" }
-      ]
-    })
-  }}
-/>
+            <div style={{ marginTop: "3rem" }}>
+              <DonationSupport />
+            </div>
+          </section>
 
-<h1 className="text-3xl font-bold mb-6">
-  Convert Images to PDF Online
-</h1>
+          {/* Steps */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.stepsTitle}</h2>
+            <ol style={listStyle}>
+              {t.steps.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ol>
+          </section>
 
-<p>
-Combine JPG and PNG images into a single PDF file easily.
-PDFImageTools makes image to PDF conversion fast, free, and secure.
-</p>
+          {/* About */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.aboutTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.aboutText.map((p, idx) => <p key={idx}>{p}</p>)}
+            </div>
+          </section>
 
-<h2>Related Tools</h2>
-<ul className="space-y-1">
-  <li><Link href="/pdf-to-image">PDF to Image</Link></li>
-  <li><Link href="/combine-pdfs">Merge PDFs</Link></li>
-  <li><Link href="/pdf-to-word">PDF to Word</Link></li>
-  <li><Link href="/word-to-pdf">Word to PDF</Link></li>
-</ul>
+          {/* Privacy */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.privacyTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.privacyText.map((p, idx) => <p key={idx}>{p}</p>)}
+            </div>
+          </section>
 
-</article>
-);
+          {/* FAQ */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.faqTitle}</h2>
+            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              {t.faq.map((item, idx) => (
+                <div key={idx} style={{ marginBottom: "1.5rem" }}>
+                  <h4 style={{ fontWeight: 600 }}>{item.question}</h4>
+                  <p>{item.answer}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Related Tools */}
+          <section style={sectionStyle}>
+            <h2 style={headingStyle}>{t.relatedTitle}</h2>
+            <ul style={listStyle}>
+              {t.relatedTools.map((tool, idx) => (
+                <li key={idx}>
+                  <Link href={`/blog/${tool.slug}`}>{tool.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
 }
