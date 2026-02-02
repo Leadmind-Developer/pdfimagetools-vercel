@@ -2,96 +2,116 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CTA from "../components/CTA";
+import Features from "../components/Features";
+import Hero from "../components/Hero";
+import "./landing.css";
 
 export const metadata = {
-  title: "Free PDF, Word, PowerPoint, Excel & Image Tools — PDFImageTools",
+  title: "Free PDF, Word, PowerPoint, Excel & Image Tools — Convert, Edit & Optimize | PDFImageTools",
   description:
-    "Convert and edit PDF, Word, Excel, and image files instantly. Free online tools for PDF to Word, PowerPoint to PDF, Excel to PDF, background remover, and more.",
+    "Convert and edit PDF, Word, Excel, and image files instantly. Free online tools for PDF to Word, PowerPoint to PDF, Excel to PDF, background remover, and more — no signup required.",
   alternates: { canonical: "https://pdfimagetools.app/" },
+  openGraph: {
+    title: "Free PDF, Word, Excel & Image Tools — Convert, Edit & Optimize | PDFImageTools",
+    description:
+      "Instantly convert, edit, and optimize PDF, Word, PowerPoint, Excel, and image files online. Fast, secure, and 100% free.",
+    url: "https://pdfimagetools.app/",
+    images: [
+      {
+        url: "https://pdfimagetools.app/og/homepage-preview.png",
+        width: 1200,
+        height: 630,
+        alt: "PDFImageTools — Free PDF & Image Converter",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free PDF, Word, Excel & Image Tools — Convert, Edit & Optimize | PDFImageTools",
+    description:
+      "Fast, privacy-friendly tools to convert PDFs, Word, Excel, and images. No signup required.",
+    images: ["https://pdfimagetools.app/og/homepage-preview.png"],
+  },
 };
-
-const tools = [
-  { name: "Merge PDF", slug: "mergepdf" },
-  { name: "PDF to Word", slug: "pdf-to-word" },
-  { name: "PDF to Excel", slug: "pdf-to-excel" },
-  { name: "PDF to PPT", slug: "pdf-to-ppt" },
-  { name: "PDF to Image", slug: "pdf-to-image" },
-  { name: "Image to PDF", slug: "image-to-pdf" },
-  { name: "Word to PDF", slug: "word-to-pdf" },
-  { name: "Excel to PDF", slug: "excel-to-pdf" },
-  { name: "PPT to PDF", slug: "ppt-to-pdf" },
-  { name: "Remove Image Background", slug: "remove-image-background" },
-  { name: "Resize Passport Photo", slug: "resize-passport-photo" },
-  { name: "Image Converter", slug: "image-converter" },
-];
 
 export default function LandingPage() {
   return (
-    <div className="landing-page min-h-screen flex flex-col">
+    <div className="landing-page">
       <Header />
+      <Hero />
 
-      {/* Hero */}
-      <section className="relative bg-gray-50 py-20 flex flex-col items-center text-center">
-        <img
-          src="/pdfdoc.webp"
-          alt="PDF Tools Hero"
-          className="w-full max-w-3xl object-cover rounded-lg shadow-lg mb-8"
-        />
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Free PDF, Word, Excel & Image Tools
-        </h1>
-        <p className="text-gray-700 max-w-2xl text-lg">
-          Convert, edit, merge, and optimize documents and images instantly. Fast, secure, and completely free — no signup required.
-        </p>
+      <section className="features-section">
+        <Features />
       </section>
 
-      {/* Tools Grid */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Explore Our Tools
+      <CTA />
+
+      {/* About Section */}
+      <section className="about-section bg-gray-50 py-16">
+        <div className="container mx-auto max-w-4xl px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-gray-800">
+            About PDFImageTools
           </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {tools.map(tool => (
-              <a
-                key={tool.slug}
-                href={`/blog/${tool.slug}`}
-                className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow duration-300 bg-gray-50"
-              >
-                <div className="w-full h-40 relative">
-                  <img
-                    src="/pdfdoc.webp"
-                    alt={tool.name}
-                    className="object-cover w-full h-full"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                    {tool.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Learn how to use {tool.name} step by step, with FAQs and tips.
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
-      <section className="py-16 bg-gray-50 text-center">
-        <div className="container mx-auto max-w-4xl px-4">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">About PDFImageTools</h2>
-          <p className="text-gray-700 text-lg leading-relaxed">
+          <p className="text-gray-600 text-lg leading-relaxed">
             PDFImageTools is a free, browser-based suite for converting, editing, and
-            optimizing PDF and image files. No installation or signup required. All processing
-            is fast, secure, and privacy-first.
+            optimizing PDF and image files. Our tools are designed for speed, simplicity,
+            and privacy — no account or software installation required. Whether you’re
+            converting PDFs to Word, merging files, or removing image backgrounds, all
+            processing happens securely in your browser.
           </p>
         </div>
       </section>
 
-      <CTA />
+      {/* FAQ Section */}
+      <section className="faq-section py-16">
+        <div className="container mx-auto max-w-4xl px-4">
+          <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-6">
+            <div className="faq-item">
+              <h4 className="text-xl font-semibold text-gray-900">
+                Is PDFImageTools really free?
+              </h4>
+              <p className="text-gray-700">
+                Yes — all our tools are completely free to use with no hidden fees,
+                limits, or subscriptions.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h4 className="text-xl font-semibold text-gray-900">
+                Do I need to create an account?
+              </h4>
+              <p className="text-gray-700">
+                No sign-up or login is required. You can use every feature instantly.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h4 className="text-xl font-semibold text-gray-900">
+                Are my files secure?
+              </h4>
+              <p className="text-gray-700">
+                Absolutely. Most operations happen locally in your browser, meaning your
+                files never leave your device.
+              </p>
+            </div>
+
+            <div className="faq-item">
+              <h4 className="text-xl font-semibold text-gray-900">
+                Which formats do you support?
+              </h4>
+              <p className="text-gray-700">
+                PDFImageTools supports popular document and image formats — including
+                PDF, DOCX, PPTX, XLSX, JPG, PNG, and more.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
