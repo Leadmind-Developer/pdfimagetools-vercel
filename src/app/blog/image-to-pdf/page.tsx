@@ -1,230 +1,156 @@
-// src/app/blog/image-to-pdf/page.tsx
+// src/app/blog/image-to-pdf/page.jsx
 import React from "react";
 import Link from "next/link";
-import ImageToPdfUploader from "../../components/ImageToPdfUploader"; // assume you have this uploader component
-import DonationSupport from "../../components/DonationSupport";
 
 export const metadata = {
   title: "Convert Images to PDF Online for Free | PDFImageTools",
   description:
-    "Convert images (JPG, PNG, etc.) into PDF documents online for free with PDFImageTools.",
+    "Learn how to convert JPG, PNG, and other image files to PDF online for free. Step-by-step guide, use cases, FAQs, and tips for Image to PDF conversion.",
+  robots: "index, follow",
+  openGraph: {
+    title: "Convert Images to PDF Online – Free & Easy",
+    description:
+      "Turn multiple images into a single PDF quickly with PDFImageTools. Fast, secure, no signup required.",
+    url: "https://pdfimagetools.app/blog/image-to-pdf",
+    siteName: "PDFImageTools",
+    type: "article"
+  }
 };
 
-const t = {
-  heroTitle: "Convert Images to PDF Online",
-  heroSubtitle:
-    "Turn your JPG, PNG, or other image files into high-quality PDF documents instantly. Preserve layout, download fast, and no signup required.",
-  stepsTitle: "How It Works",
-  steps: [
-    "Upload one or more image files (JPG, PNG, etc.).",
-    "Arrange images in the order you want them in the PDF.",
-    "Click 'Convert to PDF' to generate your document.",
-    "Download your PDF or start a new conversion.",
-  ],
-  aboutTitle: "Why Convert Images to PDF?",
-  aboutText: [
-    "Converting images to PDF makes it easy to share multiple images as a single document.",
-    "PDF preserves image quality, ensures consistent layout, and is universally readable across devices.",
-  ],
-  privacyTitle: "Privacy & Security",
-  privacyText: [
-    "All uploaded images are deleted automatically after one hour.",
-    "Your files are processed securely; no login or email required.",
-  ],
-  faqTitle: "Frequently Asked Questions",
-  faq: [
-    {
-      question: "Is Image to PDF free?",
-      answer: "Yes — this conversion tool is completely free with no watermark.",
-    },
-    {
-      question: "Can I upload multiple images?",
-      answer: "Yes, you can upload multiple images and arrange them in your preferred order.",
-    },
-    {
-      question: "Are my images secure?",
-      answer: "All files are processed securely and deleted automatically after one hour.",
-    },
-  ],
-  relatedTitle: "Other Tools You May Like",
-  relatedTools: [
-    { name: "PDF to Image", slug: "pdf-to-image" },
-    { name: "Merge PDFs", slug: "combine-pdfs" },
-    { name: "Word to PDF", slug: "word-to-pdf" },
-    { name: "Image Converter", slug: "image-converter" },
-  ],
-};
-
-export default function ImageToPdfBlog() {
-  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
-  const sectionStyle = {
-    marginBottom: "4rem",
-    padding: "2rem",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9",
-  };
-  const headingStyle = {
-    fontSize: "2.5rem",
-    fontWeight: 700,
-    marginBottom: "1rem",
-    color: "#222",
-    textAlign: "center",
-  };
-  const subHeadingStyle = {
-    fontSize: "1.25rem",
-    marginBottom: "1.5rem",
-    color: "#555",
-    lineHeight: 1.6,
-    textAlign: "center",
-  };
-  const listStyle = {
-    paddingLeft: "1.5rem",
-    marginBottom: "1rem",
-    color: "#555",
-    fontSize: "1.1rem",
-    lineHeight: 1.6,
-  };
-  const badgeStyle = {
-    display: "inline-block",
-    padding: "0.5rem 1rem",
-    margin: "0.25rem",
-    borderRadius: "999px",
-    backgroundColor: "#e0e0e0",
-    fontSize: "0.9rem",
-    color: "#333",
-  };
-  const homeButtonStyle = {
-    display: "inline-block",
-    padding: "0.5rem 1rem",
-    marginBottom: "2rem",
-    borderRadius: "5px",
-    backgroundColor: "#0070f3",
-    color: "#fff",
-    textDecoration: "none",
-    fontWeight: 600,
-  };
-
-  // JSON-LD structured data
-  const faqStructured = t.faq.map(f => ({
-    "@type": "Question",
-    name: f.question,
-    acceptedAnswer: { "@type": "Answer", text: f.answer },
-  }));
-
+export default function ImageToPdfBlogPage() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
-      <main style={{ flex: 1 }}>
-        <div style={containerStyle}>
-          {/* Home Link */}
-          <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
-            <Link href="/" style={homeButtonStyle}>
-              PDFImageTools Home
-            </Link>
-          </div>
+    <article className="max-w-4xl mx-auto px-4 py-12 leading-relaxed">
 
-          {/* JSON-LD */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Article",
-                headline: t.heroTitle,
-                author: { "@type": "Organization", name: "PDFImageTools" },
-                mainEntityOfPage: { "@id": "https://pdfimagetools.app/blog/image-to-pdf" },
-              }),
-            }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                mainEntity: faqStructured,
-              }),
-            }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "BreadcrumbList",
-                itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: "https://pdfimagetools.app/" },
-                  { "@type": "ListItem", position: 2, name: "Blog", item: "https://pdfimagetools.app/blog" },
-                  { "@type": "ListItem", position: 3, name: "Image to PDF", item: "https://pdfimagetools.app/blog/image-to-pdf" },
-                ],
-              }),
-            }}
-          />
+      {/* ================= JSON-LD SCHEMA ================= */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Convert Images to PDF Online",
+            "description": "Step-by-step guide to convert images (JPG, PNG, etc.) into PDF files online securely using PDFImageTools.",
+            "author": { "@type": "Organization", "name": "PDFImageTools" },
+            "publisher": {
+              "@type": "Organization",
+              "name": "PDFImageTools",
+              "logo": { "@type": "ImageObject", "url": "https://pdfimagetools.app/logo.png" }
+            },
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "https://pdfimagetools.app/blog/image-to-pdf" }
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is Image to PDF free?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, converting images to PDF is completely free with no watermark." }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I combine multiple images?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, you can upload multiple images and arrange them in the desired order." }
+              },
+              {
+                "@type": "Question",
+                "name": "Are my files private?",
+                "acceptedAnswer": { "@type": "Answer", "text": "All files are processed securely and automatically deleted after a short time." }
+              },
+              {
+                "@type": "Question",
+                "name": "Does the PDF quality reduce?",
+                "acceptedAnswer": { "@type": "Answer", "text": "No, the PDF preserves image quality and layout." }
+              }
+            ]
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://pdfimagetools.app/" },
+              { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://pdfimagetools.app/blog" },
+              { "@type": "ListItem", "position": 3, "name": "Image to PDF", "item": "https://pdfimagetools.app/blog/image-to-pdf" }
+            ]
+          })
+        }}
+      />
 
-          {/* Hero */}
-          <section style={{ marginBottom: "4rem", textAlign: "center" }}>
-            <h1 style={headingStyle}>{t.heroTitle}</h1>
-            <p style={subHeadingStyle}>{t.heroSubtitle}</p>
-            <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-              <ImageToPdfUploader />
-            </div>
+      {/* ================= BLOG CONTENT ================= */}
+      <h1 className="text-3xl font-bold mb-6">Convert Images to PDF Online – Fast, Free & Secure</h1>
 
-            <div style={{ marginTop: "3rem" }}>
-              <DonationSupport />
-            </div>
-          </section>
+      <p>
+        Converting images to PDF makes it easy to share multiple images in a single document, preserve layout and quality, and ensure compatibility across devices. PDFImageTools allows you to create PDFs from JPG, PNG, and other image formats instantly — no signup required.
+      </p>
 
-          {/* Steps */}
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t.stepsTitle}</h2>
-            <ol style={listStyle}>
-              {t.steps.map((step, i) => (
-                <li key={i}>{step}</li>
-              ))}
-            </ol>
-          </section>
+      <h2>Why Convert Images to PDF?</h2>
+      <ul>
+        <li>Combine receipts, invoices, or screenshots into one file</li>
+        <li>Share multiple images in a single document</li>
+        <li>Preserve image quality and formatting</li>
+        <li>Organize scanned documents or photos</li>
+        <li>Easier to print or archive images</li>
+      </ul>
 
-          {/* About */}
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t.aboutTitle}</h2>
-            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              {t.aboutText.map((p, idx) => <p key={idx}>{p}</p>)}
-            </div>
-          </section>
+      <h2>How to Convert Images to PDF</h2>
+      <ol>
+        <li>Upload your image files (JPG, PNG, etc.)</li>
+        <li>Arrange them in the desired order</li>
+        <li>Click “Convert to PDF”</li>
+        <li>Download your PDF or start a new conversion</li>
+      </ol>
 
-          {/* Privacy */}
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t.privacyTitle}</h2>
-            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              {t.privacyText.map((p, idx) => <p key={idx}>{p}</p>)}
-            </div>
-          </section>
+      <h2>Common Issues & Fixes</h2>
+      <p><strong>Upload failed:</strong> Make sure the file format is supported (JPG, PNG).</p>
+      <p><strong>PDF layout not correct:</strong> Arrange images properly before converting.</p>
+      <p><strong>Large PDF file:</strong> Compress images before conversion if needed.</p>
 
-          {/* FAQ */}
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t.faqTitle}</h2>
-            <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              {t.faq.map((item, idx) => (
-                <div key={idx} style={{ marginBottom: "1.5rem" }}>
-                  <h4 style={{ fontWeight: 600 }}>{item.question}</h4>
-                  <p>{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
+      <h2>Security & Privacy</h2>
+      <p>
+        All files are processed securely and automatically deleted shortly after conversion.
+        PDFImageTools does not store your content permanently or share it with anyone.
+      </p>
 
-          {/* Related Tools */}
-          <section style={sectionStyle}>
-            <h2 style={headingStyle}>{t.relatedTitle}</h2>
-            <ul style={listStyle}>
-              {t.relatedTools.map((tool, idx) => (
-                <li key={idx}>
-                  <Link href={`/blog/${tool.slug}`}>{tool.name}</Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-        </div>
-      </main>
-    </div>
+      <h2>Why Choose PDFImageTools?</h2>
+      <ul>
+        <li>100% free</li>
+        <li>No watermarks</li>
+        <li>No signup or account needed</li>
+        <li>Fast conversion</li>
+        <li>Privacy-first system</li>
+      </ul>
+
+      <h2>Try Our Related Tools</h2>
+      <ul className="space-y-1">
+        <li><Link href="/combine-pdfs">Merge PDFs</Link></li>
+        <li><Link href="/pdf-to-word">PDF to Word</Link></li>
+        <li><Link href="/pdf-to-ppt">PDF to PPT</Link></li>
+        <li><Link href="/pdf-to-image">PDF to Image</Link></li>
+        <li><Link href="/image-to-pdf">Image to PDF</Link></li>
+        <li><Link href="/pdf-to-excel">PDF to Excel</Link></li>
+        <li><Link href="/word-to-pdf">Word to PDF</Link></li>
+        <li><Link href="/excel-to-pdf">Excel to PDF</Link></li>
+        <li><Link href="/ppt-to-pdf">PPT to PDF</Link></li>
+        <li><Link href="/remove-image-background">Remove Image Background</Link></li>
+        <li><Link href="/resize-passport-photo">Resize Passport Photo</Link></li>
+        <li><Link href="/image-converter">Image Converter</Link></li>
+      </ul>
+
+      <h2>Final Thoughts</h2>
+      <p>
+        Whether you're a student, professional, or business owner, converting images to PDF helps keep documents organized and easy to share.
+        PDFImageTools gives you a simple, fast, and secure solution for all your PDF conversion needs.
+      </p>
+    </article>
   );
 }
