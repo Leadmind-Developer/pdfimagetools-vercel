@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import CTA from "../components/CTA";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import CTA from "../../components/CTA";
 
 export const metadata = {
   title: "Free PDF, Word, PowerPoint, Excel & Image Tools — PDFImageTools",
