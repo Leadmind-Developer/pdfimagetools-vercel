@@ -1,13 +1,11 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-// Lazy load donation (client-only, after paint)
+// Load donation after initial render (no LCP impact)
 const DonationSupport = dynamic(
   () => import("./DonationSupport"),
-  { ssr: false, loading: () => null }
+  { ssr: false }
 );
 
 export default function Footer() {
@@ -36,106 +34,56 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="footer-container">
+    <footer className="bg-[var(--background)] text-[var(--foreground)] border-t border-gray-300 px-4 py-10 text-center">
 
-      {/* Donation loads after main render */}
+      {/* Donation loads only on client AFTER paint */}
       <DonationSupport />
 
-      <div className="footer-note">
+      <p className="text-sm text-gray-600 mt-6">
         Built with ❤️ for privacy-friendly online conversions.
-      </div>
+      </p>
 
-      <div className="footer-sections">
+      <div className="flex flex-wrap justify-center gap-10 mt-8">
 
-        <div className="footer-section">
-          <h4>PDF Tools</h4>
+        <div className="flex flex-col items-center space-y-1">
+          <h4 className="font-semibold text-sm mb-1">PDF Tools</h4>
           {pdfLinks.map(link => (
-            <Link key={link.href} href={link.href}>{link.label}</Link>
+            <Link key={link.href} href={link.href} className="text-sm hover:text-blue-600">
+              {link.label}
+            </Link>
           ))}
         </div>
 
-        <div className="footer-section">
-          <h4>Image & File Tools</h4>
+        <div className="flex flex-col items-center space-y-1">
+          <h4 className="font-semibold text-sm mb-1">Image & File Tools</h4>
           {imageToolsLinks.map(link => (
-            <Link key={link.href} href={link.href}>{link.label}</Link>
+            <Link key={link.href} href={link.href} className="text-sm hover:text-blue-600">
+              {link.label}
+            </Link>
           ))}
         </div>
 
-        <div className="footer-section">
-          <h4>Legal</h4>
+        <div className="flex flex-col items-center space-y-1">
+          <h4 className="font-semibold text-sm mb-1">Legal</h4>
           {legalLinks.map(link => (
-            <Link key={link.href} href={link.href}>{link.label}</Link>
+            <Link key={link.href} href={link.href} className="text-sm hover:text-blue-600">
+              {link.label}
+            </Link>
           ))}
-          <a href="mailto:support@pdfimagetools.app">Support Email</a>
+          <a
+            href="mailto:support@pdfimagetools.app"
+            className="text-sm hover:text-blue-600"
+          >
+            Support Email
+          </a>
         </div>
 
       </div>
 
-      <div className="footer-copyright">
+      <p className="text-xs text-gray-600 mt-10">
         © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
-      </div>
+      </p>
 
-      <style jsx>{`
-        .footer-container {
-          background: var(--background);
-          color: var(--foreground);
-          border-top: 1px solid #ccc;
-          padding: 2.5rem 1rem 1.5rem;
-          text-align: center;
-        }
-
-        .footer-note {
-          font-size: 0.85rem;
-          margin-top: 1.5rem;
-          color: #555;
-        }
-
-        .footer-sections {
-          display: flex;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 2.5rem;
-          margin-top: 2rem;
-        }
-
-        .footer-section {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .footer-section h4 {
-          margin-bottom: 0.6rem;
-          font-size: 0.95rem;
-          font-weight: 600;
-        }
-
-        .footer-section a {
-          margin: 3px 0;
-          font-size: 0.85rem;
-          text-decoration: none;
-          color: var(--foreground);
-          transition: color 0.2s;
-        }
-
-        .footer-section a:hover {
-          color: #0079cd;
-        }
-
-        .footer-copyright {
-          margin-top: 2rem;
-          font-size: 0.8rem;
-          color: #555;
-        }
-
-        @media (max-width: 600px) {
-          .footer-sections {
-            text-align: center;
-          }
-        }
-      `}</style>
     </footer>
   );
 }
-
-
