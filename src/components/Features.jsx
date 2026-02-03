@@ -52,11 +52,18 @@ const Features = () => (
         <Link href="/image-converter" className="feature-card">
           Convert Image Formats
         </Link>
+        <Link href="/compress-pdf" className="feature-card">
+          Compress & Reduce PDF 
+        </Link>
+        <Link href="/pdf-sign" className="feature-card">
+          Sign PDF e-Signature
+        </Link>
       </div>
     </div>
   </section>
 );
 
 export default Features;
+
 
 
