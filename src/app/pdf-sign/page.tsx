@@ -62,8 +62,7 @@ const t = {
 };
 
 export default function PdfSignPage() {
-  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };  
-  const containerStyle: CSSProperties = {
+ const containerStyle: CSSProperties = {
   maxWidth: "1200px",
   margin: "0 auto",
   padding: "2rem",
