@@ -1,74 +1,81 @@
-// src/app/combine-pdfs/page.tsx
 import React from "react";
 import Footer from "../../components/Footer";
 import DonationSupport from "../../components/DonationSupport";
-import PdfCombineUploader from "../../components/PdfCombineUploader";
+import PdfCompressUploader from "../../components/PdfCompressUploader";
 import Link from "next/link";
 
-// English translations only
 const t = {
-  heroTitle: "Merge PDF Files Online",
+  heroTitle: "Compress PDF Files Online",
   heroSubtitle:
-    "Easily combine multiple PDF documents into a single file. Drag, reorder, and merge instantly — no limits, no watermarks, always free.",
+    "Reduce PDF file size while keeping great quality. Drag, drop, compress instantly — no limits, no watermarks, always free.",
+
   stepsTitle: "How It Works",
   steps: [
-    "Upload two or more PDF files from your device.",
-    "Reorder your PDFs using the drag-and-drop interface.",
-    "Click the merge button to combine everything into one document.",
-    "Download your merged PDF or start a new merge.",
+    "Upload your PDF file from your device.",
+    "Choose your preferred compression level.",
+    "Click Compress and wait a few seconds.",
+    "Download your optimized PDF file.",
   ],
+
   supportedTitle: "Supported Languages",
-  aboutTitle: "Why Merge PDFs?",
+
+  aboutTitle: "Why Compress PDFs?",
   aboutText: [
-    "Merging PDF files helps keep documents organized, especially when handling reports, forms, scanned pages, and project files.",
-    "A single PDF is easier to store, share, print, and secure. It also ensures consistency when sending files to clients or colleagues.",
-    "Our tool maintains the original quality of all PDF pages — no compression unless you choose otherwise.",
+    "Compressing PDF files makes them easier to share through email, messaging apps, and websites.",
+    "Smaller PDFs upload faster and save storage space on your devices.",
+    "Our tool keeps text readable and images clear while reducing file size.",
   ],
+
   privacyTitle: "Privacy & Security",
   privacyText: [
-    "All uploaded PDFs are automatically deleted after one hour. We never store your merged documents permanently.",
-    "Merging happens securely on the server using temporary copies. No login or email required.",
+    "All uploaded PDFs are automatically deleted after one hour. We never store your compressed files permanently.",
+    "Compression happens securely using temporary copies. No login or email required.",
   ],
+
   faqTitle: "Frequently Asked Questions",
   faq: [
     {
-      question: "Is the PDF merge tool free?",
+      question: "Is the PDF compressor free?",
       answer:
-        "Yes, the service is 100% free with no limits, no watermarks, and no hidden costs.",
+        "Yes, it is completely free with no limits, no watermarks, and no hidden charges.",
     },
     {
-      question: "How many PDFs can I merge?",
-      answer: "You can upload and merge as many PDF files as you want.",
+      question: "Will compression reduce quality?",
+      answer:
+        "Our compression balances file size and quality so your documents remain clear.",
+    },
+    {
+      question: "Can I compress multiple PDFs?",
+      answer:
+        "Currently one file at a time. Batch compression is planned soon.",
     },
     {
       question: "Are my files safe?",
       answer:
-        "Absolutely. Files are deleted automatically after 60 minutes and are never shared.",
-    },
-    {
-      question: "Does merging reduce file quality?",
-      answer:
-        "No. Your merged output keeps the original resolution of all pages.",
+        "Yes. Files are deleted automatically after 60 minutes and never shared.",
     },
   ],
+
   relatedTitle: "Other Tools You May Like",
   relatedTools: [
-    "PDF to Word",
-    "Compress PDF",
-    "PDF to Images",
+    "Merge PDF",
     "Split PDF",
+    "PDF to Word",
     "Image to PDF",
+    "PDF to Images",
   ],
 };
 
-export default function CombinePdfsPage() {
+export default function CompressPdfPage() {
   const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
+
   const sectionStyle = {
     marginBottom: "4rem",
     padding: "2rem",
     borderRadius: "8px",
     backgroundColor: "#f9f9f9",
   };
+
   const headingStyle = {
     fontSize: "2.5rem",
     fontWeight: 700,
@@ -76,6 +83,7 @@ export default function CombinePdfsPage() {
     color: "#222",
     textAlign: "center",
   };
+
   const subHeadingStyle = {
     fontSize: "1.25rem",
     marginBottom: "1.5rem",
@@ -83,6 +91,7 @@ export default function CombinePdfsPage() {
     lineHeight: 1.6,
     textAlign: "center",
   };
+
   const listStyle = {
     paddingLeft: "1.5rem",
     marginBottom: "1rem",
@@ -90,6 +99,7 @@ export default function CombinePdfsPage() {
     fontSize: "1.1rem",
     lineHeight: 1.6,
   };
+
   const badgeStyle = {
     display: "inline-block",
     padding: "0.5rem 1rem",
@@ -99,6 +109,7 @@ export default function CombinePdfsPage() {
     fontSize: "0.9rem",
     color: "#333",
   };
+
   const homeButtonStyle = {
     display: "inline-block",
     padding: "0.5rem 1rem",
@@ -114,6 +125,7 @@ export default function CombinePdfsPage() {
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <main style={{ flex: 1 }}>
         <div style={containerStyle}>
+
           {/* Home Link */}
           <div style={{ display: "flex", alignItems: "center", marginBottom: "2rem" }}>
             <Link href="/" style={homeButtonStyle}>
@@ -125,11 +137,11 @@ export default function CombinePdfsPage() {
           <section style={{ marginBottom: "4rem", textAlign: "center" }}>
             <h1 style={headingStyle}>{t.heroTitle}</h1>
             <p style={subHeadingStyle}>{t.heroSubtitle}</p>
+
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-              <PdfCombineUploader />
+              <PdfCompressUploader />
             </div>
 
-            {/* DonationSupport placed here */}
             <div style={{ marginTop: "3rem" }}>
               <DonationSupport />
             </div>
@@ -150,7 +162,9 @@ export default function CombinePdfsPage() {
             <h2 style={headingStyle}>{t.supportedTitle}</h2>
             <div style={{ textAlign: "center" }}>
               {["English"].map((lang) => (
-                <span key={lang} style={badgeStyle}>{lang}</span>
+                <span key={lang} style={badgeStyle}>
+                  {lang}
+                </span>
               ))}
             </div>
           </section>
@@ -159,7 +173,9 @@ export default function CombinePdfsPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t.aboutTitle}</h2>
             <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              {t.aboutText.map((p, idx) => <p key={idx}>{p}</p>)}
+              {t.aboutText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
             </div>
           </section>
 
@@ -167,7 +183,9 @@ export default function CombinePdfsPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t.privacyTitle}</h2>
             <div style={{ color: "#555", fontSize: "1.1rem", lineHeight: 1.6 }}>
-              {t.privacyText.map((p, idx) => <p key={idx}>{p}</p>)}
+              {t.privacyText.map((p, idx) => (
+                <p key={idx}>{p}</p>
+              ))}
             </div>
           </section>
 
@@ -188,15 +206,16 @@ export default function CombinePdfsPage() {
           <section style={sectionStyle}>
             <h2 style={headingStyle}>{t.relatedTitle}</h2>
             <ul style={listStyle}>
-              {t.relatedTools.map((tool, idx) => <li key={idx}>{tool}</li>)}
+              {t.relatedTools.map((tool, idx) => (
+                <li key={idx}>{tool}</li>
+              ))}
             </ul>
           </section>
+
         </div>
       </main>
+
       <Footer />
     </div>
   );
 }
-
-
-
