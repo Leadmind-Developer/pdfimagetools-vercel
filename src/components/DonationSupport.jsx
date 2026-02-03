@@ -5,16 +5,20 @@ import Image from "next/image";
 
 export default function DonationSupport() {
   return (
-    <div className="donation-support">
-      <h2>Support PDF Image Tools ❤️</h2>
+    <div className="max-w-[600px] mx-auto my-8 p-6 border border-gray-300 rounded-xl text-center shadow-sm">
 
-      <p className="intro">
-        This platform is free to use but costs money to run. If this tool helped you, please consider supporting us.
+      <h2 className="text-xl font-semibold mb-3">
+        Support PDF Image Tools ❤️
+      </h2>
+
+      <p className="text-sm text-gray-600 mb-4">
+        This platform is free to use but costs money to run. If this tool helped you,
+        please consider supporting us.
       </p>
 
-      <p className="donate-via">Donate via:</p>
+      <p className="font-semibold mb-4">Donate via:</p>
 
-      <div className="payment-gateways">
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
 
         <a href="https://paypal.me/teemmiej" target="_blank" rel="noopener noreferrer">
           <Image
@@ -48,57 +52,6 @@ export default function DonationSupport() {
 
       </div>
 
-      <style jsx>{`
-        .donation-support {
-          max-width: 600px;
-          margin: 2rem auto;
-          padding: 1.5rem;
-          background: var(--background);
-          color: var(--foreground);
-          border: 1px solid #ccc;
-          border-radius: 12px;
-          text-align: center;
-          box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* lighter shadow */
-        }
-
-        .donation-support h2 {
-          font-size: 1.5rem;
-          margin-bottom: 0.8rem;
-        }
-
-        .intro {
-          font-size: 0.9rem;
-          margin-bottom: 1.2rem;
-        }
-
-        .donate-via {
-          font-size: 1.15rem;
-          font-weight: bold;
-          margin-bottom: 1rem;
-        }
-
-        .payment-gateways {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          align-items: center;
-        }
-
-        @media (min-width: 500px) {
-          .payment-gateways {
-            flex-direction: row;
-            justify-content: center;
-          }
-        }
-
-        .payment-gateways a {
-          transition: transform 0.2s ease;
-        }
-
-        .payment-gateways a:hover {
-          transform: scale(1.05);
-        }
-      `}</style>
     </div>
   );
 }
