@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -136,3 +138,4 @@ export default function Footer() {
     </footer>
   );
 }
+
