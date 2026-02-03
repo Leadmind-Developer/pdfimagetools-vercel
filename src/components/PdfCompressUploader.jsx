@@ -3,12 +3,12 @@
 
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { Upload, File, CheckCircle, AlertCircle, Download } from "lucide-react"; // ← add lucide-react or similar icons
+import { Upload, File, CheckCircle, AlertCircle, Download } from "lucide-react";
 
 export default function PdfCompressUploader() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState("");
-  const [quality, setQuality] = useState("ebook"); // default to balanced
+  const [quality, setQuality] = useState("ebook");
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -22,7 +22,7 @@ export default function PdfCompressUploader() {
   const dropRef = useRef(null);
   const fileInputRef = useRef(null);
 
-  const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000"; // fallback for dev
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
 
   const formatSize = (bytes) => {
     if (!bytes) return "—";
@@ -111,7 +111,168 @@ export default function PdfCompressUploader() {
   ];
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div style={{ width: "100%", maxWidth: "32rem", margin: "0 auto" }}>
+      <style jsx>{`
+        .dropzone {
+          border: 2px dashed #d1d5db;
+          border-radius: 0.75rem;
+          padding: 2.5rem;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          background-color: white;
+        }
+
+        .dropzone.has-file {
+          border-color: #86efac;
+          background-color: rgba(240, 253, 244, 0.4);
+        }
+
+        .dropzone.uploading {
+          opacity: 0.6;
+          pointer-events: none;
+        }
+
+        .dropzone.drag-over {
+          border-color: #3b82f6;
+          background-color: #eff6ff;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .dropzone:hover:not(.has-file):not(.uploading) {
+          border-color: #60a5fa;
+        }
+
+        .quality-button {
+          position: relative;
+          padding: 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          text-align: left;
+          background-color: white;
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+
+        .quality-button.selected {
+          border-color: #3b82f6;
+          background-color: #eff6ff;
+          box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .quality-button:hover:not(.selected):not(:disabled) {
+          border-color: #d1d5db;
+        }
+
+        .quality-button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .icon-right {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: #d1d5db;
+        }
+
+        .action-button {
+          width: 100%;
+          padding: 0.75rem 1.5rem;
+          margin-top: 1.5rem;
+          border: none;
+          border-radius: 0.5rem;
+          font-weight: 500;
+          color: white;
+          transition: background-color 0.2s;
+          cursor: pointer;
+        }
+
+        .action-button:disabled {
+          background-color: #9ca3af;
+          cursor: not-allowed;
+        }
+
+        .action-button:not(:disabled) {
+          background-color: #16a34a;
+        }
+
+        .action-button:not(:disabled):hover {
+          background-color: #15803d;
+        }
+
+        .result-box {
+          margin-top: 2rem;
+          padding: 1.5rem;
+          background-color: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          border-radius: 0.75rem;
+          text-align: center;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        .download-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-top: 1.5rem;
+          padding: 0.75rem 1.5rem;
+          background-color: #16a34a;
+          color: white;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          font-weight: 500;
+          transition: background-color 0.2s;
+        }
+
+        .download-link:hover {
+          background-color: #15803d;
+        }
+
+        .progress-bar {
+          width: 100%;
+          height: 0.625rem;
+          background-color: #e5e7eb;
+          border-radius: 9999px;
+          overflow: hidden;
+          margin-top: 1rem;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background-color: #16a34a;
+          border-radius: 9999px;
+          transition: width 0.3s ease;
+        }
+
+        .spinner {
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+
+        .error-message {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 1rem;
+          color: #dc2626;
+          font-size: 0.875rem;
+        }
+      `}</style>
+
       {/* Dropzone */}
       <div
         ref={dropRef}
@@ -119,12 +280,7 @@ export default function PdfCompressUploader() {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onClick={() => fileInputRef.current?.click()}
-        className={`
-          border-2 border-dashed rounded-xl p-10 text-center cursor-pointer transition-all duration-200
-          ${file ? "border-green-400 bg-green-50/40" : "border-gray-300 hover:border-blue-400 bg-white/50"}
-          ${uploading ? "opacity-60 pointer-events-none" : ""}
-          drag-over:border-blue-500 drag-over:bg-blue-50 drag-over:shadow-lg
-        `}
+        className={`dropzone ${file ? "has-file" : ""} ${uploading ? "uploading" : ""}`}
       >
         <input
           ref={fileInputRef}
@@ -136,25 +292,34 @@ export default function PdfCompressUploader() {
 
         {!file ? (
           <>
-            <Upload className="mx-auto h-12 w-12 text-gray-400" />
-            <p className="mt-4 text-lg font-medium text-gray-700">
+            <Upload size={48} className="mx-auto text-gray-400" />
+            <p style={{ marginTop: "1rem", fontSize: "1.125rem", fontWeight: 500, color: "#374151" }}>
               Drag & drop your PDF here
             </p>
-            <p className="mt-1 text-sm text-gray-500">or</p>
+            <p style={{ marginTop: "0.25rem", fontSize: "0.875rem", color: "#6b7280" }}>or</p>
             <button
               type="button"
-              className="mt-4 inline-flex items-center px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
+              style={{
+                marginTop: "1rem",
+                padding: "0.625rem 1.25rem",
+                backgroundColor: "#2563eb",
+                color: "white",
+                borderRadius: "0.5rem",
+                border: "none",
+                fontWeight: 500,
+                cursor: "pointer",
+              }}
             >
               Browse files
             </button>
           </>
         ) : (
-          <div className="space-y-3">
-            <File className="mx-auto h-10 w-10 text-green-600" />
-            <p className="font-medium text-gray-800 truncate max-w-xs mx-auto">
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            <File size={40} className="mx-auto text-green-600" />
+            <p style={{ fontWeight: 500, color: "#1f2937", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: "20rem", margin: "0 auto" }}>
               {fileName}
             </p>
-            <p className="text-sm text-gray-600">
+            <p style={{ fontSize: "0.875rem", color: "#4b5563" }}>
               {formatSize(beforeSize)}
             </p>
           </div>
@@ -162,65 +327,53 @@ export default function PdfCompressUploader() {
       </div>
 
       {/* Quality selector */}
-      <div className="mt-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+      <div style={{ marginTop: "1.5rem" }}>
+        <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, color: "#374151", marginBottom: "0.5rem" }}>
           Compression Level
         </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "0.75rem", '@media (min-width: 640px)': { gridTemplateColumns: "1fr 1fr" } }}>
           {qualityOptions.map((opt) => (
             <button
               key={opt.value}
               type="button"
               disabled={uploading}
               onClick={() => setQuality(opt.value)}
-              className={`
-                relative p-4 border rounded-lg text-left transition-all
-                ${quality === opt.value
-                  ? "border-blue-500 bg-blue-50 ring-2 ring-blue-200"
-                  : "border-gray-200 hover:border-gray-300 bg-white"}
-                ${uploading ? "opacity-50" : ""}
-              `}
+              className={`quality-button ${quality === opt.value ? "selected" : ""}`}
             >
-              <div className="font-medium">{opt.label}</div>
-              <div className="text-xs text-gray-500 mt-1">{opt.desc}</div>
-              <div className="absolute top-4 right-4 text-xl font-bold text-gray-300">
-                {opt.icon}
-              </div>
+              <div style={{ fontWeight: 500 }}>{opt.label}</div>
+              <div style={{ fontSize: "0.75rem", color: "#6b7280", marginTop: "0.25rem" }}>{opt.desc}</div>
+              <div className="icon-right">{opt.icon}</div>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Status messages */}
+      {/* Original size hint */}
       {beforeSize && !afterSize && !uploading && (
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Original size: <span className="font-semibold">{formatSize(beforeSize)}</span>
+        <p style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.875rem", color: "#4b5563" }}>
+          Original size: <span style={{ fontWeight: 600 }}>{formatSize(beforeSize)}</span>
         </p>
       )}
 
+      {/* Error */}
       {error && (
-        <div className="mt-4 flex items-center justify-center gap-2 text-red-600 text-sm">
-          <AlertCircle className="h-5 w-5" />
+        <div className="error-message">
+          <AlertCircle size={20} />
           {error}
         </div>
       )}
 
-      {/* Action button */}
+      {/* Compress button */}
       <button
         onClick={handleUpload}
         disabled={uploading || !file}
-        className={`
-          mt-6 w-full py-3 px-6 rounded-lg font-medium text-white transition
-          ${uploading || !file
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-green-600 hover:bg-green-700 shadow-sm"}
-        `}
+        className="action-button"
       >
         {uploading ? (
-          <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+          <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem" }}>
+            <svg className="spinner" style={{ height: "1.25rem", width: "1.25rem" }} viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" style={{ opacity: 0.25 }} />
+              <path fill="currentColor" d="M4 12a8 8 0 018-8v8z" style={{ opacity: 0.75 }} />
             </svg>
             Compressing...
           </span>
@@ -229,46 +382,45 @@ export default function PdfCompressUploader() {
         )}
       </button>
 
-      {/* Progress */}
+      {/* Progress bar */}
       {uploading && (
-        <div className="mt-4">
-          <div className="w-full bg-gray-200 rounded-full h-2.5">
-            <div
-              className="bg-green-600 h-2.5 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
+        <div style={{ marginTop: "1rem" }}>
+          <div className="progress-bar">
+            <div className="progress-fill" style={{ width: `${progress}%` }} />
           </div>
-          <p className="text-center text-xs text-gray-500 mt-1">{progress}%</p>
+          <p style={{ textAlign: "center", fontSize: "0.75rem", color: "#6b7280", marginTop: "0.25rem" }}>
+            {progress}%
+          </p>
         </div>
       )}
 
       {/* Result */}
       {afterSize > 0 && (
-        <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-xl text-center">
-          <CheckCircle className="mx-auto h-10 w-10 text-green-600 mb-3" />
-          <h3 className="text-lg font-semibold text-green-800">Compression Complete!</h3>
-          
-          <div className="mt-4 grid grid-cols-3 gap-4 text-sm">
+        <div className="result-box">
+          <CheckCircle size={40} className="mx-auto text-green-600" style={{ marginBottom: "0.75rem" }} />
+          <h3 style={{ fontSize: "1.125rem", fontWeight: 600, color: "#065f46" }}>Compression Complete!</h3>
+
+          <div className="stats-grid">
             <div>
-              <p className="text-gray-600">Original</p>
-              <p className="font-bold">{formatSize(beforeSize)}</p>
+              <p style={{ color: "#4b5563", margin: 0 }}>Original</p>
+              <p style={{ fontWeight: 700 }}>{formatSize(beforeSize)}</p>
             </div>
             <div>
-              <p className="text-gray-600">Compressed</p>
-              <p className="font-bold text-green-700">{formatSize(afterSize)}</p>
+              <p style={{ color: "#4b5563", margin: 0 }}>Compressed</p>
+              <p style={{ fontWeight: 700, color: "#15803d" }}>{formatSize(afterSize)}</p>
             </div>
             <div>
-              <p className="text-gray-600">Saved</p>
-              <p className="font-bold text-green-600">{savingsPercent}%</p>
+              <p style={{ color: "#4b5563", margin: 0 }}>Saved</p>
+              <p style={{ fontWeight: 700, color: "#16a34a" }}>{savingsPercent}%</p>
             </div>
           </div>
 
           <a
             href={downloadUrl}
             download={`compressed-${fileName}`}
-            className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-medium shadow-sm"
+            className="download-link"
           >
-            <Download className="h-5 w-5" />
+            <Download size={20} />
             Download Compressed PDF
           </a>
         </div>
