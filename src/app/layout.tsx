@@ -48,11 +48,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? 'G-6YD815J9ND';
 
   return (
-    <html lang="en">
+    <html lang="en" className={inter.className}>
       <head>
-        {/* Fonts & preconnect */}
-        <body className={inter.className}>
-
         {/* Favicon (drop pdfdoc.webp into /public) */}
         <link rel="icon" href="/pdfdoc.webp" />
 
