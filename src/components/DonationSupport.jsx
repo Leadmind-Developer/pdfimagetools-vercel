@@ -1,6 +1,7 @@
-"use client"; // <- Important for Next.js App Router
+"use client";
 
 import React from "react";
+import Image from "next/image";
 
 export default function DonationSupport() {
   return (
@@ -11,20 +12,40 @@ export default function DonationSupport() {
         This platform is free to use but costs money to run. If this tool helped you, please consider supporting us.
       </p>
 
-      <p className="donate-via">
-        Donate via:
-      </p>
+      <p className="donate-via">Donate via:</p>
 
       <div className="payment-gateways">
+
         <a href="https://paypal.me/teemmiej" target="_blank" rel="noopener noreferrer">
-          <img src="/logo/paypal_PDFTools.png" alt="PayPal" />
+          <Image
+            src="/logo/paypal_PDFTools.png"
+            width={120}
+            height={60}
+            alt="PayPal"
+            loading="lazy"
+          />
         </a>
+
         <a href="https://flutterwave.com/pay/enkl6s6cpibf" target="_blank" rel="noopener noreferrer">
-          <img src="/logo/flutterwave.png" alt="Flutterwave" />
+          <Image
+            src="/logo/flutterwave.png"
+            width={120}
+            height={60}
+            alt="Flutterwave"
+            loading="lazy"
+          />
         </a>
+
         <a href="https://paystack.shop/pay/pdfimagetools" target="_blank" rel="noopener noreferrer">
-          <img src="/logo/Paystack-Logo.jpg" alt="Paystack" />
+          <Image
+            src="/logo/Paystack-Logo.jpg"
+            width={120}
+            height={60}
+            alt="Paystack"
+            loading="lazy"
+          />
         </a>
+
       </div>
 
       <style jsx>{`
@@ -37,40 +58,44 @@ export default function DonationSupport() {
           border: 1px solid #ccc;
           border-radius: 12px;
           text-align: center;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          box-shadow: 0 3px 8px rgba(0,0,0,0.08); /* lighter shadow */
         }
+
         .donation-support h2 {
-          font-size: 1.75rem;
-          margin-bottom: 1rem;
+          font-size: 1.5rem;
+          margin-bottom: 0.8rem;
         }
+
         .intro {
-          font-size: 0.95rem;
-          margin-bottom: 1.5rem;
+          font-size: 0.9rem;
+          margin-bottom: 1.2rem;
         }
+
         .donate-via {
-          font-size: 1.3rem;
+          font-size: 1.15rem;
           font-weight: bold;
           margin-bottom: 1rem;
         }
+
         .payment-gateways {
           display: flex;
           flex-direction: column;
           gap: 1rem;
           align-items: center;
         }
+
         @media (min-width: 500px) {
           .payment-gateways {
             flex-direction: row;
             justify-content: center;
           }
         }
-        .payment-gateways a img {
-          width: 120px;
-          border-radius: 8px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
+        .payment-gateways a {
           transition: transform 0.2s ease;
         }
-        .payment-gateways a img:hover {
+
+        .payment-gateways a:hover {
           transform: scale(1.05);
         }
       `}</style>
