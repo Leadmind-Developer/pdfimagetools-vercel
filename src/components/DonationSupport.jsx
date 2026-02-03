@@ -12,7 +12,7 @@ export default function DonationSupport() {
       </p>
 
       <p className="donate-via">
-        Donate via:
+        Buy me a coffee via:
       </p>
 
       <div className="payment-gateways">
