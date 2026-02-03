@@ -63,14 +63,13 @@ const t = {
     { name: "Image to PDF", href: "/image-to-pdf" },
     { name: "PDF to Images", href: "/pdf-to-images" },
   ],
-  supportedLanguages: ["English"], // extend later
 };
 
 export default function CompressPdfPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <main className="flex-1">
-        <div className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-16">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:py-16">
 
           {/* Home link */}
           <div className="mb-8">
@@ -84,14 +83,14 @@ export default function CompressPdfPage() {
 
           {/* Hero + Uploader */}
           <section className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-5 leading-tight min-h-[120px]">
               {t.heroTitle}
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10 min-h-[60px]">
               {t.heroSubtitle}
             </p>
 
-            <div className="max-w-2xl mx-auto mb-12">
+            <div className="max-w-2xl mx-auto mb-12 min-h-[180px]">
               <PdfCompressUploader />
             </div>
 
@@ -100,7 +99,7 @@ export default function CompressPdfPage() {
             </div>
           </section>
 
-          {/* Preview Area Placeholder */}
+          {/* Preview Area */}
           <section className="mb-16 bg-white rounded-xl shadow-sm border border-gray-200 p-8 text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
               {t.previewTitle}
@@ -109,8 +108,7 @@ export default function CompressPdfPage() {
               {t.previewDescription}
             </p>
 
-            {/* This is where the preview will appear after compression */}
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-10 min-h-[320px] flex flex-col items-center justify-center text-gray-500">
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-10 min-h-[320px] aspect-[4/3] flex flex-col items-center justify-center text-gray-500">
               <p className="text-lg font-medium">Preview appears here after compression</p>
               <p className="text-sm mt-2">
                 (First page • Original size: — • Compressed: — • Saved: —%)
@@ -125,12 +123,12 @@ export default function CompressPdfPage() {
               {t.howSteps.map((step, i) => (
                 <div
                   key={i}
-                  className="bg-white p-7 rounded-xl shadow-sm border border-gray-100 text-center"
+                  className="bg-white p-7 rounded-xl shadow-sm border border-gray-100 text-center min-h-[220px] flex flex-col"
                 >
                   <div className="w-12 h-12 mx-auto mb-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold">
                     {i + 1}
                   </div>
-                  <p className="text-lg font-medium text-gray-800">{step}</p>
+                  <p className="text-lg font-medium text-gray-800 mt-auto">{step}</p>
                 </div>
               ))}
             </div>
@@ -171,11 +169,11 @@ export default function CompressPdfPage() {
               {t.faq.map((item, i) => (
                 <details
                   key={i}
-                  className="bg-white rounded-lg shadow-sm border overflow-hidden"
+                  className="bg-white rounded-lg shadow-sm border overflow-hidden transition-all duration-300"
                 >
-                  <summary className="font-medium text-lg px-6 py-4 cursor-pointer hover:bg-gray-50 flex justify-between items-center">
+                  <summary className="font-medium text-lg px-6 py-4 cursor-pointer flex justify-between items-center">
                     {item.q}
-                    <span className="text-gray-400">▼</span>
+                    <span className="text-gray-400 transition-transform duration-300">▼</span>
                   </summary>
                   <div className="px-6 pb-5 pt-1 text-gray-700 border-t">
                     {item.a}
