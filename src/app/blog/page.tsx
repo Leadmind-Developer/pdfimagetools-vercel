@@ -33,6 +33,7 @@ const tools = [
   { name: "PPT to PDF", slug: "ppt-to-pdf", icon: FaRegFilePowerpoint },
   { name: "Remove Image Background", slug: "remove-image-background", icon: FaMagic },
   { name: "Resize Passport Photo", slug: "resize-passport-photo", icon: FaUserEdit },
+  { name: "Compress PDF", slug: "compress-pdf", icon: FaFilePdf },
   { name: "Image Converter", slug: "image-converter", icon: FaExchangeAlt },
 ];
 
