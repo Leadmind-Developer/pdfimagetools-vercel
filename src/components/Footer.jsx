@@ -132,10 +132,12 @@ export default function Footer() {
           .footer-sections {
             flex-direction: column;
             gap: 1.8rem;
+            align-items: center;
           }
         }
       `}</style>
     </footer>
   );
 }
+
 
