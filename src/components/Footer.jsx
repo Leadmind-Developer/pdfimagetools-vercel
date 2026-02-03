@@ -130,14 +130,13 @@ export default function Footer() {
 
         @media (max-width: 600px) {
           .footer-sections {
-            flex-direction: column;
-            gap: 1.8rem;
-            align-items: center;
+            text-align: center;
           }
         }
       `}</style>
     </footer>
   );
 }
+
 
 
