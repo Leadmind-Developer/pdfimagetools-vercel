@@ -1,8 +1,12 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import DonationSupport from "./DonationSupport";
+import dynamic from "next/dynamic";
+
+// Lazy load donation (client-only, after paint)
+const DonationSupport = dynamic(
+  () => import("./DonationSupport"),
+  { ssr: false, loading: () => null }
+);
 
 export default function Footer() {
   const pdfLinks = [
@@ -26,58 +30,45 @@ export default function Footer() {
   const legalLinks = [
     { href: "/privacy", label: "Privacy Policy" },
     { href: "/terms", label: "Terms of Service" },
-    { href: "/contact", label: "Contact Us" }, // SEO friendly page
-    { href: "mailto:support@pdfimagetools.app", label: "Support Email" },
+    { href: "/contact", label: "Contact Us" },
   ];
 
   return (
     <footer className="footer-container">
-      {/* Donation */}
+
+      {/* Donation loads after main render */}
       <DonationSupport />
 
       <div className="footer-note">
         Built with ❤️ for privacy-friendly online conversions.
       </div>
 
-      {/* Link sections */}
       <div className="footer-sections">
 
         <div className="footer-section">
           <h4>PDF Tools</h4>
-          {pdfLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
+          {pdfLinks.map(link => (
+            <Link key={link.href} href={link.href}>{link.label}</Link>
           ))}
         </div>
 
         <div className="footer-section">
           <h4>Image & File Tools</h4>
-          {imageToolsLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
+          {imageToolsLinks.map(link => (
+            <Link key={link.href} href={link.href}>{link.label}</Link>
           ))}
         </div>
 
         <div className="footer-section">
           <h4>Legal</h4>
-          {legalLinks.map((link) =>
-            link.href.startsWith("mailto:") ? (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ) : (
-              <Link key={link.href} href={link.href}>
-                {link.label}
-              </Link>
-            )
-          )}
+          {legalLinks.map(link => (
+            <Link key={link.href} href={link.href}>{link.label}</Link>
+          ))}
+          <a href="mailto:support@pdfimagetools.app">Support Email</a>
         </div>
 
       </div>
 
-      {/* Copyright last */}
       <div className="footer-copyright">
         © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
       </div>
@@ -145,5 +136,3 @@ export default function Footer() {
     </footer>
   );
 }
-
-
