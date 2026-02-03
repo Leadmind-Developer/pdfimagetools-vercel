@@ -1,13 +1,14 @@
-"use client";
-
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
-// Lazy load donation AFTER render (no LCP hit)
-const DonationSupport = lazy(() => import("./DonationSupport"));
+// Load donation after initial render (no LCP impact)
+const DonationSupport = dynamic(
+  () => import("./DonationSupport"),
+  { ssr: false }
+);
 
 export default function Footer() {
-
   const pdfLinks = [
     { href: "/pdf-to-word", label: "PDF to Word" },
     { href: "/pdf-to-ppt", label: "PDF to PowerPoint" },
@@ -33,44 +34,53 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="footer">
+    <footer className="bg-[var(--background)] text-[var(--foreground)] border-t border-gray-300 px-4 py-10 text-center">
 
-      {/* Loads after main content */}
-      <Suspense fallback={null}>
-        <DonationSupport />
-      </Suspense>
+      {/* Donation loads only on client AFTER paint */}
+      <DonationSupport />
 
-      <p className="footer-note">
+      <p className="text-sm text-gray-600 mt-6">
         Built with ❤️ for privacy-friendly online conversions.
       </p>
 
-      <div className="footer-grid">
+      <div className="flex flex-wrap justify-center gap-10 mt-8">
 
-        <div>
-          <h4>PDF Tools</h4>
-          {pdfLinks.map(l => (
-            <Link key={l.href} href={l.href}>{l.label}</Link>
+        <div className="flex flex-col items-center space-y-1">
+          <h4 className="font-semibold text-sm mb-1">PDF Tools</h4>
+          {pdfLinks.map(link => (
+            <Link key={link.href} href={link.href} className="text-sm hover:text-blue-600">
+              {link.label}
+            </Link>
           ))}
         </div>
 
-        <div>
-          <h4>Image & File Tools</h4>
-          {imageToolsLinks.map(l => (
-            <Link key={l.href} href={l.href}>{l.label}</Link>
+        <div className="flex flex-col items-center space-y-1">
+          <h4 className="font-semibold text-sm mb-1">Image & File Tools</h4>
+          {imageToolsLinks.map(link => (
+            <Link key={link.href} href={link.href} className="text-sm hover:text-blue-600">
+              {link.label}
+            </Link>
           ))}
         </div>
 
-        <div>
-          <h4>Legal</h4>
-          {legalLinks.map(l => (
-            <Link key={l.href} href={l.href}>{l.label}</Link>
+        <div className="flex flex-col items-center space-y-1">
+          <h4 className="font-semibold text-sm mb-1">Legal</h4>
+          {legalLinks.map(link => (
+            <Link key={link.href} href={link.href} className="text-sm hover:text-blue-600">
+              {link.label}
+            </Link>
           ))}
-          <a href="mailto:support@pdfimagetools.app">Support Email</a>
+          <a
+            href="mailto:support@pdfimagetools.app"
+            className="text-sm hover:text-blue-600"
+          >
+            Support Email
+          </a>
         </div>
 
       </div>
 
-      <p className="footer-copy">
+      <p className="text-xs text-gray-600 mt-10">
         © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
       </p>
 
