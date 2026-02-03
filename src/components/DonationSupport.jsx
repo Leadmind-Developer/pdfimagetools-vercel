@@ -24,7 +24,7 @@ export default function DonationSupport() {
           <Image
             src="/logo/paypal_PDFTools.png"
             width={120}
-            height={60}
+            style={{ height: "auto" }}
             alt="PayPal"
             loading="lazy"
           />
@@ -34,7 +34,7 @@ export default function DonationSupport() {
           <Image
             src="/logo/flutterwave.png"
             width={120}
-            height={60}
+            style={{ height: "auto" }}
             alt="Flutterwave"
             loading="lazy"
           />
@@ -44,7 +44,7 @@ export default function DonationSupport() {
           <Image
             src="/logo/Paystack-Logo.jpg"
             width={120}
-            height={60}
+            style={{ height: "auto" }}
             alt="Paystack"
             loading="lazy"
           />
