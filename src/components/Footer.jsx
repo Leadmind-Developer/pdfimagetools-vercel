@@ -133,6 +133,7 @@ export default function Footer() {
           margin-top: 2rem;
           font-size: 0.8rem;
           color: #555;
+          text-align: center;
         }
 
         @media (max-width: 600px) {
@@ -144,4 +145,5 @@ export default function Footer() {
     </footer>
   );
 }
+
 
