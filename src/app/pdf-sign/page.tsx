@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import Footer from "../../components/Footer";
 import DonationSupport from "../../components/DonationSupport";
 import PdfSignUploader from "../../components/PdfSignUploader";
@@ -62,53 +62,64 @@ const t = {
 };
 
 export default function PdfSignPage() {
-  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };
-  const sectionStyle = {
-    marginBottom: "4rem",
-    padding: "2rem",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9",
-  };
-  const headingStyle = {
-    fontSize: "2.5rem",
-    fontWeight: 700,
-    marginBottom: "1rem",
-    color: "#222",
-    textAlign: "center",
-  };
-  const subHeadingStyle = {
-    fontSize: "1.25rem",
-    marginBottom: "1.5rem",
-    color: "#555",
-    lineHeight: 1.6,
-    textAlign: "center",
-  };
-  const listStyle = {
-    paddingLeft: "1.5rem",
-    marginBottom: "1rem",
-    color: "#555",
-    fontSize: "1.1rem",
-    lineHeight: 1.6,
-  };
-  const badgeStyle = {
-    display: "inline-block",
-    padding: "0.5rem 1rem",
-    margin: "0.25rem",
-    borderRadius: "999px",
-    backgroundColor: "#e0e0e0",
-    fontSize: "0.9rem",
-    color: "#333",
-  };
-  const homeButtonStyle = {
-    display: "inline-block",
-    padding: "0.5rem 1rem",
-    marginBottom: "2rem",
-    borderRadius: "5px",
-    backgroundColor: "#0070f3",
-    color: "#fff",
-    textDecoration: "none",
-    fontWeight: 600,
-  };
+  const containerStyle = { maxWidth: "1200px", margin: "0 auto", padding: "2rem" };  
+  const containerStyle: CSSProperties = {
+  maxWidth: "1200px",
+  margin: "0 auto",
+  padding: "2rem",
+};
+
+const sectionStyle: CSSProperties = {
+  marginBottom: "4rem",
+  padding: "2rem",
+  borderRadius: "8px",
+  backgroundColor: "#f9f9f9",
+};
+
+const headingStyle: CSSProperties = {
+  fontSize: "2.5rem",
+  fontWeight: 700,
+  marginBottom: "1rem",
+  color: "#222",
+  textAlign: "center",
+};
+
+const subHeadingStyle: CSSProperties = {
+  fontSize: "1.25rem",
+  marginBottom: "1.5rem",
+  color: "#555",
+  lineHeight: 1.6,
+  textAlign: "center",
+};
+
+const listStyle: CSSProperties = {
+  paddingLeft: "1.5rem",
+  marginBottom: "1rem",
+  color: "#555",
+  fontSize: "1.1rem",
+  lineHeight: 1.6,
+};
+
+const badgeStyle: CSSProperties = {
+  display: "inline-block",
+  padding: "0.5rem 1rem",
+  margin: "0.25rem",
+  borderRadius: "999px",
+  backgroundColor: "#e0e0e0",
+  fontSize: "0.9rem",
+  color: "#333",
+};
+
+const homeButtonStyle: CSSProperties = {
+  display: "inline-block",
+  padding: "0.5rem 1rem",
+  marginBottom: "2rem",
+  borderRadius: "5px",
+  backgroundColor: "#0070f3",
+  color: "#fff",
+  textDecoration: "none",
+  fontWeight: 600,
+};
 
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
@@ -122,7 +133,7 @@ export default function PdfSignPage() {
           </div>
 
           {/* Hero */}
-          <section style={{ marginBottom: "4rem", textAlign: "center" }}>
+          <section style={{ marginBottom: "4rem", textAlign: "center" } as CSSProperties}>
             <h1 style={headingStyle}>{t.heroTitle}</h1>
             <p style={subHeadingStyle}>{t.heroSubtitle}</p>
             <div style={{ maxWidth: "600px", margin: "0 auto" }}>
