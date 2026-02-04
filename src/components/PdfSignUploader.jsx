@@ -282,14 +282,10 @@ const PdfSignUploader = () => {
           className="pdf-viewer"
           onMouseMove={onDrag}
           onMouseUp={stopDrag}
-          onMouseMove={onMove}
           onMouseLeave={stopDrag}
-          onTouchMove={onMove}
+          onTouchMove={onDrag}
           onTouchEnd={stopDrag}
         >
-          <div
-        >
-
           <canvas ref={canvasRef} />
 
           {signatures
