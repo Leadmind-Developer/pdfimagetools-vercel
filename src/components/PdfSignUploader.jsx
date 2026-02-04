@@ -103,6 +103,15 @@ const PdfSignUploader = () => {
     if (activeSig === null) return;
 
     const rect = canvasRef.current.getBoundingClientRect();
+    let clientX, clientY;
+
+    if (e.touches && e.touches.length > 0) {
+    clientX = e.touches[0].clientX;
+    clientY = e.touches[0].clientY;
+  } else {
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
 
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -112,6 +121,8 @@ const PdfSignUploader = () => {
         idx === activeSig ? { ...s, x, y } : s
       )
     );
+
+    e.preventDefault();
   };
 
   const stopDrag = () => setActiveSig(null);
@@ -271,6 +282,12 @@ const PdfSignUploader = () => {
           className="pdf-viewer"
           onMouseMove={onDrag}
           onMouseUp={stopDrag}
+          onMouseMove={onMove}
+          onMouseLeave={stopDrag}
+          onTouchMove={onMove}
+          onTouchEnd={stopDrag}
+        >
+          <div
         >
 
           <canvas ref={canvasRef} />
