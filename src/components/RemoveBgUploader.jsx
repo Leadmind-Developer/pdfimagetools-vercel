@@ -15,31 +15,87 @@ const RemoveBgUploader = () => {
   const [bgColor, setBgColor] = useState('');
   const [bgImage, setBgImage] = useState(null);
   const [error, setError] = useState('');
+  const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
   const handleFileChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    const validFiles = selectedFiles.filter((f) => f.type.startsWith('image/'));
-    if (!validFiles.length) return setError('Please upload valid image files.');
-    setFiles(validFiles);
-    setPreviews(validFiles.map((f) => URL.createObjectURL(f)));
-    setError('');
-  };
+  const selectedFiles = Array.from(e.target.files);
 
-  const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    setDragActive(false);
-    const droppedFiles = Array.from(e.dataTransfer.files || []);
-    const validFiles = droppedFiles.filter((f) => f.type.startsWith('image/'));
-    if (validFiles.length) {
-      setFiles(validFiles);
-      setPreviews(validFiles.map((f) => URL.createObjectURL(f)));
-      setError('');
-    } else {
-      setError('Please upload valid image files.');
-    }
-  }, []);
+  // Separate by valid images and invalid files
+  const validImages = selectedFiles.filter((f) => f.type.startsWith("image/"));
+  const invalidFiles = selectedFiles.filter((f) => !f.type.startsWith("image/"));
+
+  // Separate oversized files
+  const tooBig = validImages.filter((f) => f.size > MAX_SIZE);
+
+  // Alert invalid files
+  if (invalidFiles.length) {
+    alert(
+      "These files are not images:\n" +
+        invalidFiles.map((f) => f.name).join("\n")
+    );
+  }
+
+  // Alert too-big files
+  if (tooBig.length) {
+    alert(
+      `These images are too large (>${MAX_SIZE / 1024 / 1024}MB):\n` +
+        tooBig.map((f) => f.name).join("\n")
+    );
+  }
+
+  // Keep only valid images under size limit
+  const filteredFiles = validImages.filter((f) => f.size <= MAX_SIZE);
+
+  if (!filteredFiles.length) {
+    return setError("No valid images to upload.");
+  }
+
+  setFiles(filteredFiles);
+  setPreviews(filteredFiles.map((f) => URL.createObjectURL(f)));
+  setError("");
+};
+
+const handleDrop = useCallback((e) => {
+  e.preventDefault();
+  setDragActive(false);
+
+  const droppedFiles = Array.from(e.dataTransfer.files || []);
+
+  // Separate by valid images and invalid files
+  const validImages = droppedFiles.filter((f) => f.type.startsWith("image/"));
+  const invalidFiles = droppedFiles.filter((f) => !f.type.startsWith("image/"));
+
+  // Separate oversized files
+  const tooBig = validImages.filter((f) => f.size > MAX_SIZE);
+
+  // Alert invalid files
+  if (invalidFiles.length) {
+    alert(
+      "These files are not images:\n" + invalidFiles.map((f) => f.name).join("\n")
+    );
+  }
+
+  // Alert too-big files
+  if (tooBig.length) {
+    alert(
+      `These images are too large (>${MAX_SIZE / 1024 / 1024}MB):\n` +
+        tooBig.map((f) => f.name).join("\n")
+    );
+  }
+
+  // Keep only valid images under size limit
+  const filteredFiles = validImages.filter((f) => f.size <= MAX_SIZE);
+
+  if (!filteredFiles.length) {
+    return setError("No valid images to upload.");
+  }
+
+  setFiles(filteredFiles);
+  setPreviews(filteredFiles.map((f) => URL.createObjectURL(f)));
+  setError("");
+}, []);
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -315,3 +371,4 @@ const RemoveBgUploader = () => {
 };
 
 export default RemoveBgUploader;
+
