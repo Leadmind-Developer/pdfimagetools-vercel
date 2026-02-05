@@ -16,7 +16,7 @@ export default function DonationSupport() {
         please consider supporting us.
       </p>
 
-      <p className="font-semibold mb-4">Donate via:</p>
+      <p className="font-semibold mb-4">Buy me a coffee via:</p>
 
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
 
