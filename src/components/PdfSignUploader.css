@@ -92,3 +92,64 @@
 .error {
   color: red;
 }
+
+.viewer-scroll{
+  height:75vh;
+  overflow:auto;
+  background:#eee;
+  padding:10px;
+}
+
+.page-wrapper{
+  position:relative;
+  margin-bottom:20px;
+}
+
+.page-wrapper canvas{
+  width:100%;
+  background:white;
+  display:block;
+}
+
+.sig{
+  position:absolute;
+  cursor:grab;
+}
+
+.sig img{
+  width:100%;
+  pointer-events:none;
+}
+
+.resize{
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:#007bff;
+  right:-6px;
+  bottom:-6px;
+  cursor:se-resize;
+}
+
+.rotate{
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:red;
+  left:50%;
+  top:-18px;
+  transform:translateX(-50%);
+  cursor:grab;
+}
+
+.templates{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.templates img{
+  width:80px;
+  cursor:pointer;
+  border:1px solid #ccc;
+}
