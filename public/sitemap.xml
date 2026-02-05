@@ -129,6 +129,13 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://pdfimagetools.app/split-pdf</loc>
+    <lastmod>2025-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
     <!-- Blog index -->
   <url>
     <loc>https://pdfimagetools.app/blog</loc>
@@ -244,5 +251,3 @@
   </url>
 
 </urlset>
-
-
