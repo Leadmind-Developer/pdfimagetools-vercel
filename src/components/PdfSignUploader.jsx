@@ -11,32 +11,33 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 const fonts = ["cursive", "serif", "monospace", "sans-serif"];
 
 export default function PdfSignUploader() {
+
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
-  const canvasRef = useRef(null);
-  const wrapperRef = useRef(null);
+  const viewerRef = useRef(null);
   const drawRef = useRef(null);
 
   const [pdfFile, setPdfFile] = useState(null);
   const [pdfDoc, setPdfDoc] = useState(null);
+  const [pages, setPages] = useState([]);
 
-  const [page, setPage] = useState(0);
   const [zoom, setZoom] = useState(1);
 
-  const [thumbnails, setThumbnails] = useState([]);
   const [signatures, setSignatures] = useState([]);
   const [history, setHistory] = useState([]);
 
-  const [dragIndex, setDragIndex] = useState(null);
+  const [activeSig, setActiveSig] = useState(null);
+  const [mode, setMode] = useState(null); // drag | resize | rotate
 
   const [typed, setTyped] = useState("");
   const [font, setFont] = useState(fonts[0]);
 
   const [drawing, setDrawing] = useState(false);
 
+  const [templates, setTemplates] = useState([]);
+
   const [uploading, setUploading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState("");
-  const [error, setError] = useState("");
 
   /* ================= PDF LOAD ================= */
 
@@ -46,74 +47,64 @@ export default function PdfSignUploader() {
     (async () => {
       const url = URL.createObjectURL(pdfFile);
       const pdf = await pdfjsLib.getDocument(url).promise;
+
       setPdfDoc(pdf);
-      renderPage(pdf, page, zoom);
-      buildThumbs(pdf);
+      renderAllPages(pdf);
     })();
-  }, [pdfFile]);
 
-  useEffect(() => {
-    if (!pdfDoc) return;
-    renderPage(pdfDoc, page, zoom);
-  }, [page, zoom]);
+  }, [pdfFile, zoom]);
 
-  const renderPage = async (pdf, index, zoomLevel) => {
-    const p = await pdf.getPage(index + 1);
+  const renderAllPages = async (pdf) => {
 
-    const containerWidth = wrapperRef.current.clientWidth;
-
-    const baseViewport = p.getViewport({ scale: 1 });
-    const fitScale = containerWidth / baseViewport.width;
-
-    const viewport = p.getViewport({
-      scale: fitScale * zoomLevel,
-    });
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
-
-    await p.render({ canvasContext: ctx, viewport }).promise;
-  };
-
-  const buildThumbs = async (pdf) => {
     const arr = [];
 
     for (let i = 1; i <= pdf.numPages; i++) {
-      const p = await pdf.getPage(i);
-      const vp = p.getViewport({ scale: 0.25 });
 
-      const c = document.createElement("canvas");
-      const ctx = c.getContext("2d");
+      const page = await pdf.getPage(i);
 
-      c.width = vp.width;
-      c.height = vp.height;
+      const baseVp = page.getViewport({ scale: 1 });
 
-      await p.render({ canvasContext: ctx, viewport: vp }).promise;
-      arr.push(c.toDataURL());
+      const width = viewerRef.current.clientWidth;
+      const fit = width / baseVp.width;
+
+      const vp = page.getViewport({ scale: fit * zoom });
+
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = vp.width;
+      canvas.height = vp.height;
+
+      await page.render({ canvasContext: ctx, viewport: vp }).promise;
+
+      arr.push({
+        index: i - 1,
+        width: vp.width,
+        height: vp.height,
+        canvas,
+      });
     }
 
-    setThumbnails(arr);
+    setPages(arr);
   };
 
   /* ================= HISTORY ================= */
 
-  const pushHistory = () =>
+  const saveHistory = () =>
     setHistory((h) => [...h, JSON.stringify(signatures)]);
 
   const undo = () => {
     if (!history.length) return;
-    const prev = history[history.length - 1];
-    setHistory((h) => h.slice(0, -1));
+    const prev = history.pop();
+    setHistory([...history]);
     setSignatures(JSON.parse(prev));
   };
 
-  /* ================= ADD SIGN ================= */
+  /* ================= SIGNATURE ================= */
 
   const addSignature = (src) => {
-    pushHistory();
+
+    saveHistory();
 
     setSignatures((s) => [
       ...s,
@@ -123,62 +114,84 @@ export default function PdfSignUploader() {
         y: 80,
         size: 140,
         rotation: 0,
-        page,
+        page: 0,
       },
     ]);
   };
 
-  /* ================= DRAG ================= */
+  const snapToPage = (y) => {
 
-  const point = (e) =>
+    let offset = 0;
+
+    for (let p of pages) {
+      if (y >= offset && y <= offset + p.height) {
+        return { page: p.index, localY: y - offset };
+      }
+      offset += p.height;
+    }
+
+    return { page: 0, localY: y };
+  };
+
+  /* ================= POINTER ================= */
+
+  const pos = (e) =>
     e.touches
       ? { x: e.touches[0].clientX, y: e.touches[0].clientY }
       : { x: e.clientX, y: e.clientY };
 
-  let raf = null;
-
   const move = (e) => {
-    if (dragIndex === null) return;
 
-    if (raf) cancelAnimationFrame(raf);
+    if (activeSig === null) return;
 
-    raf = requestAnimationFrame(() => {
-      const rect = wrapperRef.current.getBoundingClientRect();
-      const p = point(e);
+    const r = viewerRef.current.getBoundingClientRect();
+    const p = pos(e);
 
-      let x = p.x - rect.left;
-      let y = p.y - rect.top;
+    let x = p.x - r.left + viewerRef.current.scrollLeft;
+    let y = p.y - r.top + viewerRef.current.scrollTop;
 
-      const canvas = canvasRef.current;
+    const snap = snapToPage(y);
 
-      x = Math.max(0, Math.min(x, canvas.width));
-      y = Math.max(0, Math.min(y, canvas.height));
+    setSignatures((s) =>
+      s.map((sig, i) => {
 
-      setSignatures((s) =>
-        s.map((sig, i) =>
-          i === dragIndex ? { ...sig, x, y } : sig
-        )
-      );
-    });
+        if (i !== activeSig) return sig;
 
-    document.body.style.overflow = "hidden";
+        if (mode === "drag") {
+          return { ...sig, x, y: snap.localY, page: snap.page };
+        }
+
+        if (mode === "resize") {
+          return { ...sig, size: Math.max(40, x - sig.x) };
+        }
+
+        if (mode === "rotate") {
+          return { ...sig, rotation: sig.rotation + 2 };
+        }
+
+        return sig;
+      })
+    );
+
     e.preventDefault();
   };
 
-  const stopDrag = () => {
-    setDragIndex(null);
-    document.body.style.overflow = "auto";
+  const stop = () => {
+    setActiveSig(null);
+    setMode(null);
   };
 
   /* ================= DRAW ================= */
 
   const startDraw = (e) => {
+
     setDrawing(true);
+
     const ctx = drawRef.current.getContext("2d");
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
 
-    const p = point(e);
+    const p = pos(e);
     const r = drawRef.current.getBoundingClientRect();
 
     ctx.beginPath();
@@ -186,10 +199,11 @@ export default function PdfSignUploader() {
   };
 
   const draw = (e) => {
+
     if (!drawing) return;
 
     const ctx = drawRef.current.getContext("2d");
-    const p = point(e);
+    const p = pos(e);
     const r = drawRef.current.getBoundingClientRect();
 
     ctx.lineTo(p.x - r.left, p.y - r.top);
@@ -199,14 +213,18 @@ export default function PdfSignUploader() {
   const stopDraw = () => setDrawing(false);
 
   const saveDraw = () => {
+
     const img = drawRef.current.toDataURL("image/png");
     drawRef.current.getContext("2d").clearRect(0, 0, 300, 120);
+
+    setTemplates((t) => [...t, img]);
     addSignature(img);
   };
 
   /* ================= TYPE ================= */
 
   const addTyped = () => {
+
     if (!typed) return;
 
     const c = document.createElement("canvas");
@@ -215,38 +233,36 @@ export default function PdfSignUploader() {
 
     const ctx = c.getContext("2d");
     ctx.font = `60px ${font}`;
-    ctx.fillStyle = "#000";
     ctx.fillText(typed, 10, 80);
 
-    addSignature(c.toDataURL("image/png"));
+    const img = c.toDataURL("image/png");
+
+    setTemplates((t) => [...t, img]);
+    addSignature(img);
+
     setTyped("");
   };
 
   /* ================= EXPORT ================= */
 
   const exportPdf = async () => {
+
     if (!pdfFile || !signatures.length) return;
 
     setUploading(true);
-    setError("");
 
     const fd = new FormData();
     fd.append("file", pdfFile);
     fd.append("signatures", JSON.stringify(signatures));
 
-    try {
-      const res = await axios.post(
-        `${API_BASE}/convert/pdf-sign`,
-        fd,
-        { responseType: "blob" }
-      );
+    const res = await axios.post(
+      `${API_BASE}/convert/pdf-sign`,
+      fd,
+      { responseType: "blob" }
+    );
 
-      setDownloadUrl(URL.createObjectURL(res.data));
-    } catch {
-      setError("Signing failed");
-    } finally {
-      setUploading(false);
-    }
+    setDownloadUrl(URL.createObjectURL(res.data));
+    setUploading(false);
   };
 
   /* ================= UI ================= */
@@ -254,62 +270,73 @@ export default function PdfSignUploader() {
   return (
     <div className="pdf-container">
 
-      <input
-        className="file-input"
-        type="file"
-        accept=".pdf"
-        onChange={(e) => setPdfFile(e.target.files[0])}
-      />
+      <input type="file" accept=".pdf" onChange={(e)=>setPdfFile(e.target.files[0])} />
 
       <div className="toolbar">
-        <button onClick={() => setZoom((z) => z + 0.2)}>Zoom +</button>
-        <button onClick={() => setZoom((z) => Math.max(0.5, z - 0.2))}>Zoom -</button>
+        <button onClick={()=>setZoom(z=>z+0.2)}>Zoom +</button>
+        <button onClick={()=>setZoom(z=>Math.max(0.5,z-0.2))}>Zoom -</button>
         <button onClick={undo}>Undo</button>
       </div>
 
-      <div className="viewer-wrapper">
+      <div
+        ref={viewerRef}
+        className="viewer-scroll"
+        onMouseMove={move}
+        onMouseUp={stop}
+        onTouchMove={move}
+        onTouchEnd={stop}
+      >
 
-        <div className="thumbs">
-          {thumbnails.map((t, i) => (
-            <img
-              key={i}
-              src={t}
-              className={i === page ? "active" : ""}
-              onClick={() => setPage(i)}
+        {pages.map((p, pi) => (
+
+          <div key={pi} className="page-wrapper">
+
+            <canvas
+              ref={(el)=>{
+                if(el){
+                  el.width=p.width;
+                  el.height=p.height;
+                  el.getContext("2d").drawImage(p.canvas,0,0);
+                }
+              }}
             />
-          ))}
-        </div>
 
-        <div
-          ref={wrapperRef}
-          className="viewer"
-          onMouseMove={move}
-          onMouseUp={stopDrag}
-          onMouseLeave={stopDrag}
-          onTouchMove={move}
-          onTouchEnd={stopDrag}
-        >
-          <canvas ref={canvasRef} />
+            {signatures.filter(s=>s.page===pi).map((sig,i)=>{
 
-          {signatures
-            .filter((s) => s.page === page)
-            .map((sig, i) => (
-              <div
-                key={i}
-                className="sig"
-                style={{
-                  left: sig.x,
-                  top: sig.y,
-                  width: sig.size,
-                  transform: `rotate(${sig.rotation}deg)`,
-                }}
-                onMouseDown={() => setDragIndex(i)}
-                onTouchStart={() => setDragIndex(i)}
-              >
-                <img src={sig.src} />
-              </div>
-            ))}
-        </div>
+              const idx = signatures.findIndex(x=>x===sig);
+
+              return (
+                <div
+                  key={idx}
+                  className="sig"
+                  style={{
+                    left: sig.x,
+                    top: sig.y,
+                    width: sig.size,
+                    transform:`rotate(${sig.rotation}deg)`
+                  }}
+                  onMouseDown={()=>{setActiveSig(idx);setMode("drag")}}
+                  onTouchStart={()=>{setActiveSig(idx);setMode("drag")}}
+                >
+
+                  <img src={sig.src} />
+
+                  <div
+                    className="resize"
+                    onMouseDown={()=>{setActiveSig(idx);setMode("resize")}}
+                  />
+
+                  <div
+                    className="rotate"
+                    onMouseDown={()=>{setActiveSig(idx);setMode("rotate")}}
+                  />
+
+                </div>
+              )
+            })}
+          </div>
+        ))}
+
       </div>
 
       <div className="draw-box">
@@ -328,31 +355,25 @@ export default function PdfSignUploader() {
       </div>
 
       <div className="type-box">
-        <input
-          value={typed}
-          onChange={(e) => setTyped(e.target.value)}
-          placeholder="Type name"
-          style={{ fontFamily: font }}
-        />
-        <select value={font} onChange={(e) => setFont(e.target.value)}>
-          {fonts.map((f) => (
-            <option key={f}>{f}</option>
-          ))}
+        <input value={typed} onChange={(e)=>setTyped(e.target.value)} style={{fontFamily:font}} />
+        <select value={font} onChange={(e)=>setFont(e.target.value)}>
+          {fonts.map(f=><option key={f}>{f}</option>)}
         </select>
         <button onClick={addTyped}>Add Typed</button>
       </div>
 
-      <button className="export-btn" onClick={exportPdf} disabled={uploading}>
+      <div className="templates">
+        {templates.map((t,i)=>(
+          <img key={i} src={t} onClick={()=>addSignature(t)} />
+        ))}
+      </div>
+
+      <button onClick={exportPdf}>
         {uploading ? "Signing..." : "Export Signed PDF"}
       </button>
 
-      {downloadUrl && (
-        <a className="download" href={downloadUrl} download="signed.pdf">
-          Download Signed PDF
-        </a>
-      )}
+      {downloadUrl && <a href={downloadUrl} download>Download</a>}
 
-      {error && <p className="error">{error}</p>}
     </div>
   );
 }
