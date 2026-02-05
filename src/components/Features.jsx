@@ -55,6 +55,9 @@ const Features = () => (
         <Link href="/compress-pdf" className="feature-card">
           Compress & Reduce PDF 
         </Link>
+        <Link href="/split-pdf" className="feature-card">
+         Split & Extract PDF Pages
+       </Link>
         <Link href="/pdf-sign" className="feature-card">
           Sign PDF e-Signature
         </Link>
@@ -64,6 +67,3 @@ const Features = () => (
 );
 
 export default Features;
-
-
-
