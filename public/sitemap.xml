@@ -115,4 +115,19 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://pdfimagetools.app/compress-pdf</loc>
+    <lastmod>2025-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://pdfimagetools.app/pdf-sign</loc>
+    <lastmod>2025-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
+
