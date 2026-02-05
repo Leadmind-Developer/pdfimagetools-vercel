@@ -35,6 +35,7 @@ const tools = [
   { name: "Resize Passport Photo", slug: "resize-passport-photo", icon: FaUserEdit },
   { name: "Compress PDF", slug: "compress-pdf", icon: FaFilePdf },
   { name: "Image Converter", slug: "image-converter", icon: FaExchangeAlt },
+  { name: "PDF Sign", slug: "pdf-sign", icon: FaUserEdit },
 ];
 
 export default function BlogIndexPage() {
