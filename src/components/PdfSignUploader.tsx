@@ -311,7 +311,7 @@ export default function PdfSignUploader() {
 // Convert Uint8Array to plain ArrayBuffer safely
 const pdfBytes = await pdf.save(); // Uint8Array
 
-const blob = new Blob([pdfBytes.buffer], { type: "application/pdf" });
+const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" });
 
 const url = URL.createObjectURL(blob);
 setDownloadUrl(url);
