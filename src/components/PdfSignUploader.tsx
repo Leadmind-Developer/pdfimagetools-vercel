@@ -308,15 +308,15 @@ export default function PdfSignUploader() {
 
       const signedPdfBytes = await pdf.save();
 
-// Convert Uint8Array → ArrayBuffer
-      const buffer = signedPdfBytes.buffer.slice(
-        signedPdfBytes.byteOffset,
-        signedPdfBytes.byteOffset + signedPdfBytes.byteLength
-       );
+// Use the exact ArrayBuffer from Uint8Array
+const buffer = signedPdfBytes.buffer.slice(
+  signedPdfBytes.byteOffset,
+  signedPdfBytes.byteOffset + signedPdfBytes.byteLength
+);
 
-     const blob = new Blob([buffer], { type: "application/pdf" });
-     const url = URL.createObjectURL(blob);
-      setDownloadUrl(url);
+const blob = new Blob([buffer], { type: "application/pdf" });
+const url = URL.createObjectURL(blob);
+setDownloadUrl(url);
     } catch (err) {
       console.error("Signing failed:", err);
       alert("Failed to sign PDF. Check console.");
