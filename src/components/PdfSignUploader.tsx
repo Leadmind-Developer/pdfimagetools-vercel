@@ -274,62 +274,50 @@ export default function PdfSignUploader() {
   //  Export signed PDF – client-side with pdf-lib
   // ────────────────────────────────────────────────
   const exportSignedPdf = async () => {
-    if (!pdfFile || signatures.length === 0 || !pdfDoc) return;
+  if (!pdfFile || signatures.length === 0 || !pdfDoc) return;
 
-    setExporting(true);
+  setExporting(true);
 
-    try {
-      const pdfBytes = await pdfFile.arrayBuffer();
-      const pdf = await PDFDocument.load(pdfBytes);
+  try {
+    const pdfBytes = await pdfFile.arrayBuffer();
+    const pdf = await PDFDocument.load(pdfBytes);
 
-      for (const sig of signatures) {
-        const page = pdf.getPage(sig.pageIndex);
-        const { width: pageWidth, height: pageHeight } = page.getSize();
+    for (const sig of signatures) {
+      const page = pdf.getPage(sig.pageIndex);
+      const { width: pageWidth, height: pageHeight } = page.getSize();
 
-        // Embed signature image
-        const imgBytes = await fetch(sig.src).then((r) => r.arrayBuffer());
-        const img =
-          sig.src.startsWith("data:image/jpeg") || sig.src.includes(".jpg")
-            ? await pdf.embedJpg(imgBytes)
-            : await pdf.embedPng(imgBytes);
+      // Embed signature image
+      const imgBytes = await fetch(sig.src).then((r) => r.arrayBuffer());
+      const img =
+        sig.src.startsWith("data:image/jpeg") || sig.src.includes(".jpg")
+          ? await pdf.embedJpg(imgBytes)
+          : await pdf.embedPng(imgBytes);
 
-        const scaledWidth = sig.width;
-        const scaledHeight = sig.height;
-
-        page.drawImage(img, {
-          x: sig.x,
-          y: sig.y, // already bottom-up
-          width: scaledWidth,
-          height: scaledHeight,
-          rotate: degrees(sig.rotation),
-          opacity: 1,
-        });
-      }
-
-      const pdfBytes = await pdf.save();
-
-let arrayBuffer: ArrayBuffer;
-
-if (pdfBytes instanceof Uint8Array) {
-  arrayBuffer = pdfBytes.buffer.slice(
-    pdfBytes.byteOffset,
-    pdfBytes.byteOffset + pdfBytes.byteLength
-  ) as ArrayBuffer;
-} else {
-  // Very unlikely fallback
-  arrayBuffer = pdfBytes as unknown as ArrayBuffer;
-}
-
-const blob = new Blob([arrayBuffer], { type: "application/pdf" });
-setDownloadUrl(url);
-    } catch (err) {
-      console.error("Signing failed:", err);
-      alert("Failed to sign PDF. Check console.");
-    } finally {
-      setExporting(false);
+      page.drawImage(img, {
+        x: sig.x,
+        y: sig.y,
+        width: sig.width,
+        height: sig.height,
+        rotate: degrees(sig.rotation),
+        opacity: 1,
+      });
     }
-  };
 
+    // This is the only place where we define pdfBytes (the signed result)
+    const signedPdfBytes = await pdf.save();
+
+    // Create blob directly from Uint8Array (pdf-lib returns Uint8Array)
+    const blob = new Blob([signedPdfBytes], { type: "application/pdf" });
+
+    const url = URL.createObjectURL(blob);
+    setDownloadUrl(url);
+  } catch (err) {
+    console.error("Signing failed:", err);
+    alert("Failed to sign PDF. Check console.");
+  } finally {
+    setExporting(false);
+  }
+};
   // ────────────────────────────────────────────────
   //  Render
   // ────────────────────────────────────────────────
