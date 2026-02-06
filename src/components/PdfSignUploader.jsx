@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import * as pdfjsLib from "pdfjs-dist";
-import "pdfjs-dist/build/pdf.worker.entry";
+import * as pdfjsLib from "pdfjs-dist/build/pdf";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js";
 
 export default function PdfViewer() {
   const viewerRef = useRef(null);
@@ -48,7 +50,6 @@ export default function PdfViewer() {
         accept=".pdf"
         onChange={(e) => setPdfFile(e.target.files[0])}
       />
-
       <div
         ref={viewerRef}
         style={{
