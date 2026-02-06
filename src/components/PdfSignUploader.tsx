@@ -306,14 +306,21 @@ export default function PdfSignUploader() {
         });
       }
 
-      const signedPdfBytes = await pdf.save();
+      const pdfBytes = await pdf.save();
 
-// Convert Uint8Array to plain ArrayBuffer safely
-const pdfBytes = await pdf.save(); // Uint8Array
+let arrayBuffer: ArrayBuffer;
 
-const blob = new Blob([pdfBytes.buffer as ArrayBuffer], { type: "application/pdf" });
+if (pdfBytes instanceof Uint8Array) {
+  arrayBuffer = pdfBytes.buffer.slice(
+    pdfBytes.byteOffset,
+    pdfBytes.byteOffset + pdfBytes.byteLength
+  ) as ArrayBuffer;
+} else {
+  // Very unlikely fallback
+  arrayBuffer = pdfBytes as unknown as ArrayBuffer;
+}
 
-const url = URL.createObjectURL(blob);
+const blob = new Blob([arrayBuffer], { type: "application/pdf" });
 setDownloadUrl(url);
     } catch (err) {
       console.error("Signing failed:", err);
