@@ -307,9 +307,15 @@ export default function PdfSignUploader() {
       }
 
       const signedPdfBytes = await pdf.save();
-      const blob = new Blob([signedPdfBytes], { type: "application/pdf" });
-      const url = URL.createObjectURL(blob);
 
+// Convert Uint8Array → ArrayBuffer
+      const buffer = signedPdfBytes.buffer.slice(
+        signedPdfBytes.byteOffset,
+        signedPdfBytes.byteOffset + signedPdfBytes.byteLength
+       );
+
+     const blob = new Blob([buffer], { type: "application/pdf" });
+     const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
     } catch (err) {
       console.error("Signing failed:", err);
