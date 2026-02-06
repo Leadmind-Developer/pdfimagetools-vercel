@@ -308,7 +308,7 @@ export default function PdfSignUploader() {
     // ── Choose ONE of the following three lines ──
 
     // Option 1 – assertion (usually enough)
-    // const blob = new Blob([signedPdfData as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
+    const blob = new Blob([signedPdfData as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
 
     // Option 2 – explicit safe slice
     // const safeBuffer = signedPdfData.buffer.slice(
