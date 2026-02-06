@@ -57,8 +57,8 @@ const ImageConverter = () => {
 
       let queryParams = `?task=${selectedTab.toLowerCase()}&output_format=${format}`;
       if (selectedTab === "Resize") {
-        formData.append("width", resizeWidth);
-        formData.append("height", resizeHeight);
+        formData.append("width", Number(resizeWidth));
+        formData.append("height", Number(resizeHeight));
       }
       if (selectedTab === "Watermark") {
         formData.append("watermark_text", watermarkText);
