@@ -31,6 +31,9 @@ const ImageConverter = () => {
   const [history, setHistory] = useState([]);
   const [showSVGCode, setShowSVGCode] = useState({});
   const fileInputRef = useRef(null);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [success, setSuccess] = useState(false);
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
@@ -49,49 +52,71 @@ const ImageConverter = () => {
   };
 
   const handleProcess = async () => {
-    const newHistory = [];
+  const newHistory = [];
 
-    for (let file of files) {
-      const formData = new FormData();
-      formData.append("file", file);
+  setUploading(true);
+  setProgress(0);
+  setSuccess(false);
 
-      let queryParams = `?task=${selectedTab.toLowerCase()}&output_format=${format}`;
-      if (selectedTab === "Resize") {
-        formData.append("width", Number(resizeWidth));
-        formData.append("height", Number(resizeHeight));
-      }
-      if (selectedTab === "Watermark") {
-        formData.append("watermark_text", watermarkText);
-      }
-      if (format === "svg") {
-        queryParams += `&svg_mode=${svgMode}`;
-      }
+  for (let file of files) {
+    const formData = new FormData();
+    formData.append("file", file);
 
-      const url = `${API_BASE}/image/convert${queryParams}`;
+    let queryParams = `?task=${selectedTab.toLowerCase()}&output_format=${format}`;
 
-      try {
-        const res = await axios.post(url, formData, { responseType: "blob" });
-        const blobUrl = URL.createObjectURL(res.data);
-        const fileName = file.name.replace(/\.[^/.]+$/, "");
-
-        const text = format === "svg" ? await res.data.text() : null;
-
-        newHistory.push({
-          name: `${fileName}.${format}`,
-          url: blobUrl,
-          blob: res.data,
-          rawSVG: text,
-        });
-      } catch (err) {
-        console.error("Processing error:", err);
-        alert(`Failed to process ${file.name}`);
-      }
+    if (selectedTab === "Resize") {
+      formData.append("width", Number(resizeWidth));
+      formData.append("height", Number(resizeHeight));
     }
 
-    setHistory((prev) => [...prev, ...newHistory]);
-    setFiles([]);
-  };
+    if (selectedTab === "Watermark") {
+      formData.append("watermark_text", watermarkText);
+    }
 
+    if (format === "svg") {
+      queryParams += `&svg_mode=${svgMode}`;
+    }
+
+    const url = `${API_BASE}/image/convert${queryParams}`;
+
+    try {
+      const res = await axios.post(url, formData, {
+        responseType: "blob",
+        onUploadProgress: (e) => {
+          if (e.total) {
+            const percent = Math.round((e.loaded * 100) / e.total);
+            setProgress(percent);
+          }
+        },
+      });
+
+      const blobUrl = URL.createObjectURL(res.data);
+      const fileName = file.name.replace(/\.[^/.]+$/, "");
+
+      const text = format === "svg" ? await res.data.text() : null;
+
+      newHistory.push({
+        name: `${fileName}.${format}`,
+        url: blobUrl,
+        blob: res.data,
+        rawSVG: text,
+      });
+    } catch (err) {
+      console.error("Processing error:", err);
+      alert(`Failed to process ${file.name}`);
+    }
+  }
+
+  setHistory((prev) => [...prev, ...newHistory]);
+  setFiles([]);
+
+  setUploading(false);
+  setProgress(100);
+  setSuccess(true);
+
+  setTimeout(() => setSuccess(false), 3000);
+};
+  
   const handleBatchDownload = async () => {
     const zip = new JSZip();
     for (let item of history) {
@@ -235,6 +260,24 @@ const ImageConverter = () => {
           </>
         )}
       </div>
+
+      {uploading && (
+  <div className="progress-wrapper">
+    <div className="progress-bar">
+      <div
+        className="progress-fill"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+    <p>{progress}%</p>
+  </div>
+)}
+
+{success && (
+  <div className="success-box">
+    ✅ Processing complete!
+  </div>
+)}
 
       {history.length > 0 && (
         <div className="history">
