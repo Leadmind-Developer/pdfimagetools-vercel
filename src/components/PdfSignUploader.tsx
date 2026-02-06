@@ -308,13 +308,12 @@ export default function PdfSignUploader() {
 
       const signedPdfBytes = await pdf.save();
 
-// Use the exact ArrayBuffer from Uint8Array
-const buffer = signedPdfBytes.buffer.slice(
-  signedPdfBytes.byteOffset,
-  signedPdfBytes.byteOffset + signedPdfBytes.byteLength
-);
+// Convert Uint8Array to plain ArrayBuffer safely
+const arrayBuffer = signedPdfBytes instanceof Uint8Array
+  ? signedPdfBytes.buffer.slice(signedPdfBytes.byteOffset, signedPdfBytes.byteOffset + signedPdfBytes.byteLength)
+  : signedPdfBytes; // fallback if somehow not Uint8Array
 
-const blob = new Blob([buffer], { type: "application/pdf" });
+const blob = new Blob([arrayBuffer], { type: "application/pdf" });
 const url = URL.createObjectURL(blob);
 setDownloadUrl(url);
     } catch (err) {
