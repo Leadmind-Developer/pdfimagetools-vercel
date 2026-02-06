@@ -16,8 +16,8 @@ export default function PdfSignUploader() {
 
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfDoc, setPdfDoc] = useState<pdfjsLib.PDFDocumentProxy | null>(null);
-  const [pages, setPages] = useState<Array<{ index: number, width: number, height: number }>>([]);
-  const [pageCanvases, setPageCanvases] = useState<Map<number, string>>(new Map()); // data URLs
+  const [pages, setPages] = useState<{ index: number; width: number; height: number }[]>([]);
+  const [pageCanvases, setPageCanvases] = useState(new Map<number, string>());// data URLs
 
   const [zoom, setZoom] = useState(1.0);
 
