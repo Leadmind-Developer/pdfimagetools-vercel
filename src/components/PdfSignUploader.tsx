@@ -305,19 +305,26 @@ export default function PdfSignUploader() {
 
     const signedPdfData = await pdf.save();
 
-    // Fix for TS 5.9+ strict BlobPart checking
-    const arrayBuffer = signedPdfData.buffer.slice(
-      signedPdfData.byteOffset,
-      signedPdfData.byteOffset + signedPdfData.byteLength
-    );
+    // ── Choose ONE of the following three lines ──
 
-    const blob = new Blob([arrayBuffer], { type: "application/pdf" });
+    // Option 1 – assertion (usually enough)
+    // const blob = new Blob([signedPdfData as Uint8Array<ArrayBuffer>], { type: "application/pdf" });
+
+    // Option 2 – explicit safe slice
+    // const safeBuffer = signedPdfData.buffer.slice(
+    //   signedPdfData.byteOffset,
+    //   signedPdfData.byteOffset + signedPdfData.byteLength
+    // ) as ArrayBuffer;
+    // const blob = new Blob([safeBuffer], { type: "application/pdf" });
+
+    // Option 3 – if you added skipLibCheck, just this is fine:
+    // const blob = new Blob([signedPdfData], { type: "application/pdf" });
+
     const url = URL.createObjectURL(blob);
-
     setDownloadUrl(url);
   } catch (err) {
     console.error("Signing failed:", err);
-    alert("Failed to sign PDF. Please check the console.");
+    alert("Failed to sign PDF. Check console.");
   } finally {
     setExporting(false);
   }
