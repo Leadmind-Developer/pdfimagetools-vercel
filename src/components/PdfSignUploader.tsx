@@ -76,7 +76,10 @@ export default function PdfSignUploader() {
     const newPages: typeof pages = [];
     const newCanvasUrls = new Map<number, string>();
 
-    const containerWidth = viewerRef.current?.clientWidth ?? 800;
+    const containerWidth =
+      viewerRef.current?.clientWidth && viewerRef.current.clientWidth > 50
+        ? viewerRef.current.clientWidth
+        : window.innerWidth * 0.95;
 
     for (let i = 1; i <= pdf.numPages; i++) {
       const page = await pdf.getPage(i);
