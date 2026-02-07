@@ -12,7 +12,11 @@ export default function TaskDashboard() {
   const fetchTasks = async () => {
     try {
       const res = await axios.get(`${API_BASE}/tasks/all`);
-      setTasks(res.data);
+      const data = Array.isArray(res.data)
+        ? res.data
+        : Object.values(res.data || {});
+
+     setTasks(data);
     } catch (err) {
       console.error("Failed to fetch tasks", err);
     }
@@ -145,4 +149,5 @@ export default function TaskDashboard() {
     </div>
   );
 }
+
 
