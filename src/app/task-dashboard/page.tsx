@@ -1,16 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
-import TaskDashboard from "../../components/TaskDashboard"; // adjust path if needed
+import TaskDashboard from "../../components/TaskDashboard";
 
 export default function ProtectedTaskPage() {
-  const [password, setPassword] = useState("");
-  const [unlocked, setUnlocked] = useState(false);
+  const [password, setPassword] = useState<string>("");
+  const [unlocked, setUnlocked] = useState<boolean>(false);
+
   const correctPassword = "zyx";
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (password === correctPassword) {
       setUnlocked(true);
     } else {
@@ -28,12 +30,18 @@ export default function ProtectedTaskPage() {
 
       <div style={{ padding: "2rem", textAlign: "center" }}>
         {!unlocked ? (
-          <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "auto" }}>
+          <form
+            onSubmit={handleSubmit}
+            style={{ maxWidth: "400px", margin: "auto" }}
+          >
             <h2>Enter Password to Access Dashboard</h2>
+
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value)
+              }
               placeholder="Password"
               style={{
                 width: "100%",
@@ -42,6 +50,7 @@ export default function ProtectedTaskPage() {
                 fontSize: "1rem",
               }}
             />
+
             <button
               type="submit"
               style={{
