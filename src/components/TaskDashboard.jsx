@@ -10,18 +10,28 @@ export default function TaskDashboard() {
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
   const fetchTasks = async () => {
-    try {
-      const res = await axios.get(`${API_BASE}/tasks/all`);
-      const data = Array.isArray(res.data)
-        ? res.data
-        : Object.values(res.data || {});
+  try {
+    console.log("API_BASE =", API_BASE);
 
-     setTasks(data);
-    } catch (err) {
-      console.error("Failed to fetch tasks", err);
-    }
-  };
+    const res = await axios.get(`${API_BASE}/tasks/all`);
 
+    console.log("RAW /tasks/all response:", res.data);
+    console.log("Type:", typeof res.data);
+    console.log("Is array:", Array.isArray(res.data));
+    console.log("Keys:", res.data && Object.keys(res.data));
+
+    const data = Array.isArray(res.data)
+      ? res.data
+      : Object.values(res.data || {});
+
+    console.log("NORMALIZED tasks:", data);
+
+    setTasks(data);
+  } catch (err) {
+    console.error("Failed to fetch tasks", err);
+  }
+};
+  
   useEffect(() => {
     fetchTasks();
     const interval = setInterval(fetchTasks, 5000); // auto-refresh every 5s
@@ -149,5 +159,6 @@ export default function TaskDashboard() {
     </div>
   );
 }
+
 
 
