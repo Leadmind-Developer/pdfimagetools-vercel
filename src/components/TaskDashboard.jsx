@@ -7,11 +7,11 @@ export default function TaskDashboard() {
   const [tasks, setTasks] = useState([]);
   const [expanded, setExpanded] = useState({});
   const [filter, setFilter] = useState("all");
-  const baseURL = import.meta.env.VITE_API_URL;
+  const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get(`${baseURL}/tasks/all`);
+      const res = await axios.get(`${API_BASE}/tasks/all`);
       setTasks(res.data);
     } catch (err) {
       console.error("Failed to fetch tasks", err);
@@ -145,3 +145,4 @@ export default function TaskDashboard() {
     </div>
   );
 }
+
