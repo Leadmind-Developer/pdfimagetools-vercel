@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Head from "next/head";
-import TaskDashboard from "../components/TaskDashboard"; // adjust path if needed
+import TaskDashboard from "../../components/TaskDashboard"; // adjust path if needed
 
 export default function ProtectedTaskPage() {
   const [password, setPassword] = useState("");
