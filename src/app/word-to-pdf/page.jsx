@@ -5,6 +5,12 @@ import DonationSupport from "../../components/DonationSupport";
 import WordToPdfUploader from "../../components/WordToPdfUploader";
 import Link from "next/link";
 
+export const metadata = {
+  title: 'Word to PDF Converter',
+  description:
+    'Convert Word documents to PDF instantly. Free, fast, and secure with no signup required.',
+};
+
 // English translations only
 const t = {
   heroTitle: "Convert Word Files to PDF",
