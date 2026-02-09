@@ -6,8 +6,9 @@ import PassportPhotoUploader from "../../components/PassportPhotoUploader";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free Passport Photo Resizer — Standard Sizes for Visa & ID | PDFImageTools",
-  description: "Easily resize passport photos to meet standard requirements for passports, visas, and ID cards. Free, fast, and accurate online tool. No signup needed.",
+  title: "Passport Photo Resizer — Visa & ID Sizes Online | PDFImageTools",
+  description:
+    "Resize passport photos online to official visa and ID sizes. Fast, accurate, and free with no signup.",
   alternates: { canonical: "https://pdfimagetools.app/resize-passport-photo" },
 };
 
@@ -212,4 +213,5 @@ export default function ResizePassportPhotoPage() {
     </div>
   );
 }
+
 
