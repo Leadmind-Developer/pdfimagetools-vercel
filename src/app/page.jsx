@@ -7,9 +7,9 @@ import Hero from "../components/Hero";
 import "./landing.css";
 
 export const metadata = {
-  title: "Free PDF, Word, PowerPoint, Excel & Image Tools — Convert, Edit & Optimize | PDFImageTools",
+  title: "Free PDF & Image Tools – Convert, Edit & Optimize",
   description:
-    "Convert and edit PDF, Word, Excel, and image files instantly. Free online tools for PDF to Word, PowerPoint to PDF, Excel to PDF, background remover, and more — no signup required.",
+    "Free online tools to convert and edit PDFs, Word, Excel, and images. Fast, secure, and no signup required.",
   alternates: { canonical: "https://pdfimagetools.app/" },
   openGraph: {
     title: "Free PDF, Word, Excel & Image Tools — Convert, Edit & Optimize | PDFImageTools",
@@ -117,3 +117,4 @@ export default function LandingPage() {
     </div>
   );
 }
+
