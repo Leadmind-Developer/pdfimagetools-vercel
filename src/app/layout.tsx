@@ -11,9 +11,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: {
-    default: 'PDFImageTools',
-    template: '%s – PDFImageTools',
+  title: 'PDFImageTools - Convert, Edit, and Optimize PDFs and Images',
   description:
     "Convert PDFs, images, and documents easily. Free online tools for PDF to Word, PDF to PPT, Image Converter, Remove Background, and more.",
   keywords:
