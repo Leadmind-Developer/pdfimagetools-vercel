@@ -4,6 +4,12 @@ import DonationSupport from "../../components/DonationSupport";
 import PdfCompressUploader from "../../components/PdfCompressUploader";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Compress PDF Online — Reduce PDF File Size Free | PDFImageTools",
+  description:
+    "Compress PDF files online to reduce file size without losing quality. Fast, secure, and completely free.",
+};
+
 const t = {
   heroTitle: "Compress PDF Files Online",
   heroSubtitle:
