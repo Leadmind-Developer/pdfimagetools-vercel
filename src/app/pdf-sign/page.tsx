@@ -4,6 +4,12 @@ import DonationSupport from "../../components/DonationSupport";
 import PdfSignUploader from "../../components/PdfSignUploader";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Sign PDF Online — Add Digital Signatures Free | PDFImageTools",
+  description:
+    "Sign PDF documents online by adding your digital signature. Secure, fast, and free with no registration needed.",
+};
+
 // English translations only
 const t = {
   heroTitle: "Sign PDF Files Online – e-Signature",
