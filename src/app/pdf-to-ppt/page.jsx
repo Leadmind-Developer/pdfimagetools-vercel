@@ -6,9 +6,9 @@ import PdfToPptxUploader from "../../components/PdfToPptxUploader";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free PDF to PowerPoint Converter — Convert PDF to PPTX Online | PDFImageTools",
+  title: "PDF to PowerPoint Converter — PPTX Online | PDFImageTools",
   description:
-    "Convert PDFs to editable PowerPoint (PPTX) slides online. Fast, secure, and 100% free PDF to PowerPoint converter. No signup required.",
+    "Convert PDF files to editable PowerPoint (PPTX) slides online. Secure, fast, and free.",
   alternates: { canonical: "https://pdfimagetools.app/pdf-to-ppt" },
 };
 
@@ -203,4 +203,5 @@ export default function PdfToPptPage() {
     </div>
   );
 }
+
 
