@@ -4,6 +4,12 @@ import DonationSupport from "../../components/DonationSupport";
 import PdfSplitUploader from "../../components/PdfSplitUploader";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Split PDF Online — Separate PDF Pages Free | PDFImageTools",
+  description:
+    "Split PDF files into separate pages or documents online. Free, fast, and easy to use.",
+};
+
 const t = {
   heroTitle: "Split PDF Files Online",
   heroSubtitle:
