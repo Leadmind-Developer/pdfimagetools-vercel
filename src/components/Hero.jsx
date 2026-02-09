@@ -5,7 +5,7 @@ const Hero = () => (
   <section className="hero bg-gradient-to-b from-white to-gray-50 py-20 text-center">
     <div className="container mx-auto px-6 max-w-3xl">
       <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
-        Free Online PDF & Image Tools — Convert, Edit & Manage Instantly
+        Free PDF & Image Tools — Convert & Edit Instantly
       </h1>
 
       <p className="text-lg text-gray-700 mb-8">
@@ -25,3 +25,4 @@ const Hero = () => (
 );
 
 export default Hero;
+
