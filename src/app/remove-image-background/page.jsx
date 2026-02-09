@@ -6,8 +6,9 @@ import RemoveBgUploader from "../../components/RemoveBgUploader";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free Online Background Remover — Transparent PNG in Seconds | PDFImageTools",
-  description: "Remove backgrounds from images online for free. Generate high-quality transparent PNGs instantly. Fast, secure, and no signup required.",
+  title: "Free Online Background Remover – Transparent PNG",
+  description:
+    "Remove backgrounds from images online for free. Generate high-quality transparent PNGs instantly. Fast, secure, and no signup required.",
   alternates: { canonical: "https://pdfimagetools.app/remove-image-background" },
 };
 
@@ -212,4 +213,5 @@ export default function RemoveImageBackgroundPage() {
     </div>
   );
 }
+
 
