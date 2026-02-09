@@ -5,6 +5,12 @@ import DonationSupport from "../../components/DonationSupport";
 import PdfCombineUploader from "../../components/PdfCombineUploader";
 import Link from "next/link";
 
+export const metadata = {
+  title: "Combine PDFs Online — Merge PDF Files for Free | PDFImageTools",
+  description:
+    "Combine multiple PDF files into one document online. Free PDF merger that works instantly with no signup required.",
+};
+
 // English translations only
 const t = {
   heroTitle: "Merge PDF Files Online",
@@ -197,3 +203,4 @@ export default function CombinePdfsPage() {
     </div>
   );
 }
+
