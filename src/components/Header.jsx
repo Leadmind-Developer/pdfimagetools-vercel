@@ -5,7 +5,7 @@ import Link from "next/link";
 const Header = () => (
   <header className="header">
     <div className="container">
-      <h1 className="logo">PDFImageTools</h1>
+      <div className="logo">PDFImageTools</div>
       <nav>
         <a href="#features">Features</a>
         <Link href="/tools">Tools</Link>
@@ -19,5 +19,6 @@ const Header = () => (
 );
 
 export default Header;
+
 
 
