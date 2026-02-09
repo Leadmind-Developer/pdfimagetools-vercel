@@ -6,9 +6,9 @@ import PdfToImageUploader from "../../components/PdfToImageUploader";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free PDF to Image Converter — Export High-Quality JPG & PNG | PDFImageTools",
+  title: "PDF to Image Converter — JPG & PNG Online | PDFImageTools",
   description:
-    "Convert PDF pages to high-quality images (JPG, PNG) online. Free, fast, secure PDF to image converter with no signup required.",
+    "Convert PDF pages to JPG or PNG images online. Fast, secure, and free PDF to image converter.",
   alternates: { canonical: "https://pdfimagetools.app/pdf-to-image" },
 };
 
@@ -203,4 +203,5 @@ export default function PdfToImagePage() {
     </div>
   );
 }
+
 
