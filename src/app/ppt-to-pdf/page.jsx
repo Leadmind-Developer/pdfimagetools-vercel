@@ -6,9 +6,9 @@ import PptToPdfUploader from "../../components/PptToPdfUploader";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free PowerPoint to PDF Converter — Preserve Slides & Design | PDFImageTools",
+  title: "PowerPoint to PDF Converter — PPT to PDF | PDFImageTools",
   description:
-    "Convert PowerPoint (PPT, PPTX) to PDF online for free. Keep your slide layouts, images, and design perfectly intact. Fast, secure, and easy to use.",
+    "Convert PowerPoint (PPT, PPTX) files to PDF online. Keep layouts and images intact. Free and fast.",
   alternates: { canonical: "https://pdfimagetools.app/ppt-to-pdf" },
 };
 
