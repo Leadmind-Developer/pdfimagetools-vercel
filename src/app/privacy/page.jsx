@@ -102,7 +102,7 @@ export default function PrivacyPage() {
               href="mailto:support@pdfimagetool.app"
               className="text-blue-600 hover:underline"
             >
-              support@pdfimagetool.app
+              support@pdfimagetools.app
             </a>
             .
           </p>
@@ -111,6 +111,7 @@ export default function PrivacyPage() {
     </main>
   );
 }
+
 
 
 
