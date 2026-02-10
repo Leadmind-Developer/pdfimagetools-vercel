@@ -79,10 +79,10 @@ export default function TermsPage() {
           <p>
             For any questions, reach out at{" "}
             <a
-              href="mailto:support@pdfimagetool.app"
+              href="mailto:support@pdfimagetools.app"
               className="text-blue-600 hover:underline"
             >
-              support@pdfimagetool.app
+              support@pdfimagetools.app
             </a>
             .
           </p>
@@ -91,4 +91,5 @@ export default function TermsPage() {
     </main>
   );
 }
+
 
