@@ -105,7 +105,7 @@ Your data remains private.
 </ul>
 
 </article>
-
+);
   <footer className="mt-12 pt-4 border-t border-gray-300 text-center text-sm text-gray-500 dark:text-gray-400">
   <p className="mb-2">
     <a
