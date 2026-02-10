@@ -17,9 +17,6 @@ export const metadata = {
   }
 };
 
-import React from "react";
-import Link from "next/link";
-
 export default function ExcelToPdfBlogPage() {
   return (
     <>
