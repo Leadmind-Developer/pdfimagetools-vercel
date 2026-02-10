@@ -58,12 +58,20 @@ export default function PrivacyPage() {
 
         <div>
           <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            4. Third-Party Services
+            4. Third-Party Advertising & Analytics
           </h2>
           <p>
-            We may use third-party services for analytics or storage. These
-            services comply with modern data protection standards.
+            PDFImageTools uses third-party services such as Google Analytics and Google
+            AdSense to understand usage patterns and display advertisements
           </p>
+          <p className="mb-3">
+           Google, as a third-party vendor, uses cookies (including the DoubleClick
+           cookie) to serve ads based on users’ visits to this and other websites.
+         </p>
+         <p className="mb-3">
+           Users may opt out of personalized advertising by visiting Google’s Ads
+           Settings or by using a browser-based ad blocker.
+        </p>
         </div>
 
         <div>
@@ -103,5 +111,6 @@ export default function PrivacyPage() {
     </main>
   );
 }
+
 
 
