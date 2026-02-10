@@ -85,14 +85,27 @@ export default function BlogIndexPage() {
         </div>
       </main>
 
-      <footer style={{ marginTop: '3rem', paddingTop: '1rem', borderTop: '1px solid #ddd', textAlign: 'center', fontSize: '0.9rem', color: isDarkMode ? '#aaa' : '#888' }}>
-        <p>
-          <a href="/privacy" style={{ color: '#007bff', textDecoration: 'none', marginRight: '1rem' }}>Privacy Policy</a>
-          |
-          <a href="/terms" style={{ color: '#007bff', textDecoration: 'none', marginLeft: '1rem' }}>Terms of Service</a>
-        </p>
-        <p>© {new Date().getFullYear()} PDFImageTools. All rights reserved.</p>
-      </footer>
+      <footer className="mt-12 pt-4 border-t border-gray-300 text-center text-sm text-gray-500 dark:text-gray-400">
+  <p className="mb-2">
+    <a
+      href="/privacy"
+      className="text-blue-600 hover:underline mr-4"
+    >
+      Privacy Policy
+    </a>
+    |
+    <a
+      href="/terms"
+      className="text-blue-600 hover:underline ml-4"
+    >
+      Terms of Service
+    </a>
+  </p>
+
+  <p>
+    © {new Date().getFullYear()} PDFImageTools. All rights reserved.
+  </p>
+</footer>
     </div>
   );
 };
