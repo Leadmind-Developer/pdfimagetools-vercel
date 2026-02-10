@@ -159,12 +159,13 @@ const ToolSelector = () => {
           |
           <a href="/terms" style={{ color: '#007bff', textDecoration: 'none', marginLeft: '1rem' }}>Terms of Service</a>
         </p>
-        <p>© {new Date().getFullYear()} Leadmind Developer. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} PDFImageTools. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
 export default ToolSelector;
+
 
 
