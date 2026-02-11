@@ -74,7 +74,11 @@ export default function Footer() {
         © {new Date().getFullYear()} <strong><!-- Bidvertiser2103688 --> PDFImageTools</strong>. All rights reserved.
       </p>
 
-    </footer>
-  );
-}
+    <p
+  className="footer-verification"
+  aria-label="Bidvertiser site verification"
+  dangerouslySetInnerHTML={{
+    __html: "<!-- Bidvertiser2103688 -->",
+  }}
+/>
 
