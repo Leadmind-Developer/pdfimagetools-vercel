@@ -71,14 +71,15 @@ export default function Footer() {
       </div>
 
       <p className="footer-copy">
-        © {new Date().getFullYear()} <strong><!-- Bidvertiser2103688 --> PDFImageTools</strong>. All rights reserved.
-      </p>
+  © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
+</p>
 
-    <p
+<p
   className="footer-verification"
   aria-label="Bidvertiser site verification"
   dangerouslySetInnerHTML={{
     __html: "<!-- Bidvertiser2103688 -->",
   }}
 />
+
 
