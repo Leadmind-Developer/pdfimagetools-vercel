@@ -89,7 +89,7 @@ export default function BestFreePdfTools() {
 
         <p style={{ fontSize: '1.25rem', color: '#4a5568', marginBottom: '2rem' }}>
           PDFs remain the most widely used document format in 2026 — contracts, invoices, academic papers, reports, e-books, presentations, and more. 
-          Whether you're a student in Lagos juggling assignments, a freelancer, small business owner, or corporate professional, you frequently need to <strong>merge</strong>, 
+          Whether you're a student juggling assignments, a freelancer, small business owner, or corporate professional, you frequently need to <strong>merge</strong>, 
           <strong>split</strong>, <strong>compress</strong>, <strong>convert</strong>, <strong>edit</strong>, <strong>sign</strong>, <strong>rotate</strong>, 
           or <strong>protect</strong> PDF files quickly and without spending money.
         </p>
