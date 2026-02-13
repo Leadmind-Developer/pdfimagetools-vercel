@@ -36,6 +36,8 @@ const tools = [
   { name: "Compress PDF", slug: "compress-pdf", icon: FaFilePdf },
   { name: "Image Converter", slug: "image-converter", icon: FaExchangeAlt },
   { name: "PDF Sign", slug: "pdf-sign", icon: FaUserEdit },
+  { name: "Merge Bank Statements", slug: "merge-bank-statements", icon: FaFilePdf },
+  { name: "Compress Large Bank Statements", slug: "compress-large-bank-statements", icon: FaFilePdf },
 ];
 
 export default function BlogIndexPage() {
