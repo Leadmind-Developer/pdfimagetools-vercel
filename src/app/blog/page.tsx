@@ -38,6 +38,11 @@ const tools = [
   { name: "PDF Sign", slug: "pdf-sign", icon: FaUserEdit },
   { name: "Merge Bank Statements", slug: "merge-bank-statements", icon: FaFilePdf },
   { name: "Compress Large Bank Statements", slug: "compress-large-bank-statements", icon: FaFilePdf },
+  { name: "Best Free PDF Tools", slug: "best-free-pdf-tools", icon: FaFilePdf },
+  { name: "Free vs Paid PDF Tools", slug: "free-vs-paid-pdf-tools", icon: FaFilePdf },
+  { name: "Combine PDFs for Visa Application", slug: "combine-pdf-for-visa-application", icon: FaFilePdf },
+  { name: "Why PDF File Size is Large", slug: "why-pdf-file-size-is-large", icon: FaFilePdf },
+  { name: "Smallpdf Alternative", slug: "smallpdf-alternative", icon: FaFilePdf },
 ];
 
 export default function BlogIndexPage() {
