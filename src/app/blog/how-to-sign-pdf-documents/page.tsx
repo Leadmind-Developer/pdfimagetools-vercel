@@ -271,7 +271,7 @@ export default function SignPdfPage() {
       </article>
 
       {/* ---------- Plain CSS ---------- */}
-      <style jsx>{`
+      style>{`
         .article {
           max-width: 820px;
           margin: auto;
