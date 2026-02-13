@@ -249,7 +249,7 @@ export default function CompressForEmail() {
       </article>
 
       {/* Plain CSS */}
-      <style jsx>{`
+      <style>{`
         .article {
           max-width: 820px;
           margin: auto;
