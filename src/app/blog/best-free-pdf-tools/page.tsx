@@ -71,7 +71,7 @@ export default function BestFreePdfTools() {
 
   return (
     <>
-      <article className="max-w-4xl mx-auto px-4 py-12 leading-relaxed prose prose-lg dark:prose-invert">
+      <article style={{ maxWidth: '56rem', marginLeft: 'auto', marginRight: 'auto', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '3rem', paddingBottom: '3rem', lineHeight: '1.75' }}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -83,13 +83,13 @@ export default function BestFreePdfTools() {
           }}
         />
 
-        <h1 className="text-4xl font-bold mb-6">
+        <h1 style={{ fontSize: '2.25rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
           15 Best Free PDF Tools Online – No Signup Required (Tested 2026)
         </h1>
 
-        <p className="lead text-xl text-gray-700 dark:text-gray-300 mb-8">
+        <p style={{ fontSize: '1.25rem', color: '#4a5568', marginBottom: '2rem' }}>
           PDFs remain the most widely used document format in 2026 — contracts, invoices, academic papers, reports, e-books, presentations, and more. 
-          Whether you're a student, freelancer, small business owner, or corporate professional, you frequently need to <strong>merge</strong>, 
+          Whether you're a student in Lagos juggling assignments, a freelancer, small business owner, or corporate professional, you frequently need to <strong>merge</strong>, 
           <strong>split</strong>, <strong>compress</strong>, <strong>convert</strong>, <strong>edit</strong>, <strong>sign</strong>, <strong>rotate</strong>, 
           or <strong>protect</strong> PDF files quickly and without spending money.
         </p>
@@ -99,7 +99,7 @@ export default function BestFreePdfTools() {
           <strong>no signup</strong>, <strong>no watermarks</strong>, <strong>no forced credit cards</strong>, and <strong>automatic file deletion</strong> after processing.
         </p>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>
           Why Free Online PDF Tools Are Still the Smart Choice in 2026
         </h2>
 
@@ -108,27 +108,27 @@ export default function BestFreePdfTools() {
           The reality is that 85–90% of everyday PDF needs are covered by free tools:
         </p>
 
-        <ul className="list-disc pl-6 space-y-3">
-          <li>Reducing large scanned PDFs to email-friendly sizes</li>
-          <li>Converting PDF invoices, resumes, or research papers into editable Word/Excel</li>
-          <li>Merging multiple documents into one clean file</li>
-          <li>Extracting or deleting specific pages</li>
-          <li>Adding signatures to contracts and agreements</li>
-          <li>Protecting sensitive files with passwords</li>
-          <li>Rotating scanned documents that were uploaded sideways</li>
+        <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+          <li style={{ marginBottom: '0.75rem' }}>Reducing large scanned PDFs to email-friendly sizes</li>
+          <li style={{ marginBottom: '0.75rem' }}>Converting PDF invoices, resumes, or research papers into editable Word/Excel</li>
+          <li style={{ marginBottom: '0.75rem' }}>Merging multiple documents into one clean file</li>
+          <li style={{ marginBottom: '0.75rem' }}>Extracting or deleting specific pages</li>
+          <li style={{ marginBottom: '0.75rem' }}>Adding signatures to contracts and agreements</li>
+          <li style={{ marginBottom: '0.75rem' }}>Protecting sensitive files with passwords</li>
+          <li style={{ marginBottom: '0.75rem' }}>Rotating scanned documents that were uploaded sideways</li>
           <li>Making scanned PDFs searchable with OCR</li>
         </ul>
 
-        <p className="mt-6">
+        <p style={{ marginTop: '1.5rem' }}>
           Free online tools are faster to access (no installation), work on any device (phone, tablet, laptop), and are constantly improved by competition.
         </p>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>
           Top 15 Free PDF Tools Online (No Signup Needed for Core Features)
         </h2>
 
-        <ol className="list-decimal pl-6 space-y-8">
-          <li>
+        <ol style={{ listStyleType: 'decimal', paddingLeft: '1.5rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+          <li style={{ marginBottom: '2rem' }}>
             <strong>PDFImageTools</strong>  
             <p>
               Fast, modern interface focused on compression, conversion, merging, and basic editing. Excellent quality-to-size ratio when compressing PDFs. 
@@ -136,7 +136,7 @@ export default function BestFreePdfTools() {
             </p>
           </li>
 
-          <li>
+          <li style={{ marginBottom: '2rem' }}>
             <strong>iLovePDF</strong>  
             <p>
               One of the most popular all-in-one PDF platforms worldwide. Offers merge, split, compress (multiple quality levels), convert (Word, Excel, PPT, JPG, etc.), 
@@ -145,7 +145,7 @@ export default function BestFreePdfTools() {
             </p>
           </li>
 
-          <li>
+          <li style={{ marginBottom: '2rem' }}>
             <strong>Smallpdf</strong>  
             <p>
               Extremely clean and beginner-friendly design. Great mobile experience. Strong focus on security (256-bit TLS, ISO 27001). 
@@ -153,7 +153,7 @@ export default function BestFreePdfTools() {
             </p>
           </li>
 
-          <li>
+          <li style={{ marginBottom: '2rem' }}>
             <strong>Sejda</strong>  
             <p>
               One of the most powerful online PDF editors available for free. You can actually edit existing text in PDFs (rare among free tools), 
@@ -161,7 +161,7 @@ export default function BestFreePdfTools() {
             </p>
           </li>
 
-          <li>
+          <li style={{ marginBottom: '2rem' }}>
             <strong>PDF24 Tools</strong>  
             <p>
               Currently the most generous completely free offering — no daily/hourly/task limits, no forced signup, no watermarks. 
@@ -169,92 +169,92 @@ export default function BestFreePdfTools() {
             </p>
           </li>
 
-          <li>PDF Candy – Simple, fast, good conversion quality</li>
-          <li>PDFgear – Excellent free online + desktop combo</li>
-          <li>Adobe Acrobat Online – Official free web tools from Adobe</li>
-          <li>PDFescape – Long-standing browser-based editor</li>
-          <li>Canva PDF Editor – Great if you want to redesign PDFs visually</li>
-          <li>TinyWow – No signup, no limits, very clean</li>
-          <li>PDF2Go – Reliable all-rounder with OCR</li>
-          <li>Soda PDF Online – Solid free tier</li>
-          <li>PDF2Edit – Focused on editing & conversion</li>
+          <li style={{ marginBottom: '2rem' }}>PDF Candy – Simple, fast, good conversion quality</li>
+          <li style={{ marginBottom: '2rem' }}>PDFgear – Excellent free online + desktop combo</li>
+          <li style={{ marginBottom: '2rem' }}>Adobe Acrobat Online – Official free web tools from Adobe</li>
+          <li style={{ marginBottom: '2rem' }}>PDFescape – Long-standing browser-based editor</li>
+          <li style={{ marginBottom: '2rem' }}>Canva PDF Editor – Great if you want to redesign PDFs visually</li>
+          <li style={{ marginBottom: '2rem' }}>TinyWow – No signup, no limits, very clean</li>
+          <li style={{ marginBottom: '2rem' }}>PDF2Go – Reliable all-rounder with OCR</li>
+          <li style={{ marginBottom: '2rem' }}>Soda PDF Online – Solid free tier</li>
+          <li style={{ marginBottom: '2rem' }}>PDF2Edit – Focused on editing & conversion</li>
           <li>Xodo – Strong mobile/web experience</li>
         </ol>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>
           Quick Comparison Table – Free PDF Tools 2026
         </h2>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse">
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ minWidth: '100%', borderCollapse: 'collapse' }}>
             <thead>
-              <tr className="bg-gray-100 dark:bg-gray-800">
-                <th className="border px-4 py-3 text-left">Tool</th>
-                <th className="border px-4 py-3 text-left">No Signup</th>
-                <th className="border px-4 py-3 text-left">Unlimited</th>
-                <th className="border px-4 py-3 text-left">Edit Text</th>
-                <th className="border px-4 py-3 text-left">OCR</th>
-                <th className="border px-4 py-3 text-left">Offline</th>
+              <tr style={{ backgroundColor: '#f7fafc' }}>
+                <th style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem', textAlign: 'left' }}>Tool</th>
+                <th style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem', textAlign: 'left' }}>No Signup</th>
+                <th style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem', textAlign: 'left' }}>Unlimited</th>
+                <th style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem', textAlign: 'left' }}>Edit Text</th>
+                <th style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem', textAlign: 'left' }}>OCR</th>
+                <th style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem', textAlign: 'left' }}>Offline</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="border px-4 py-3">PDF24 Tools</td>
-                <td>Yes</td>
-                <td>Yes</td>
-                <td>Yes</td>
-                <td>Yes</td>
-                <td>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>PDF24 Tools</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
               </tr>
               <tr>
-                <td className="border px-4 py-3">iLovePDF</td>
-                <td>Yes (most tools)</td>
-                <td>With premium</td>
-                <td>Yes</td>
-                <td>Yes</td>
-                <td>Premium</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>iLovePDF</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes (most tools)</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>With premium</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Premium</td>
               </tr>
               <tr>
-                <td className="border px-4 py-3">Smallpdf</td>
-                <td>Yes</td>
-                <td>Limited</td>
-                <td>Yes</td>
-                <td>Limited</td>
-                <td>App</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Smallpdf</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Limited</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Limited</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>App</td>
               </tr>
               <tr>
-                <td className="border px-4 py-3">Sejda</td>
-                <td>Yes</td>
-                <td>Limited</td>
-                <td>Excellent</td>
-                <td>Yes</td>
-                <td>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Sejda</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Limited</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Excellent</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
               </tr>
               <tr>
-                <td className="border px-4 py-3">PDFImageTools</td>
-                <td>Yes</td>
-                <td>Yes</td>
-                <td>Basic</td>
-                <td>No</td>
-                <td>No</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>PDFImageTools</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Yes</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>Basic</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>No</td>
+                <td style={{ borderWidth: '1px', borderStyle: 'solid', borderColor: '#e2e8f0', paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '0.75rem', paddingBottom: '0.75rem' }}>No</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">Which Free PDF Tool Should You Choose?</h2>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>Which Free PDF Tool Should You Choose?</h2>
 
-        <ul className="list-disc pl-6 space-y-4">
-          <li>
+        <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+          <li style={{ marginBottom: '1rem' }}>
             <strong>Want the most generous free experience?</strong> → Go with <strong>PDF24 Tools</strong>
           </li>
-          <li>
+          <li style={{ marginBottom: '1rem' }}>
             <strong>Need the best-looking interface & mobile support?</strong> → <strong>Smallpdf</strong>
           </li>
-          <li>
+          <li style={{ marginBottom: '1rem' }}>
             <strong>Want to actually edit text inside PDFs?</strong> → <strong>Sejda</strong> or <strong>iLovePDF</strong>
           </li>
-          <li>
+          <li style={{ marginBottom: '1rem' }}>
             <strong>Need fast compression without quality loss?</strong> → <strong>PDFImageTools</strong> or <strong>iLovePDF</strong>
           </li>
           <li>
@@ -262,35 +262,35 @@ export default function BestFreePdfTools() {
           </li>
         </ul>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">Safety & Privacy Tips for Online PDF Tools</h2>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>Safety & Privacy Tips for Online PDF Tools</h2>
 
-        <ul className="list-disc pl-6 space-y-3">
-          <li>Only upload documents that do not contain highly sensitive data (bank details, ID numbers, medical records, etc.)</li>
-          <li>Choose tools that clearly state they delete files automatically (usually within 1–2 hours)</li>
-          <li>Look for HTTPS (padlock icon) in the browser address bar</li>
-          <li>For maximum privacy — use offline desktop versions when handling confidential files</li>
+        <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginTop: '0.75rem', marginBottom: '0.75rem' }}>
+          <li style={{ marginBottom: '0.75rem' }}>Only upload documents that do not contain highly sensitive data (bank details, ID numbers, medical records, etc.)</li>
+          <li style={{ marginBottom: '0.75rem' }}>Choose tools that clearly state they delete files automatically (usually within 1–2 hours)</li>
+          <li style={{ marginBottom: '0.75rem' }}>Look for HTTPS (padlock icon) in the browser address bar</li>
+          <li style={{ marginBottom: '0.75rem' }}>For maximum privacy — use offline desktop versions when handling confidential files</li>
           <li>Avoid tools that require signup just to download the result</li>
         </ul>
 
-        <h2 className="text-3xl font-bold mt-12 mb-6">Frequently Asked Questions</h2>
+        <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>Frequently Asked Questions</h2>
 
-        <div className="space-y-8">
+        <div style={{ marginTop: '0.75rem', marginBottom: '0.75rem' }}>
           {faq.map((item, index) => (
-            <div key={index}>
-              <h3 className="text-xl font-semibold">{item.name}</h3>
-              <p className="mt-2">{item.acceptedAnswer.text}</p>
+            <div key={index} style={{ marginBottom: '2rem' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>{item.name}</h3>
+              <p style={{ marginTop: '0.5rem' }}>{item.acceptedAnswer.text}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 p-6 bg-blue-50 dark:bg-blue-950 rounded-xl">
-          <p className="text-center text-lg font-medium">
+        <div style={{ marginTop: '3rem', padding: '1.5rem', backgroundColor: '#ebf8ff', borderRadius: '0.75rem' }}>
+          <p style={{ textAlign: 'center', fontSize: '1.125rem', fontWeight: '500' }}>
             Need to compress, merge, convert or edit PDFs right now?
           </p>
-          <p className="text-center mt-4">
+          <p style={{ textAlign: 'center', marginTop: '1rem' }}>
             <Link 
               href="/compress-pdf" 
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition"
+              style={{ display: 'inline-block', backgroundColor: '#3182ce', color: '#ffffff', paddingLeft: '2rem', paddingRight: '2rem', paddingTop: '1rem', paddingBottom: '1rem', borderRadius: '0.5rem', fontWeight: '600', fontSize: '1.125rem', transition: 'background-color 0.3s' }}
             >
               Try PDFImageTools Free →
             </Link>
