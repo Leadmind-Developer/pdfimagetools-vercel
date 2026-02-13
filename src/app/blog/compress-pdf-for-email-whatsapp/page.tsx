@@ -203,13 +203,12 @@ export default function CompressForEmail() {
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6">
             Common Use Cases Where PDF Compression Helps Most
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm border">
-              <h3 className="text-xl font-semibold mb-3">Job applications & CVs</h3>
-              <p className="text-gray-700">
-                Many recruiters still prefer PDF, but their email systems reject files >10–15 MB.
-              </p>
-            </div>
+          <div className="bg-white p-6 rounded-lg shadow-sm border">
+  <h3 className="text-xl font-semibold mb-3">Job applications & CVs</h3>
+  <p className="text-gray-700">
+  Many recruiters still prefer PDF, but their email systems reject files over 10-15 MB.
+</p>
+</div>
             <div className="bg-white p-6 rounded-lg shadow-sm border">
               <h3 className="text-xl font-semibold mb-3">University / school notes</h3>
               <p className="text-gray-700">
