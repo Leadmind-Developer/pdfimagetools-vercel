@@ -23,7 +23,7 @@ export default function PdfCompressUploader() {
   const fileInputRef = useRef(null);
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
-  const MAX_DIRECT_UPLOAD_SIZE = 1 * 1024 * 1024; // 1MB
+  const SIZE_THRESHOLD = 1 * 1024 * 1024; // 1MB
 
   const formatSize = (bytes) => {
     if (!bytes) return "—";
@@ -60,23 +60,63 @@ export default function PdfCompressUploader() {
     dropRef.current?.classList.add("drag-over");
   };
 
-  const handleDragLeave = (e) => {
+  const handleDragLeave = () => {
     dropRef.current?.classList.remove("drag-over");
   };
 
-  // ───────────────────────────────────────────────
-  //  Assumed helper: get signed upload URL from backend
-  // ───────────────────────────────────────────────
-  const getSignedUploadUrl = async (filename) => {
-    try {
-      const res = await axios.post(`${API_BASE}/upload/signed-url`, {
-        filename,
-        contentType: "application/pdf",
-      });
-      return res.data.signedUrl; // e.g. { signedUrl: "https://storage.googleapis.com/...", filePath: "uploads/xxx.pdf" }
-    } catch (err) {
-      throw new Error("Failed to get signed upload URL");
-    }
+  // ────────────────────────────────────────────────
+  //  MODE 1: Direct upload (small files)
+  // ────────────────────────────────────────────────
+  const compressDirect = async () => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const res = await axios.post(
+      `${API_BASE}/convert/pdf-compress?quality=${quality}`,
+      formData,
+      {
+        responseType: "blob",
+        onUploadProgress: (progressEvent) => {
+          const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setProgress(percent);
+        },
+      }
+    );
+
+    return res.data; // Blob
+  };
+
+  // ────────────────────────────────────────────────
+  //  MODE 2: GCS presigned upload + backend filePath
+  // ────────────────────────────────────────────────
+  const compressViaGCS = async () => {
+    // 1. Get presigned URL + filePath
+    const { data: presign } = await axios.post(`${API_BASE}/api/storage/upload-url`);
+
+    const { uploadUrl, filePath } = presign;
+
+    // 2. Upload file directly to GCS using PUT
+    await axios.put(uploadUrl, file, {
+      headers: {
+        "Content-Type": "application/pdf",
+      },
+      onUploadProgress: (progressEvent) => {
+        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        setProgress(percent);
+      },
+    });
+
+    // 3. Tell backend to process the file via filePath
+    const res = await axios.post(
+      `${API_BASE}/convert/pdf-compress?quality=${quality}`,
+      { filePath },
+      {
+        headers: { "Content-Type": "application/json" },
+        responseType: "blob",
+      }
+    );
+
+    return res.data; // Blob
   };
 
   const handleUpload = async () => {
@@ -87,63 +127,19 @@ export default function PdfCompressUploader() {
     setError("");
 
     try {
-      let inputForBackend = {};
+      let blob;
 
-      const isLarge = file.size > MAX_DIRECT_UPLOAD_SIZE;
-
-      if (isLarge) {
-        // MODE 2 ── GCS path
-        setProgress(10); // fake step
-
-        const signedUploadInfo = await getSignedUploadUrl(file.name);
-
-        // Upload directly to GCS with the signed URL
-        await axios.put(signedUploadInfo.signedUrl, file, {
-          headers: {
-            "Content-Type": "application/pdf",
-          },
-          onUploadProgress: (e) => {
-            const percent = Math.round((e.loaded * 80) / e.total) + 10; // 10–90%
-            setProgress(percent);
-          },
-        });
-
-        inputForBackend = { filePath: signedUploadInfo.filePath };
+      if (file.size > SIZE_THRESHOLD) {
+        // MODE 2 — large file → GCS
+        blob = await compressViaGCS();
       } else {
-        // MODE 1 ── direct multipart upload
-        const formData = new FormData();
-        formData.append("file", file);
-
-        await axios.post(
-          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-          formData,
-          {
-            responseType: "blob",
-            onUploadProgress: (progressEvent) => {
-              const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-              setProgress(percent);
-            },
-          }
-        ).then((res) => {
-          // We'll handle the response below (shared logic)
-          return res;
-        });
+        // MODE 1 — small file → direct
+        blob = await compressDirect();
       }
 
-      // ── Common compression request ──────────────────────────────
-      const compressRes = await axios.post(
-        `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-        isLarge ? inputForBackend : null, // only send body for MODE 2
-        {
-          headers: isLarge ? { "Content-Type": "application/json" } : undefined,
-          responseType: "blob",
-        }
-      );
-
-      const blob = new Blob([compressRes.data], { type: "application/pdf" });
       const newSize = blob.size;
-
       setAfterSize(newSize);
+
       const saved = beforeSize - newSize;
       const percent = beforeSize ? Math.round((saved / beforeSize) * 100) : 0;
       setSavingsPercent(percent);
@@ -151,11 +147,8 @@ export default function PdfCompressUploader() {
       setDownloadUrl(URL.createObjectURL(blob));
     } catch (err) {
       console.error(err);
-      setError(
-        err.message.includes("signed")
-          ? "Failed to prepare large file upload. Try a smaller file."
-          : "Something went wrong during compression. Please try again."
-      );
+      const msg = err.response?.data?.error || err.message || "Compression failed";
+      setError(msg.includes("No file provided") ? "Upload session expired. Please try again." : msg);
     } finally {
       setUploading(false);
     }
@@ -170,9 +163,12 @@ export default function PdfCompressUploader() {
 
   return (
     <div style={{ width: "100%", maxWidth: "32rem", margin: "0 auto" }}>
-      {/* ── Keep your existing <style jsx> block here (unchanged) ── */}
+      {/* ── existing <style jsx> remains unchanged ── */}
+      <style jsx>{`
+        /* ... your original styles ... */
+      `}</style>
 
-      {/* Dropzone */}
+      {/* Dropzone – unchanged */}
       <div
         ref={dropRef}
         onDrop={handleDrop}
@@ -189,7 +185,6 @@ export default function PdfCompressUploader() {
           onChange={(e) => handleFiles(e.target.files)}
         />
 
-        {/* ── Dropzone content (unchanged) ── */}
         {!file ? (
           <>
             <Upload size={48} className="mx-auto text-gray-400" />
@@ -220,10 +215,7 @@ export default function PdfCompressUploader() {
               {fileName}
             </p>
             <p style={{ fontSize: "0.875rem", color: "#4b5563" }}>
-              {formatSize(beforeSize)}
-              {file.size > MAX_DIRECT_UPLOAD_SIZE && (
-                <span style={{ color: "#d97706", fontWeight: 500 }}> → Large file (GCS mode)</span>
-              )}
+              {formatSize(beforeSize)} {file.size > SIZE_THRESHOLD && " (>1MB – using cloud upload)"}
             </p>
           </div>
         )}
@@ -234,7 +226,7 @@ export default function PdfCompressUploader() {
         <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, color: "#374151", marginBottom: "0.5rem" }}>
           Compression Level
         </label>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "0.75rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "0.75rem", '@media (min-width: 640px)': { gridTemplateColumns: "1fr 1fr" } }}>
           {qualityOptions.map((opt) => (
             <button
               key={opt.value}
@@ -251,7 +243,6 @@ export default function PdfCompressUploader() {
         </div>
       </div>
 
-      {/* Hint when file is selected but not yet compressed */}
       {beforeSize && !afterSize && !uploading && (
         <p style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.875rem", color: "#4b5563" }}>
           Original size: <span style={{ fontWeight: 600 }}>{formatSize(beforeSize)}</span>
@@ -276,7 +267,7 @@ export default function PdfCompressUploader() {
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" style={{ opacity: 0.25 }} />
               <path fill="currentColor" d="M4 12a8 8 0 018-8v8z" style={{ opacity: 0.75 }} />
             </svg>
-            {file?.size > MAX_DIRECT_UPLOAD_SIZE ? "Uploading to cloud & compressing..." : "Compressing..."}
+            {file?.size > SIZE_THRESHOLD ? "Uploading to cloud..." : "Compressing..."}
           </span>
         ) : (
           "Compress PDF"
