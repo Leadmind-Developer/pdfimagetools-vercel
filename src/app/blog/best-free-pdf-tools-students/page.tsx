@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import styles from "../style.module.css";
 
 export const metadata = {
   title: "Best Free PDF Tools for Students (2026) | PDFImageTools",
@@ -50,7 +49,12 @@ export default function BestPdfToolsStudents() {
 
   return (
     <>
-     <article className={styles.article}>
+     <article style={{
+  maxWidth: '56rem',
+  margin: 'auto',
+  padding: '3rem 1rem',
+  lineHeight: '1.75'
+}}>
 
         {/* Breadcrumbs */}
         <script
