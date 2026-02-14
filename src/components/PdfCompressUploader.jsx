@@ -23,7 +23,6 @@ export default function PdfCompressUploader() {
   const fileInputRef = useRef(null);
 
   const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
-  const SIZE_THRESHOLD = 1 * 1024 * 1024; // 1MB
 
   const formatSize = (bytes) => {
     if (!bytes) return "—";
@@ -64,61 +63,9 @@ export default function PdfCompressUploader() {
     dropRef.current?.classList.remove("drag-over");
   };
 
-  // ────────────────────────────────────────────────
-  //  MODE 1: Direct upload (small files)
-  // ────────────────────────────────────────────────
-  const compressDirect = async () => {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const res = await axios.post(
-      `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-      formData,
-      {
-        responseType: "blob",
-        onUploadProgress: (progressEvent) => {
-          const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          setProgress(percent);
-        },
-      }
-    );
-
-    return res.data; // Blob
-  };
-
-  // ────────────────────────────────────────────────
-  //  MODE 2: GCS presigned upload + backend filePath
-  // ────────────────────────────────────────────────
-  const compressViaGCS = async () => {
-    // 1. Get presigned URL + filePath
-    const { data: presign } = await axios.post(`${API_BASE}/api/storage/upload-url`);
-
-    const { uploadUrl, filePath } = presign;
-
-    // 2. Upload file directly to GCS using PUT
-    await axios.put(uploadUrl, file, {
-      headers: {
-        "Content-Type": "application/pdf",
-      },
-      onUploadProgress: (progressEvent) => {
-        const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-        setProgress(percent);
-      },
-    });
-
-    // 3. Tell backend to process the file via filePath
-    const res = await axios.post(
-      `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-      { filePath },
-      {
-        headers: { "Content-Type": "application/json" },
-        responseType: "blob",
-      }
-    );
-
-    return res.data; // Blob
-  };
-
+  // ---------------------------
+  // PATCHED UPLOAD LOGIC
+  // ---------------------------
   const handleUpload = async () => {
     if (!file) return;
 
@@ -127,31 +74,63 @@ export default function PdfCompressUploader() {
     setError("");
 
     try {
-      let blob;
+      // MODE 1 — Direct Upload (<=1MB)
+      if (file.size <= 1 * 1024 * 1024) {
+        const formData = new FormData();
+        formData.append("file", file);
 
-      if (file.size > SIZE_THRESHOLD) {
-        // MODE 2 — large file → GCS
-        blob = await compressViaGCS();
-      } else {
-        // MODE 1 — small file → direct
-        blob = await compressDirect();
+        const res = await axios.post(
+          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
+          formData,
+          {
+            responseType: "blob",
+            onUploadProgress: (progressEvent) => {
+              const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+              setProgress(percent);
+            },
+          }
+        );
+
+        const blob = new Blob([res.data], { type: "application/pdf" });
+        finalizeResult(blob);
+      } 
+      // MODE 2 — GCS Upload (>1MB)
+      else {
+        const { data: urlData } = await axios.post(`${API_BASE}/api/storage/upload-url`);
+        const { uploadUrl, filePath } = urlData;
+
+        await axios.put(uploadUrl, file, {
+          headers: { "Content-Type": "application/pdf" },
+          onUploadProgress: (progressEvent) => {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setProgress(percent);
+          },
+        });
+
+        const res = await axios.post(
+          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
+          { filePath },
+          { responseType: "blob" }
+        );
+
+        const blob = new Blob([res.data], { type: "application/pdf" });
+        finalizeResult(blob);
       }
-
-      const newSize = blob.size;
-      setAfterSize(newSize);
-
-      const saved = beforeSize - newSize;
-      const percent = beforeSize ? Math.round((saved / beforeSize) * 100) : 0;
-      setSavingsPercent(percent);
-
-      setDownloadUrl(URL.createObjectURL(blob));
     } catch (err) {
       console.error(err);
-      const msg = err.response?.data?.error || err.message || "Compression failed";
-      setError(msg.includes("No file provided") ? "Upload session expired. Please try again." : msg);
+      setError("Something went wrong during compression. Please try again.");
     } finally {
       setUploading(false);
     }
+  };
+
+  const finalizeResult = (blob) => {
+    const newSize = blob.size;
+    setAfterSize(newSize);
+    const saved = beforeSize - newSize;
+    const percent = beforeSize ? Math.round((saved / beforeSize) * 100) : 0;
+    setSavingsPercent(percent);
+    setDownloadUrl(URL.createObjectURL(blob));
   };
 
   const qualityOptions = [
@@ -163,12 +142,168 @@ export default function PdfCompressUploader() {
 
   return (
     <div style={{ width: "100%", maxWidth: "32rem", margin: "0 auto" }}>
-      {/* ── existing <style jsx> remains unchanged ── */}
       <style jsx>{`
-        /* ... your original styles ... */
+        .dropzone {
+          border: 2px dashed #d1d5db;
+          border-radius: 0.75rem;
+          padding: 2.5rem;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          background-color: white;
+        }
+
+        .dropzone.has-file {
+          border-color: #86efac;
+          background-color: rgba(240, 253, 244, 0.4);
+        }
+
+        .dropzone.uploading {
+          opacity: 0.6;
+          pointer-events: none;
+        }
+
+        .dropzone.drag-over {
+          border-color: #3b82f6;
+          background-color: #eff6ff;
+          box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .dropzone:hover:not(.has-file):not(.uploading) {
+          border-color: #60a5fa;
+        }
+
+        .quality-button {
+          position: relative;
+          padding: 1rem;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          text-align: left;
+          background-color: white;
+          transition: all 0.2s;
+          cursor: pointer;
+        }
+
+        .quality-button.selected {
+          border-color: #3b82f6;
+          background-color: #eff6ff;
+          box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .quality-button:hover:not(.selected):not(:disabled) {
+          border-color: #d1d5db;
+        }
+
+        .quality-button:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .icon-right {
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: #d1d5db;
+        }
+
+        .action-button {
+          width: 100%;
+          padding: 0.75rem 1.5rem;
+          margin-top: 1.5rem;
+          border: none;
+          border-radius: 0.5rem;
+          font-weight: 500;
+          color: white;
+          transition: background-color 0.2s;
+          cursor: pointer;
+        }
+
+        .action-button:disabled {
+          background-color: #9ca3af;
+          cursor: not-allowed;
+        }
+
+        .action-button:not(:disabled) {
+          background-color: #16a34a;
+        }
+
+        .action-button:not(:disabled):hover {
+          background-color: #15803d;
+        }
+
+        .result-box {
+          margin-top: 2rem;
+          padding: 1.5rem;
+          background-color: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          border-radius: 0.75rem;
+          text-align: center;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        .download-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-top: 1.5rem;
+          padding: 0.75rem 1.5rem;
+          background-color: #16a34a;
+          color: white;
+          border-radius: 0.5rem;
+          text-decoration: none;
+          font-weight: 500;
+          transition: background-color 0.2s;
+        }
+
+        .download-link:hover {
+          background-color: #15803d;
+        }
+
+        .progress-bar {
+          width: 100%;
+          height: 0.625rem;
+          background-color: #e5e7eb;
+          border-radius: 9999px;
+          overflow: hidden;
+          margin-top: 1rem;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background-color: #16a34a;
+          border-radius: 9999px;
+          transition: width 0.3s ease;
+        }
+
+        .spinner {
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+
+        .error-message {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-top: 1rem;
+          color: #dc2626;
+          font-size: 0.875rem;
+        }
       `}</style>
 
-      {/* Dropzone – unchanged */}
+      {/* Dropzone */}
       <div
         ref={dropRef}
         onDrop={handleDrop}
@@ -215,13 +350,13 @@ export default function PdfCompressUploader() {
               {fileName}
             </p>
             <p style={{ fontSize: "0.875rem", color: "#4b5563" }}>
-              {formatSize(beforeSize)} {file.size > SIZE_THRESHOLD && " (>1MB – using cloud upload)"}
+              {formatSize(beforeSize)}
             </p>
           </div>
         )}
       </div>
 
-      {/* Quality selector – unchanged */}
+      {/* Quality selector */}
       <div style={{ marginTop: "1.5rem" }}>
         <label style={{ display: "block", fontSize: "0.875rem", fontWeight: 500, color: "#374151", marginBottom: "0.5rem" }}>
           Compression Level
@@ -243,12 +378,14 @@ export default function PdfCompressUploader() {
         </div>
       </div>
 
+      {/* Original size hint */}
       {beforeSize && !afterSize && !uploading && (
         <p style={{ marginTop: "1rem", textAlign: "center", fontSize: "0.875rem", color: "#4b5563" }}>
           Original size: <span style={{ fontWeight: 600 }}>{formatSize(beforeSize)}</span>
         </p>
       )}
 
+      {/* Error */}
       {error && (
         <div className="error-message">
           <AlertCircle size={20} />
@@ -256,6 +393,7 @@ export default function PdfCompressUploader() {
         </div>
       )}
 
+      {/* Compress button */}
       <button
         onClick={handleUpload}
         disabled={uploading || !file}
@@ -267,13 +405,14 @@ export default function PdfCompressUploader() {
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" style={{ opacity: 0.25 }} />
               <path fill="currentColor" d="M4 12a8 8 0 018-8v8z" style={{ opacity: 0.75 }} />
             </svg>
-            {file?.size > SIZE_THRESHOLD ? "Uploading to cloud..." : "Compressing..."}
+            Compressing...
           </span>
         ) : (
           "Compress PDF"
         )}
       </button>
 
+      {/* Progress bar */}
       {uploading && (
         <div style={{ marginTop: "1rem" }}>
           <div className="progress-bar">
@@ -285,6 +424,7 @@ export default function PdfCompressUploader() {
         </div>
       )}
 
+      {/* Result */}
       {afterSize > 0 && (
         <div className="result-box">
           <CheckCircle size={40} className="mx-auto text-green-600" style={{ marginBottom: "0.75rem" }} />
