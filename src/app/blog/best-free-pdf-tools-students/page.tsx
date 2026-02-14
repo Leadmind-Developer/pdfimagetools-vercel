@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import styles from "../style.module.css";
 
 export const metadata = {
   title: "Best Free PDF Tools for Students (2026) | PDFImageTools",
@@ -49,7 +50,7 @@ export default function BestPdfToolsStudents() {
 
   return (
     <>
-      <article className="article">
+     <article className={styles.article}>
 
         {/* Breadcrumbs */}
         <script
@@ -362,53 +363,5 @@ export default function BestPdfToolsStudents() {
           with PDFs throughout your academic journey.
         </p>
       </article>
-
-      <style>{`
-        .article {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 48px 20px;
-          line-height: 1.75;
-          font-family: system-ui, -apple-system, sans-serif;
-        }
-
-        h1 {
-          font-size: 2.2rem;
-          margin-bottom: 20px;
-        }
-
-        h2 {
-          margin-top: 40px;
-          font-size: 1.6rem;
-        }
-
-        h3 {
-          margin-top: 24px;
-          font-size: 1.25rem;
-        }
-
-        p {
-          margin: 16px 0;
-          color: #333;
-        }
-
-        ul {
-          margin: 16px 0 16px 20px;
-        }
-
-        li {
-          margin-bottom: 8px;
-        }
-
-        a {
-          color: #2563eb;
-          text-decoration: none;
-        }
-
-        a:hover {
-          text-decoration: underline;
-        }
-      `}</style>
-    </>
   );
 }
