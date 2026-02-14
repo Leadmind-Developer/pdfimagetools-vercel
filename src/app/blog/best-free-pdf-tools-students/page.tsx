@@ -363,5 +363,6 @@ export default function BestPdfToolsStudents() {
           with PDFs throughout your academic journey.
         </p>
       </article>
+       </>
   );
 }
