@@ -49,12 +49,7 @@ export default function BestPdfToolsStudents() {
 
   return (
     <>
-     <article style={{
-  maxWidth: '56rem',
-  margin: 'auto',
-  padding: '3rem 1rem',
-  lineHeight: '1.75'
-}}>
+     <article className="max-w-4xl mx-auto px-4 py-12 leading-relaxed">
 
         {/* Breadcrumbs */}
         <script
