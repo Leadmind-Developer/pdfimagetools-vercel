@@ -46,7 +46,7 @@ const tools = [
   { name: "How to Sign PDF Documents Online", slug: "how-to-sign-pdf-documents-online", icon: FaUserEdit },
   { name: "Compress PDF for Email or WhatsApp", slug: "compress-pdf-for-email-or-whatsapp", icon: FaFilePdf },
   { name: "PDF to Word Converter Tutorial", slug: "pdf-to-word-converter-tutorial", icon: FaFileWord },
-  { name: "Best Free PDF Tools for Students", slug: "best-free-pdf-tools-for-students", icon: FaFilePdf },
+  { name: "Best Free PDF Tools for Students", slug: "best-free-pdf-tools-students", icon: FaFilePdf },
   { name: "Merge PDFs for Job Applications", slug: "merge-pdfs-for-job-applications", icon: FaFilePdf },
   { name: "Protect PDF Files with Password Online", slug: "protect-pdf-files-with-password-online", icon: FaFilePdf },
   { name: "Convert PDF to Image Files Easily", slug: "convert-pdf-to-image-files-easily", icon: FaFileImage },
