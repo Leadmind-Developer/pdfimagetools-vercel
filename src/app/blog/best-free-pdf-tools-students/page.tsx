@@ -25,7 +25,7 @@ export default function BestPdfToolsStudents() {
       acceptedAnswer: {
         "@type": "Answer",
         text:
-          "Yes, PDFImageTools is mobile-friendly and works on all devices including phones and tablets.",
+          "Yes, PDFImageTools works on phones, tablets, and computers directly in the browser.",
       },
     },
     {
@@ -34,7 +34,7 @@ export default function BestPdfToolsStudents() {
       acceptedAnswer: {
         "@type": "Answer",
         text:
-          "No installation is required. All tools work directly in your browser.",
+          "No installation is required. All tools run online.",
       },
     },
     {
@@ -43,58 +43,66 @@ export default function BestPdfToolsStudents() {
       acceptedAnswer: {
         "@type": "Answer",
         text:
-          "Files are processed securely and automatically removed after processing to protect student privacy.",
+          "Files are processed securely and automatically removed after processing.",
       },
     },
   ];
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://pdfimagetools.app",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: "https://pdfimagetools.app/blog",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Best Free PDF Tools for Students",
+        item:
+          "https://pdfimagetools.app/blog/best-free-pdf-tools-students",
+      },
+    ],
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faq,
+  };
+
   return (
     <>
-     <article className="max-w-4xl mx-auto px-4 py-12 leading-relaxed">
+      {/* ✅ SAFE JSON-LD (Fixes your crash) */}
+      <Script
+        id="breadcrumbs-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
 
-        {/* Breadcrumbs */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Home",
-                  item: "https://pdfimagetools.app",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Blog",
-                  item: "https://pdfimagetools.app/blog",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 3,
-                  name: "Best Free PDF Tools for Students",
-                  item:
-                    "https://pdfimagetools.app/blog/best-free-pdf-tools-students",
-                },
-              ],
-            }),
-          }}
-        />
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
-        {/* FAQ Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: faq,
-            }),
-          }}
-        />
+      <article
+        style={{
+          maxWidth: "56rem",
+          margin: "auto",
+          padding: "3rem 1rem",
+          lineHeight: "1.75",
+        }}
+      >
 
         <h1>Best Free PDF Tools for Students (2026)</h1>
 
