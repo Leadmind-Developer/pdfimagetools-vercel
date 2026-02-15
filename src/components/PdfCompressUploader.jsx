@@ -67,62 +67,68 @@ export default function PdfCompressUploader() {
   // PATCHED UPLOAD LOGIC
   // ---------------------------
   const handleUpload = async () => {
-    if (!file) return;
+  if (!file) return;
 
-    setUploading(true);
-    setProgress(0);
-    setError("");
+  setUploading(true);
+  setProgress(0);
+  setError("");
 
-    try {
-      // MODE 1 — Direct Upload (<=1MB)
-      if (file.size <= 1 * 1024 * 1024) {
-        const formData = new FormData();
-        formData.append("file", file);
+  try {
+    // ---------------------------
+    // STEP 1: Get signed upload URL
+    // ---------------------------
+    const { data: uploadData } = await axios.post(
+      `${API_BASE}/api/storage/upload-url`
+    );
 
-        const res = await axios.post(
-          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-          formData,
-          {
-            responseType: "blob",
-            onUploadProgress: (progressEvent) => {
-              const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-              setProgress(percent);
-            },
-          }
-        );
+    const { uploadUrl, filePath } = uploadData;
 
-        const blob = new Blob([res.data], { type: "application/pdf" });
-        finalizeResult(blob);
-      } 
-      // MODE 2 — GCS Upload (>1MB)
-      else {
-        const { data: urlData } = await axios.post(`${API_BASE}/api/storage/upload-url`);
-        const { uploadUrl, filePath } = urlData;
+    // ---------------------------
+    // STEP 2: Upload directly to GCS
+    // ---------------------------
+    await axios.put(uploadUrl, file, {
+      headers: {
+        "Content-Type": "application/pdf",
+      },
+      onUploadProgress: (e) => {
+        const percent = Math.round((e.loaded * 100) / e.total);
+        setProgress(percent);
+      },
+    });
 
-        await axios.put(uploadUrl, file, {
-          headers: { "Content-Type": "application/pdf" },
-          onUploadProgress: (progressEvent) => {
-            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            setProgress(percent);
-          },
-        });
-
-        const res = await axios.post(
-          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-          { filePath },
-          { responseType: "blob" }
-        );
-
-        const blob = new Blob([res.data], { type: "application/pdf" });
-        finalizeResult(blob);
+    // ---------------------------
+    // STEP 3: Ask backend to compress
+    // ---------------------------
+    const res = await axios.post(
+      `${API_BASE}/convert/pdf-compress?quality=${quality}`,
+      { filePath },
+      {
+        responseType: "blob",
       }
-    } catch (err) {
-      console.error(err);
-      setError("Something went wrong during compression. Please try again.");
-    } finally {
-      setUploading(false);
-    }
-  };
+    );
+
+    const blob = new Blob([res.data], {
+      type: "application/pdf",
+    });
+
+    const newSize = blob.size;
+
+    setAfterSize(newSize);
+    const saved = beforeSize - newSize;
+    const percent = beforeSize
+      ? Math.round((saved / beforeSize) * 100)
+      : 0;
+
+    setSavingsPercent(percent);
+    setDownloadUrl(URL.createObjectURL(blob));
+
+  } catch (err) {
+    console.error(err);
+    setError("Compression failed.");
+  } finally {
+    setUploading(false);
+  }
+};
 
   const finalizeResult = (blob) => {
     const newSize = blob.size;
