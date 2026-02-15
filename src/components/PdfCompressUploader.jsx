@@ -63,9 +63,6 @@ export default function PdfCompressUploader() {
     dropRef.current?.classList.remove("drag-over");
   };
 
-  // ---------------------------
-  // PATCHED UPLOAD LOGIC
-  // ---------------------------
   const handleUpload = async () => {
     if (!file) return;
 
@@ -73,64 +70,37 @@ export default function PdfCompressUploader() {
     setProgress(0);
     setError("");
 
+    const formData = new FormData();
+    formData.append("file", file);
+
     try {
-      // MODE 1 — Direct Upload (<=1MB)
-      if (file.size <= 1 * 1024 * 1024) {
-        const formData = new FormData();
-        formData.append("file", file);
-
-        const res = await axios.post(
-          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-          formData,
-          {
-            responseType: "blob",
-            onUploadProgress: (progressEvent) => {
-              const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-              setProgress(percent);
-            },
-          }
-        );
-
-        const blob = new Blob([res.data], { type: "application/pdf" });
-        finalizeResult(blob);
-      } 
-      // MODE 2 — GCS Upload (>1MB)
-      else {
-        const { data: urlData } = await axios.post(`${API_BASE}/api/storage/upload-url`);
-        const { uploadUrl, filePath } = urlData;
-
-        await axios.put(uploadUrl, file, {
-          headers: { "Content-Type": "application/pdf" },
+      const res = await axios.post(
+        `${API_BASE}/convert/pdf-compress?quality=${quality}`,
+        formData,
+        {
+          responseType: "blob",
           onUploadProgress: (progressEvent) => {
             const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
             setProgress(percent);
           },
-        });
+        }
+      );
 
-        const res = await axios.post(
-          `${API_BASE}/convert/pdf-compress?quality=${quality}`,
-          { filePath },
-          { responseType: "blob" }
-        );
+      const blob = new Blob([res.data], { type: "application/pdf" });
+      const newSize = blob.size;
 
-        const blob = new Blob([res.data], { type: "application/pdf" });
-        finalizeResult(blob);
-      }
+      setAfterSize(newSize);
+      const saved = beforeSize - newSize;
+      const percent = beforeSize ? Math.round((saved / beforeSize) * 100) : 0;
+      setSavingsPercent(percent);
+
+      setDownloadUrl(URL.createObjectURL(blob));
     } catch (err) {
       console.error(err);
       setError("Something went wrong during compression. Please try again.");
     } finally {
       setUploading(false);
     }
-  };
-
-  const finalizeResult = (blob) => {
-    const newSize = blob.size;
-    setAfterSize(newSize);
-    const saved = beforeSize - newSize;
-    const percent = beforeSize ? Math.round((saved / beforeSize) * 100) : 0;
-    setSavingsPercent(percent);
-    setDownloadUrl(URL.createObjectURL(blob));
   };
 
   const qualityOptions = [
