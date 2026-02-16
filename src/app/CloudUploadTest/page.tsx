@@ -1,19 +1,23 @@
+"use client";
+
 import { useState } from "react";
 
+type ToolType = "image-to-pdf" | "pdf-compress";
+
 export default function CloudUploadTest() {
-  const [file, setFile] = useState(null);
-  const [log, setLog] = useState([]);
+  const [file, setFile] = useState<File | null>(null);
+  const [tool, setTool] = useState<ToolType>("image-to-pdf");
+  const [log, setLog] = useState<string[]>([]);
 
-  const API = "http://localhost:8000/cloud"; 
-  // change to Cloud Run URL later
+  const API = "http://localhost:8000/cloud";
 
-  const addLog = (msg) => {
+  const addLog = (msg: string) => {
     console.log(msg);
     setLog((prev) => [...prev, msg]);
   };
 
-  // STEP 1 — get signed URL
-  const getUploadUrl = async (filename) => {
+  // STEP 1 — Signed URL
+  const getUploadUrl = async (filename: string) => {
     addLog("Requesting signed URL...");
 
     const res = await fetch(`${API}/upload-url`, {
@@ -21,9 +25,7 @@ export default function CloudUploadTest() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        filename,
-      }),
+      body: JSON.stringify({ filename }),
     });
 
     if (!res.ok) throw new Error("Failed to get upload URL");
@@ -31,14 +33,14 @@ export default function CloudUploadTest() {
     return res.json();
   };
 
-  // STEP 2 — upload directly to GCS
-  const uploadToGCS = async (uploadUrl, file) => {
+  // STEP 2 — Upload to GCS
+  const uploadToGCS = async (uploadUrl: string, file: File) => {
     addLog("Uploading directly to GCS...");
 
     const res = await fetch(uploadUrl, {
       method: "PUT",
       headers: {
-        "Content-Type": file.type || "application/pdf",
+        "Content-Type": file.type || "application/octet-stream",
       },
       body: file,
     });
@@ -48,45 +50,73 @@ export default function CloudUploadTest() {
     addLog("Upload complete ✅");
   };
 
-  // STEP 3 — trigger processing
-  const triggerProcess = async (filePath) => {
-    addLog("Triggering processing job...");
+  // STEP 3 — Trigger Processing
+  const triggerProcess = async (filePath: string) => {
+    addLog(`Triggering ${tool} job...`);
 
-    const res = await fetch(`${API}/process/image-to-pdf`, {
+    const res = await fetch(`${API}/process/${tool}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        file_path: filePath,
-      }),
+      body: JSON.stringify({ file_path: filePath }),
     });
 
-    const data = await res.json();
+    if (!res.ok) throw new Error("Processing start failed");
 
-    addLog(`Job started: ${data.job_id}`);
+    return res.json();
   };
 
+  // STEP 4 — Poll Job
+  const pollJob = async (jobId: string) => {
+    addLog("Waiting for result...");
+
+    while (true) {
+      await new Promise((r) => setTimeout(r, 3000));
+
+      const res = await fetch(`${API}/job/${jobId}`);
+      const data = await res.json();
+
+      addLog(`Status: ${data.status}`);
+
+      if (data.status === "completed") {
+        addLog("Download ready ✅");
+        window.open(data.downloadUrl, "_blank");
+        break;
+      }
+
+      if (data.status === "failed") {
+        addLog(`FAILED: ${data.error}`);
+        break;
+      }
+    }
+  };
+
+  // MAIN FLOW
   const handleUpload = async () => {
     try {
-      if (!file) return alert("Select a file first");
+      if (!file) {
+        alert("Select a file first");
+        return;
+      }
 
-      addLog("Starting flow...");
+      addLog(`Starting ${tool} pipeline...`);
 
-      // 1️⃣ signed url
       const { uploadUrl, filePath } =
         await getUploadUrl(file.name);
 
       addLog("Signed URL received");
 
-      // 2️⃣ upload
       await uploadToGCS(uploadUrl, file);
 
-      // 3️⃣ process
-      await triggerProcess(filePath);
+      const job = await triggerProcess(filePath);
+
+      addLog(`Job started: ${job.job_id}`);
+
+      await pollJob(job.job_id);
 
       addLog("Pipeline success 🎉");
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       addLog(`ERROR: ${err.message}`);
     }
@@ -96,9 +126,26 @@ export default function CloudUploadTest() {
     <div style={{ padding: 40, fontFamily: "sans-serif" }}>
       <h2>Cloud Upload Test</h2>
 
+      {/* TOOL SELECTOR */}
+      <div style={{ marginBottom: 20 }}>
+        <label>Tool:</label>{" "}
+        <select
+          value={tool}
+          onChange={(e) =>
+_toggle omitted_
+            setTool(e.target.value as ToolType)
+          }
+        >
+          <option value="image-to-pdf">Image → PDF</option>
+          <option value="pdf-compress">PDF Compress</option>
+        </select>
+      </div>
+
       <input
         type="file"
-        onChange={(e) => setFile(e.target.files[0])}
+        onChange={(e) =>
+          setFile(e.target.files?.[0] || null)
+        }
       />
 
       <br /><br />
