@@ -1,145 +1,143 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ToolType = "image-to-pdf" | "pdf-compress";
 
-export default function CloudUploadTest() {
+interface Job {
+  job_id: string;
+  tool: string;
+  status: string;
+  created_at: number;
+  completed_at?: number;
+  error?: string;
+  downloadUrl?: string;
+}
+
+export default function AdminPanel() {
+  const API = "http://localhost:8000/cloud";
+
   const [file, setFile] = useState<File | null>(null);
   const [tool, setTool] = useState<ToolType>("image-to-pdf");
   const [log, setLog] = useState<string[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
 
-  const API = "http://localhost:8000/cloud";
+  const addLog = (msg: string) =>
+    setLog((p) => [...p, msg]);
 
-  const addLog = (msg: string) => {
-    console.log(msg);
-    setLog((prev) => [...prev, msg]);
+  // ---------------------------
+  // JOB QUEUE VIEWER
+  // ---------------------------
+  const loadJobs = async () => {
+    const res = await fetch(`${API}/jobs`);
+    const data = await res.json();
+    setJobs(data);
   };
 
-  // STEP 1 — Signed URL
-  const getUploadUrl = async (filename: string) => {
-    addLog("Requesting signed URL...");
+  useEffect(() => {
+    loadJobs();
+    const i = setInterval(loadJobs, 4000);
+    return () => clearInterval(i);
+  }, []);
 
+  // ---------------------------
+  // METRICS
+  // ---------------------------
+  const duration = (job: Job) => {
+    if (!job.completed_at) return "-";
+    return (
+      (job.completed_at - job.created_at).toFixed(1) + "s"
+    );
+  };
+
+  // ---------------------------
+  // RETRY
+  // ---------------------------
+  const retryJob = async (id: string) => {
+    await fetch(`${API}/job/${id}/retry`, {
+      method: "POST",
+    });
+    addLog(`Retrying job ${id}`);
+    loadJobs();
+  };
+
+  // ---------------------------
+  // PIPELINE (existing logic)
+  // ---------------------------
+  const getUploadUrl = async (filename: string) => {
     const res = await fetch(`${API}/upload-url`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ filename }),
     });
-
-    if (!res.ok) throw new Error("Failed to get upload URL");
-
     return res.json();
   };
 
-  // STEP 2 — Upload to GCS
-  const uploadToGCS = async (uploadUrl: string, file: File) => {
-    addLog("Uploading directly to GCS...");
-
-    const res = await fetch(uploadUrl, {
+  const uploadToGCS = async (url: string, file: File) => {
+    await fetch(url, {
       method: "PUT",
       headers: {
-        "Content-Type": file.type || "application/octet-stream",
+        "Content-Type":
+          file.type || "application/octet-stream",
       },
       body: file,
     });
-
-    if (!res.ok) throw new Error("GCS upload failed");
-
-    addLog("Upload complete ✅");
   };
 
-  // STEP 3 — Trigger Processing
-  const triggerProcess = async (filePath: string) => {
-    addLog(`Triggering ${tool} job...`);
-
-    const res = await fetch(`${API}/process/${tool}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ file_path: filePath }),
-    });
-
-    if (!res.ok) throw new Error("Processing start failed");
-
+  const startProcess = async (filePath: string) => {
+    const res = await fetch(
+      `${API}/process/${tool}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ file_path: filePath }),
+      }
+    );
     return res.json();
   };
 
-  // STEP 4 — Poll Job
-  const pollJob = async (jobId: string) => {
-    addLog("Waiting for result...");
-
-    while (true) {
-      await new Promise((r) => setTimeout(r, 3000));
-
-      const res = await fetch(`${API}/job/${jobId}`);
-      const data = await res.json();
-
-      addLog(`Status: ${data.status}`);
-
-      if (data.status === "completed") {
-        addLog("Download ready ✅");
-        window.open(data.downloadUrl, "_blank");
-        break;
-      }
-
-      if (data.status === "failed") {
-        addLog(`FAILED: ${data.error}`);
-        break;
-      }
-    }
-  };
-
-  // MAIN FLOW
   const handleUpload = async () => {
-    try {
-      if (!file) {
-        alert("Select a file first");
-        return;
-      }
+    if (!file) return;
 
-      addLog(`Starting ${tool} pipeline...`);
+    addLog("Starting pipeline...");
 
-      const { uploadUrl, filePath } =
-        await getUploadUrl(file.name);
+    const { uploadUrl, filePath } =
+      await getUploadUrl(file.name);
 
-      addLog("Signed URL received");
+    await uploadToGCS(uploadUrl, file);
 
-      await uploadToGCS(uploadUrl, file);
+    const job = await startProcess(filePath);
 
-      const job = await triggerProcess(filePath);
-
-      addLog(`Job started: ${job.job_id}`);
-
-      await pollJob(job.job_id);
-
-      addLog("Pipeline success 🎉");
-    } catch (err: any) {
-      console.error(err);
-      addLog(`ERROR: ${err.message}`);
-    }
+    addLog(`Job started: ${job.job_id}`);
   };
 
+  // ---------------------------
+  // UI
+  // ---------------------------
   return (
-    <div style={{ padding: 40, fontFamily: "sans-serif" }}>
-      <h2>Cloud Upload Test</h2>
+    <div style={{ padding: 40 }}>
+      <h1>⚙️ Admin Control Panel</h1>
 
-      {/* TOOL SELECTOR */}
-      <div style={{ marginBottom: 20 }}>
-        <label>Tool:</label>{" "}
-        <select
-          value={tool}
-          onChange={(e) =>
-_toggle omitted_
-            setTool(e.target.value as ToolType)
-          }
-        >
-          <option value="image-to-pdf">Image → PDF</option>
-          <option value="pdf-compress">PDF Compress</option>
-        </select>
-      </div>
+      {/* Upload Tester */}
+      <h2>Upload Tester</h2>
+
+      <select
+        value={tool}
+        onChange={(e) =>
+          setTool(e.target.value as ToolType)
+        }
+      >
+        <option value="image-to-pdf">
+          Image → PDF
+        </option>
+        <option value="pdf-compress">
+          PDF Compress
+        </option>
+      </select>
+
+      <br /><br />
 
       <input
         type="file"
@@ -148,22 +146,82 @@ _toggle omitted_
         }
       />
 
-      <br /><br />
-
       <button onClick={handleUpload}>
-        Test Signed Upload
+        Upload & Process
       </button>
 
       <hr />
 
-      <h3>Logs</h3>
+      {/* JOB QUEUE */}
+      <h2>Job Queue</h2>
 
+      <table
+        border={1}
+        cellPadding={8}
+        style={{ width: "100%" }}
+      >
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tool</th>
+            <th>Status</th>
+            <th>Time</th>
+            <th>Result</th>
+            <th>Retry</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {jobs.map((job) => (
+            <tr key={job.job_id}>
+              <td>{job.job_id.slice(0, 8)}</td>
+              <td>{job.tool}</td>
+              <td>
+                {job.status === "failed"
+                  ? "❌ failed"
+                  : job.status === "completed"
+                  ? "✅ done"
+                  : "⏳ processing"}
+              </td>
+              <td>{duration(job)}</td>
+
+              <td>
+                {job.downloadUrl && (
+                  <a
+                    href={job.downloadUrl}
+                    target="_blank"
+                  >
+                    Download
+                  </a>
+                )}
+              </td>
+
+              <td>
+                {job.status === "failed" && (
+                  <button
+                    onClick={() =>
+                      retryJob(job.job_id)
+                    }
+                  >
+                    Retry
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <hr />
+
+      {/* LOGS */}
+      <h2>Logs</h2>
       <pre
         style={{
           background: "#111",
           color: "#0f0",
           padding: 20,
-          height: 300,
+          height: 200,
           overflow: "auto",
         }}
       >
