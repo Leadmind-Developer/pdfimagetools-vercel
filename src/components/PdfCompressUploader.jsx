@@ -86,7 +86,7 @@ export default function PdfCompressUploader() {
         }
       );
 
-      const blob = new Blob([res.data], { type: "application/pdf" });
+      const blob = res.data;
       const newSize = blob.size;
 
       setAfterSize(newSize);
