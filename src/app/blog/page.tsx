@@ -57,17 +57,6 @@ const tools = [
 export default function BlogIndexPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900">
-      
-      {/* Clickable Page Title */}
-      <header className="py-6 bg-gray-100 dark:bg-gray-800 text-center shadow">
-        <a
-          href="/"
-          className="text-3xl font-bold text-blue-600 hover:underline dark:text-blue-400"
-        >
-          PDFImageTools
-        </a>
-      </header>
-
       <main className="flex-1 container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8 text-center text-gray-900 dark:text-gray-100">
           PDF & Image Tools Blog
