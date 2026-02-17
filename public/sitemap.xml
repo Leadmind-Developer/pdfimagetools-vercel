@@ -136,6 +136,13 @@
     <priority>0.8</priority>
   </url>
 
+  <url>
+    <loc>https://pdfimagetools.app/password-pdf</loc>
+    <lastmod>2025-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
     <!-- Blog index -->
   <url>
     <loc>https://pdfimagetools.app/blog</loc>
@@ -369,5 +376,11 @@
     <priority>0.75</priority>
   </url>
 
-</urlset>
+  <url>
+    <loc>https://pdfimagetools.app/blog/password-pdf</loc>
+    <lastmod>2025-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
 
+</urlset>
