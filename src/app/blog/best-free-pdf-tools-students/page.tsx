@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import BlogFooter from "../../../components/BlogFooter";
 
 export const metadata = {
   title: "Best Free PDF Tools for Students (2026) | PDFImageTools",
@@ -362,9 +361,7 @@ export default function BestPdfToolsStudents() {
           Explore all available tools on PDFImageTools and simplify how you work
           with PDFs throughout your academic journey.
         </p>
-     </article>
-
-      <BlogFooter />
-    </>
+      </article>
+       </>
   );
 }
