@@ -1,14 +1,18 @@
+import BlogHeader from "../../components/BlogHeader";
 import BlogFooter from "../../components/BlogFooter";
 
 export default function BlogLayout({ children }) {
   return (
     <>
-      {/* Blog Content Wrapper */}
+      {/* Minimal Blog Header */}
+      <BlogHeader />
+
+      {/* Blog Content */}
       <main className="max-w-4xl mx-auto px-4 py-12 leading-relaxed">
         {children}
       </main>
 
-      {/* Global Blog Footer */}
+      {/* Blog Footer */}
       <BlogFooter />
     </>
   );
