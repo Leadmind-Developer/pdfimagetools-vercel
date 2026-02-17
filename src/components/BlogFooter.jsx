@@ -1,25 +1,16 @@
 "use client";
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-// Wrapper to force remount on route change
 function BidvertiserNativeAd() {
-  const pathname = usePathname();
+  const [adId] = useState(() => "ntv_" + Date.now()); // unique per mount
 
-  return <BidvertiserNativeAdInner key={pathname} />;
-}
-
-// Original ad component
-function BidvertiserNativeAdInner() {
-  React.useEffect(() => {
-    const container = document.getElementById("ntv_2103688");
-
-    if (!container || container.dataset.loaded) return;
-    container.dataset.loaded = "true";
+  useEffect(() => {
+    const container = document.getElementById(adId);
+    if (!container) return;
 
     const params = {
-      bvwidgetid: "ntv_2103688",
+      bvwidgetid: adId,
       bvlinksownid: 2103688,
       rows: 1,
       cols: 2,
@@ -28,9 +19,6 @@ function BidvertiserNativeAdInner() {
       mobilecols: 1,
       cb: new Date().getTime(),
     };
-
-    params.bvwidgetid = "ntv_2103688" + params.cb;
-    container.id = params.bvwidgetid;
 
     const qs = Object.keys(params)
       .map((k) => k + "=" + encodeURIComponent(params[k]))
@@ -44,8 +32,9 @@ function BidvertiserNativeAdInner() {
       "://cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?" +
       qs;
 
+    container.innerHTML = ""; // clear old content
     container.appendChild(s);
-  }, []);
+  }, [adId]);
 
   return (
     <div
@@ -55,7 +44,7 @@ function BidvertiserNativeAdInner() {
         justifyContent: "center",
       }}
     >
-      <div id="ntv_2103688"></div>
+      <div id={adId}></div>
     </div>
   );
 }
@@ -63,7 +52,6 @@ function BidvertiserNativeAdInner() {
 export default function BlogFooter() {
   return (
     <footer
-      className="blog-footer"
       style={{
         padding: "2rem 1rem",
         borderTop: "1px solid #ddd",
