@@ -1,52 +1,51 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function BidvertiserNativeAd() {
-  useEffect(() => {
-    const container = document.getElementById("ntv_2103688");
+  const adRef = useRef(null);
 
-    if (!container || container.dataset.loaded) return;
-    container.dataset.loaded = "true";
+  useEffect(() => {
+    if (!adRef.current) return;
+
+    const cb = new Date().getTime();
+    const widgetId = "ntv_2103688_" + cb;
+
+    // Clear old children if re-rendered
+    adRef.current.innerHTML = "";
 
     const params = {
-      bvwidgetid: "ntv_2103688",
+      bvwidgetid: widgetId,
       bvlinksownid: 2103688,
       rows: 1,
       cols: 2,
       textpos: "below",
       imagewidth: 220,
       mobilecols: 1,
-      cb: new Date().getTime(),
+      cb,
     };
 
-    params.bvwidgetid = "ntv_2103688" + params.cb;
-    container.id = params.bvwidgetid;
+    adRef.current.id = params.bvwidgetid;
 
     const qs = Object.keys(params)
       .map((k) => k + "=" + encodeURIComponent(params[k]))
       .join("&");
 
-    const s = document.createElement("script");
-    s.type = "text/javascript";
-    s.async = true;
-    s.src =
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.src =
       (document.location.protocol === "https:" ? "https" : "http") +
       "://cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?" +
       qs;
 
-    container.appendChild(s);
+    adRef.current.appendChild(script);
   }, []);
 
   return (
     <div
-      style={{
-        marginTop: "20px",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <div id="ntv_2103688"></div>
-    </div>
+      ref={adRef}
+      style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
+    ></div>
   );
 }
