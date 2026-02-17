@@ -1,5 +1,4 @@
 import React from "react";
-import Footer from "../../components/Footer";
 import {
   FaFilePdf,
   FaFileWord,
@@ -13,6 +12,7 @@ import {
   FaExchangeAlt,
   FaNewspaper, // for PDFImageTools blog
 } from "react-icons/fa";
+import BlogFooter from "../../components/BlogFooter";
 
 export const metadata = {
   title: "PDF & Image Tools Blog | PDFImageTools",
@@ -100,29 +100,10 @@ export default function BlogIndexPage() {
             );
           })}
         </div>
-      </main>
+            </main>
 
-      <footer className="mt-12 pt-4 border-t border-gray-300 text-center text-sm text-gray-500 dark:text-gray-400">
-  <p className="mb-2">
-    <a
-      href="/privacy"
-      className="text-blue-600 hover:underline mr-4"
-    >
-      Privacy Policy
-    </a>
-    |
-    <a
-      href="/terms"
-      className="text-blue-600 hover:underline ml-4"
-    >
-      Terms of Service
-    </a>
-  </p>
+      <BlogFooter />
 
-  <p>
-    © {new Date().getFullYear()} PDFImageTools. All rights reserved.
-  </p>
-</footer>
     </div>
   );
-};
+}
