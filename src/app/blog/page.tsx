@@ -12,7 +12,6 @@ import {
   FaExchangeAlt,
   FaNewspaper, // for PDFImageTools blog
 } from "react-icons/fa";
-import BlogFooter from "../../components/BlogFooter";
 
 export const metadata = {
   title: "PDF & Image Tools Blog | PDFImageTools",
@@ -100,10 +99,7 @@ export default function BlogIndexPage() {
             );
           })}
         </div>
-            </main>
-
-      <BlogFooter />
-
+      </main>
     </div>
   );
 }
