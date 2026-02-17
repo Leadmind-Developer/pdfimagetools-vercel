@@ -362,9 +362,9 @@ export default function BestPdfToolsStudents() {
           Explore all available tools on PDFImageTools and simplify how you work
           with PDFs throughout your academic journey.
         </p>
-      </article>
-      <BlogFooter />
+     </article>
 
-    </div>
+      <BlogFooter />
+    </>
   );
 }
