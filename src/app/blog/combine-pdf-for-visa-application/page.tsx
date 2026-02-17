@@ -263,8 +263,6 @@ export default function CombinePdfVisa() {
           Good luck with your visa application! Thousands of Nigerians have successfully used this method in 2025–2026.
         </p>
      </article>
-
-      <BlogFooter />
     </>
   );
 }
