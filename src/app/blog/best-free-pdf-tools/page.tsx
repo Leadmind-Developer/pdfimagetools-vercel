@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import BlogFooter from "../../../components/BlogFooter";
 
 export const metadata = {
   title: "15 Best Free PDF Tools Online (No Signup, Tested 2026) | PDFImageTools",
@@ -297,9 +296,7 @@ export default function BestFreePdfTools() {
             </Link>
           </p>
         </div>
-     </article>
-
-      <BlogFooter />
+      </article>
     </>
   );
 }
