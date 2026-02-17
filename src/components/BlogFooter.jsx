@@ -1,55 +1,35 @@
 "use client";
 
+import React from "react";
 import BidvertiserNativeAd from "@/components/ads/BidvertiserNativeAd";
 
-const BlogFooter = ({ isDarkMode }) => {
+export default function BlogFooter() {
   return (
-    <footer
-      style={{
-        marginTop: "3rem",
-        paddingTop: "1.5rem",
-        borderTop: "1px solid #ddd",
-        textAlign: "center",
-        fontSize: "0.9rem",
-        color: isDarkMode ? "#aaa" : "#888",
-      }}
-    >
-      {/* Native Ad Placement */}
-      <div style={{ marginBottom: "20px" }}>
+    <footer className="blog-footer">
+
+      {/* Native Ad (primary monetization on blogs) */}
+      <div className="blog-footer-ad">
         <BidvertiserNativeAd />
       </div>
 
-      {/* Policy Links */}
-      <p>
-        <a
-          href="/privacy"
-          style={{
-            color: "#007bff",
-            textDecoration: "none",
-            marginRight: "1rem",
-          }}
-        >
-          Privacy Policy
-        </a>
-        |
-        <a
-          href="/terms"
-          style={{
-            color: "#007bff",
-            textDecoration: "none",
-            marginLeft: "1rem",
-          }}
-        >
-          Terms of Service
-        </a>
-      </p>
+      <div className="blog-footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <span>|</span>
+        <a href="/terms">Terms of Service</a>
+      </div>
 
-      {/* Copyright */}
-      <p>
+      <p className="blog-footer-copy">
         © {new Date().getFullYear()} <strong>PDFImageTools</strong>. All rights reserved.
       </p>
+
+      {/* Bidvertiser verification */}
+      <p
+        className="blog-footer-verification"
+        dangerouslySetInnerHTML={{
+          __html: "<!-- Bidvertiser2103688 -->",
+        }}
+      />
+
     </footer>
   );
-};
-
-export default BlogFooter;
+}
