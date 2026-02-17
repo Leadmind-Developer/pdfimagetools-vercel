@@ -2,7 +2,9 @@
 
 import React, { lazy, Suspense } from "react";
 import Link from "next/link";
+import BidvertiserNativeAd from "@/components/ads/BidvertiserNativeAd";
 
+// Lazy load donation AFTER render (no LCP impact)
 const DonationSupport = lazy(() => import("./DonationSupport"));
 
 export default function Footer() {
@@ -32,6 +34,7 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      {/* Donation loads after main content */}
       <Suspense fallback={null}>
         <DonationSupport />
       </Suspense>
@@ -41,7 +44,7 @@ export default function Footer() {
       </p>
 
       <div className="footer-grid">
-        <div>
+        <div className="footer-column">
           <h4>PDF Tools</h4>
           {pdfLinks.map((l) => (
             <Link key={l.href} href={l.href}>
@@ -50,7 +53,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div>
+        <div className="footer-column">
           <h4>Image & File Tools</h4>
           {imageToolsLinks.map((l) => (
             <Link key={l.href} href={l.href}>
@@ -59,14 +62,16 @@ export default function Footer() {
           ))}
         </div>
 
-        <div>
+        <div className="footer-column">
           <h4>Legal</h4>
           {legalLinks.map((l) => (
             <Link key={l.href} href={l.href}>
               {l.label}
             </Link>
           ))}
-          <a href="mailto:support@pdfimagetools.app">Support Email</a>
+          <a href="mailto:support@pdfimagetools.app">
+            Support Email
+          </a>
         </div>
       </div>
 
@@ -75,7 +80,7 @@ export default function Footer() {
         reserved.
       </p>
 
-      {/* Bidvertiser verification — must be raw HTML */}
+      {/* Bidvertiser verification (must remain raw HTML comment) */}
       <p
         className="footer-verification"
         aria-label="Bidvertiser site verification"
@@ -83,6 +88,11 @@ export default function Footer() {
           __html: "<!-- Bidvertiser2103688 -->",
         }}
       />
+
+      {/* Native Ad — loads client-side */}
+      <div className="footer-ad">
+        <BidvertiserNativeAd />
+      </div>
     </footer>
   );
 }
