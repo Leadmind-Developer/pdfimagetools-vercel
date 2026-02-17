@@ -61,9 +61,13 @@ const Features = () => (
         <Link href="/pdf-sign" className="feature-card">
           Sign PDF e-Signature
         </Link>
+        <Link href="/password-pdf" className="feature-card">
+          Secure or Remove Passwords
+        </Link>
       </div>
     </div>
   </section>
 );
 
 export default Features;
+
