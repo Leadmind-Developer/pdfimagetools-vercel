@@ -10,6 +10,7 @@ import {
   FaMagic,
   FaUserEdit,
   FaExchangeAlt,
+  FaLock,
   FaNewspaper, // for PDFImageTools blog
 } from "react-icons/fa";
 
@@ -35,6 +36,7 @@ const tools = [
   { name: "Compress PDF", slug: "compress-pdf", icon: FaFilePdf },
   { name: "Image Converter", slug: "image-converter", icon: FaExchangeAlt },
   { name: "PDF Sign", slug: "pdf-sign", icon: FaUserEdit },
+  { name: "Password PDF", slug: "password-pdf", icon: FaLock },
   { name: "Merge Bank Statements", slug: "merge-bank-statements", icon: FaFilePdf },
   { name: "Compress Large Bank Statements", slug: "compress-large-bank-statements", icon: FaFilePdf },
   { name: "Best Free PDF Tools", slug: "best-free-pdf-tools", icon: FaFilePdf },
