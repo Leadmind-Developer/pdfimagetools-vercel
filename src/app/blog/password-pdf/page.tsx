@@ -122,26 +122,12 @@ export default function PasswordPdfBlog() {
         <h2>Related Tools</h2>
         <ul>
           <li><Link href="/compress-pdf">Compress PDFs</Link></li>
-          <li><Link href="/merge-pdfs">Merge PDFs</Link></li>
+          <li><Link href="/merge-pdfs">Combine PDFs</Link></li>
           <li><Link href="/split-pdf">Split PDFs</Link></li>
           <li><Link href="/pdf-to-word">PDF to Word</Link></li>
           <li><Link href="/image-to-pdf">Image to PDF</Link></li>
         </ul>
       </article>
-
-      <footer className="mt-12 pt-4 border-t border-gray-300 text-center text-sm text-gray-500 dark:text-gray-400">
-        <p className="mb-2">
-          <a href="/privacy" className="text-blue-600 hover:underline mr-4">
-            Privacy Policy
-          </a>
-          |
-          <a href="/terms" className="text-blue-600 hover:underline ml-4">
-            Terms of Service
-          </a>
-        </p>
-
-        <p>© {new Date().getFullYear()} PDFImageTools. All rights reserved.</p>
-      </footer>
     </>
   );
 }
