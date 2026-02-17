@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export default function BidvertiserNativeAd() {
-  const adRef = useRef(null);
-
   useEffect(() => {
-    // Prevent duplicate script injection
-    if (!adRef.current || adRef.current.dataset.loaded) return;
+    const container = document.getElementById("ntv_2103688");
 
-    adRef.current.dataset.loaded = "true";
+    if (!container || container.dataset.loaded) return;
+    container.dataset.loaded = "true";
 
     const params = {
       bvwidgetid: "ntv_2103688",
@@ -22,37 +20,33 @@ export default function BidvertiserNativeAd() {
       cb: new Date().getTime(),
     };
 
-    params.bvwidgetid = params.bvwidgetid + params.cb;
-    adRef.current.id = params.bvwidgetid;
+    params.bvwidgetid = "ntv_2103688" + params.cb;
+    container.id = params.bvwidgetid;
 
     const qs = Object.keys(params)
-      .map((k) => `${k}=${encodeURIComponent(params[k])}`)
+      .map((k) => k + "=" + encodeURIComponent(params[k]))
       .join("&");
 
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.async = true;
-
-    const protocol =
-      window.location.protocol === "https:" ? "https" : "http";
-
-    script.src =
-      protocol +
+    const s = document.createElement("script");
+    s.type = "text/javascript";
+    s.async = true;
+    s.src =
+      (document.location.protocol === "https:" ? "https" : "http") +
       "://cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?" +
       qs;
 
-    adRef.current.appendChild(script);
+    container.appendChild(s);
   }, []);
 
   return (
     <div
       style={{
-        marginTop: "30px",
+        marginTop: "20px",
         display: "flex",
         justifyContent: "center",
       }}
     >
-      <div id="ntv_2103688" ref={adRef}></div>
+      <div id="ntv_2103688"></div>
     </div>
   );
 }
