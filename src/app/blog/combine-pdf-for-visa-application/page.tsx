@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogFooter from "../../../components/BlogFooter";
 
 export const metadata = {
   title: "Combine PDFs for Visa Application – Step-by-Step Guide 2026 | PDFImageTools",
@@ -261,7 +262,9 @@ export default function CombinePdfVisa() {
         <p style={{ marginTop: "2rem", fontSize: "0.875rem", color: "#718096" }}>
           Good luck with your visa application! Thousands of Nigerians have successfully used this method in 2025–2026.
         </p>
-      </article>
+     </article>
+
+      <BlogFooter />
     </>
   );
 }
