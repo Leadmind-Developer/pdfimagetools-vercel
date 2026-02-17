@@ -294,17 +294,17 @@ export default function SmallpdfVsPdfImageTools() {
 
         <ul>
           <li>
-            <Link href="/best-free-pdf-tools">
+            <Link href="/blog/best-free-pdf-tools">
               Best Free PDF Tools Online
             </Link>
           </li>
           <li>
-            <Link href="/blog/reduce-pdf-size-without-losing-quality">
+            <Link href="/blog/how-to-reduce-pdf-size-without-losing-quality">
               Reduce PDF Size Without Losing Quality
             </Link>
           </li>
           <li>
-            <Link href="/blog/merge-pdfs-job-applications">
+            <Link href="/blog/merge-pdfs-for-job-applications">
               Merge PDFs for Job Applications
             </Link>
           </li>
