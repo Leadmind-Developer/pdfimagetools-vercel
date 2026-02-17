@@ -133,20 +133,6 @@ export default function CompressPdfBlog() {
           <li><Link href="/pdf-to-image">PDF to Image</Link></li>
         </ul>
       </article>
-
-      <footer className="mt-12 pt-4 border-t border-gray-300 text-center text-sm text-gray-500 dark:text-gray-400">
-        <p className="mb-2">
-          <a href="/privacy" className="text-blue-600 hover:underline mr-4">
-            Privacy Policy
-          </a>
-          |
-          <a href="/terms" className="text-blue-600 hover:underline ml-4">
-            Terms of Service
-          </a>
-        </p>
-
-        <p>© {new Date().getFullYear()} PDFImageTools. All rights reserved.</p>
-      </footer>
     </>
   );
 }
