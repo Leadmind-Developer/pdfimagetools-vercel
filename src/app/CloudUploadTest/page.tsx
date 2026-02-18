@@ -18,9 +18,7 @@ interface Job {
  * IMPORTANT:
  * Uses env automatically in production
  */
-const API =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:8000/cloud";
+const API = `${process.env.NEXT_PUBLIC_API_BASE}/cloud`;
 
 export default function AdminPanel() {
   const [file, setFile] = useState<File | null>(null);
