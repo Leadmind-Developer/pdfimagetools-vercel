@@ -14,67 +14,103 @@ interface Job {
   downloadUrl?: string;
 }
 
-export default function AdminPanel() {
-  const API = "http://localhost:8000/cloud";
+/**
+ * IMPORTANT:
+ * Uses env automatically in production
+ */
+const API =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:8000/cloud";
 
+export default function AdminPanel() {
   const [file, setFile] = useState<File | null>(null);
-  const [tool, setTool] = useState<ToolType>("image-to-pdf");
+  const [tool, setTool] =
+    useState<ToolType>("image-to-pdf");
+
   const [log, setLog] = useState<string[]>([]);
   const [jobs, setJobs] = useState<Job[]>([]);
+  const [uploading, setUploading] = useState(false);
 
-  const addLog = (msg: string) =>
-    setLog((p) => [...p, msg]);
+  const addLog = (msg: string) => {
+    console.log(msg);
+    setLog((p) => [
+      ...p,
+      `[${new Date().toLocaleTimeString()}] ${msg}`,
+    ]);
+  };
 
-  // ---------------------------
-  // JOB QUEUE VIEWER
-  // ---------------------------
+  // ------------------------------------------------
+  // JOB QUEUE POLLING
+  // ------------------------------------------------
   const loadJobs = async () => {
-    const res = await fetch(`${API}/jobs`);
-    const data = await res.json();
-    setJobs(data);
+    try {
+      const res = await fetch(`${API}/jobs`);
+      const data = await res.json();
+      setJobs(data);
+    } catch {
+      addLog("⚠️ Failed to load jobs");
+    }
   };
 
   useEffect(() => {
     loadJobs();
-    const i = setInterval(loadJobs, 4000);
+    const i = setInterval(loadJobs, 3000);
     return () => clearInterval(i);
   }, []);
 
-  // ---------------------------
+  // ------------------------------------------------
   // METRICS
-  // ---------------------------
+  // ------------------------------------------------
   const duration = (job: Job) => {
     if (!job.completed_at) return "-";
     return (
-      (job.completed_at - job.created_at).toFixed(1) + "s"
+      (job.completed_at - job.created_at).toFixed(1) +
+      "s"
     );
   };
 
-  // ---------------------------
+  // ------------------------------------------------
   // RETRY
-  // ---------------------------
+  // ------------------------------------------------
   const retryJob = async (id: string) => {
+    addLog(`Retrying ${id}...`);
+
     await fetch(`${API}/job/${id}/retry`, {
       method: "POST",
     });
-    addLog(`Retrying job ${id}`);
+
     loadJobs();
   };
 
-  // ---------------------------
-  // PIPELINE (existing logic)
-  // ---------------------------
+  // ------------------------------------------------
+  // STEP 1 — SIGNED URL
+  // ------------------------------------------------
   const getUploadUrl = async (filename: string) => {
+    addLog("Requesting signed URL...");
+
     const res = await fetch(`${API}/upload-url`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ filename }),
     });
+
+    if (!res.ok)
+      throw new Error("Signed URL failed");
+
+    addLog("Signed URL received ✅");
     return res.json();
   };
 
-  const uploadToGCS = async (url: string, file: File) => {
-    await fetch(url, {
+  // ------------------------------------------------
+  // STEP 2 — DIRECT GCS UPLOAD
+  // ------------------------------------------------
+  const uploadToGCS = async (
+    url: string,
+    file: File
+  ) => {
+    addLog("Uploading file to GCS...");
+
+    const res = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type":
@@ -82,9 +118,21 @@ export default function AdminPanel() {
       },
       body: file,
     });
+
+    if (!res.ok)
+      throw new Error("Upload failed");
+
+    addLog("Upload complete ✅");
   };
 
-  const startProcess = async (filePath: string) => {
+  // ------------------------------------------------
+  // STEP 3 — START JOB
+  // ------------------------------------------------
+  const startProcess = async (
+    filePath: string
+  ) => {
+    addLog(`Triggering ${tool} worker...`);
+
     const res = await fetch(
       `${API}/process/${tool}`,
       {
@@ -92,35 +140,51 @@ export default function AdminPanel() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ file_path: filePath }),
+        body: JSON.stringify({
+          file_path: filePath,
+        }),
       }
     );
+
+    if (!res.ok)
+      throw new Error("Process start failed");
+
     return res.json();
   };
 
+  // ------------------------------------------------
+  // PIPELINE
+  // ------------------------------------------------
   const handleUpload = async () => {
-    if (!file) return;
+    if (!file || uploading) return;
 
-    addLog("Starting pipeline...");
+    setUploading(true);
 
-    const { uploadUrl, filePath } =
-      await getUploadUrl(file.name);
+    try {
+      addLog("🚀 Starting pipeline");
 
-    await uploadToGCS(uploadUrl, file);
+      const { uploadUrl, filePath } =
+        await getUploadUrl(file.name);
 
-    const job = await startProcess(filePath);
+      await uploadToGCS(uploadUrl, file);
 
-    addLog(`Job started: ${job.job_id}`);
+      const job = await startProcess(filePath);
+
+      addLog(`Worker queued ✅ Job: ${job.job_id}`);
+    } catch (err: any) {
+      addLog(`❌ ERROR: ${err.message}`);
+    } finally {
+      setUploading(false);
+    }
   };
 
-  // ---------------------------
+  // ------------------------------------------------
   // UI
-  // ---------------------------
+  // ------------------------------------------------
   return (
     <div style={{ padding: 40 }}>
       <h1>⚙️ Admin Control Panel</h1>
 
-      {/* Upload Tester */}
       <h2>Upload Tester</h2>
 
       <select
@@ -146,20 +210,22 @@ export default function AdminPanel() {
         }
       />
 
-      <button onClick={handleUpload}>
-        Upload & Process
+      <br /><br />
+
+      <button
+        disabled={uploading}
+        onClick={handleUpload}
+      >
+        {uploading
+          ? "Uploading..."
+          : "Upload & Process"}
       </button>
 
       <hr />
 
-      {/* JOB QUEUE */}
       <h2>Job Queue</h2>
 
-      <table
-        border={1}
-        cellPadding={8}
-        style={{ width: "100%" }}
-      >
+      <table border={1} cellPadding={8} width="100%">
         <thead>
           <tr>
             <th>ID</th>
@@ -176,6 +242,7 @@ export default function AdminPanel() {
             <tr key={job.job_id}>
               <td>{job.job_id.slice(0, 8)}</td>
               <td>{job.tool}</td>
+
               <td>
                 {job.status === "failed"
                   ? "❌ failed"
@@ -183,6 +250,7 @@ export default function AdminPanel() {
                   ? "✅ done"
                   : "⏳ processing"}
               </td>
+
               <td>{duration(job)}</td>
 
               <td>
@@ -214,14 +282,14 @@ export default function AdminPanel() {
 
       <hr />
 
-      {/* LOGS */}
       <h2>Logs</h2>
+
       <pre
         style={{
           background: "#111",
           color: "#0f0",
           padding: 20,
-          height: 200,
+          height: 220,
           overflow: "auto",
         }}
       >
