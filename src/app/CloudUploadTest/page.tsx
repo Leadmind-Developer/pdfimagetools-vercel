@@ -110,10 +110,6 @@ export default function AdminPanel() {
 
     const res = await fetch(url, {
       method: "PUT",
-      headers: {
-        "Content-Type":
-          file.type || "application/octet-stream",
-      },
       body: file,
     });
 
