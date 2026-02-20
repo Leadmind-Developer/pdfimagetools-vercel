@@ -54,6 +54,16 @@ const tools = [
   { name: "Top Free Online PDF Editors Compared", slug: "top-free-online-pdf-editors-compared", icon: FaFilePdf },
   { name: "How to Reduce PDF Size Without Losing Quality", slug: "how-to-reduce-pdf-size-without-losing-quality", icon: FaFilePdf },
   { name: "Smallpdf vs PDFImageTools", slug: "smallpdf-vs-pdfimagetools", icon: FaFilePdf },
+  { name: "Send Large PDF Files Online", slug: "send-large-pdf-files-online", icon: FaFilePdf },
+  { name: "Convert Scanned Documents to Editable Text", slug: "convert-scanned-documents-to-editable-text", icon: FaFilePdf },
+  { name: "PDF File Not Opening? Common Problems & Fixes", slug: "pdf-file-not-opening-fix", icon: FaFilePdf },
+  { name: "Best File Format for Online Applications", slug: "best-file-format-for-online-applications", icon: FaFilePdf },
+  { name: "Organize Multiple Documents into One PDF", slug: "organize-documents-into-one-pdf", icon: FaFilePdf },
+  { name: "How to Convert PDF to Word Without Losing Formatting", slug: "convert-pdf-to-word-without-losing-formatting", icon: FaFileWord },
+  { name: "Prepare Documents for Online Submission", slug: "prepare-documents-for-online-submission", icon: FaFilePdf },
+  { name: "PDF Security Guide", slug: "pdf-security-guide", icon: FaLock },
+  { name: "Convert Phone Photos to PDF", slug: "convert-phone-photos-to-pdf", icon: FaImage },
+  { name: "Digital Document Management Guide", slug: "digital-document-management-guide", icon: FaFilePdf },
 ];
 
 export default function BlogIndexPage() {
