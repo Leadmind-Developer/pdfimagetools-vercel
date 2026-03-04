@@ -1,16 +1,37 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-export default function BidvertiserNativeAd() {
+export default function BidvertiserNativeAd({
+  rows = 1,
+  cols = 2,
+  imagewidth = 220,
+  mobilecols = 1,
+}) {
   const adRef = useRef(null);
-  const pathname = usePathname(); // ⭐ detects route change
+  const pathname = usePathname();
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (!adRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
 
-    // Clear previous ad instance
+    if (adRef.current) observer.observe(adRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible || !adRef.current) return;
+
     adRef.current.innerHTML = "";
 
     const cb = Date.now();
@@ -23,11 +44,11 @@ export default function BidvertiserNativeAd() {
     const params = {
       bvwidgetid: widgetId,
       bvlinksownid: 2103688,
-      rows: 1,
-      cols: 2,
+      rows,
+      cols,
       textpos: "below",
-      imagewidth: 220,
-      mobilecols: 1,
+      imagewidth,
+      mobilecols,
       cb,
     };
 
@@ -38,19 +59,23 @@ export default function BidvertiserNativeAd() {
     const script = document.createElement("script");
     script.async = true;
     script.src =
-      (document.location.protocol === "https:" ? "https" : "http") +
-      "://cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?" +
-      qs;
+      "https://cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?" + qs;
 
-    container.appendChild(script);
+    document.body.appendChild(script);
 
-  }, [pathname]); // ⭐ THIS is the fix
+    return () => {
+      document
+        .querySelectorAll(`script[src*="bdvws.js"]`)
+        .forEach((s) => s.remove());
+    };
+
+  }, [pathname, visible]);
 
   return (
     <div
       ref={adRef}
       style={{
-        marginTop: "20px",
+        margin: "30px 0",
         display: "flex",
         justifyContent: "center",
       }}
