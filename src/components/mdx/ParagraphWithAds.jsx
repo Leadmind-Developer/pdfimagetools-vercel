@@ -1,24 +1,23 @@
 "use client";
 
-import { useRef } from "react";
+import { ReactNode, useRef } from "react";
 import BidvertiserNativeAd from "@/components/ads/BidvertiserNativeAd";
 
-let paragraphCount = 0;
+interface ParagraphWithAdsProps {
+  children: ReactNode;
+  index: number;
+}
 
-export default function ParagraphWithAds({ children }) {
-  paragraphCount++;
-
+export default function ParagraphWithAds({ children, index }: ParagraphWithAdsProps) {
   return (
     <>
       <p>{children}</p>
 
-      {paragraphCount === 2 && (
-        <BidvertiserNativeAd rows={1} cols={3} imagewidth={180} />
-      )}
+      {/* After 2nd paragraph */}
+      {index === 2 && <BidvertiserNativeAd rows={1} cols={3} imagewidth={180} />}
 
-      {paragraphCount === 6 && (
-        <BidvertiserNativeAd rows={1} cols={3} imagewidth={180} />
-      )}
+      {/* After 6th paragraph */}
+      {index === 6 && <BidvertiserNativeAd rows={1} cols={3} imagewidth={180} />}
     </>
   );
 }
