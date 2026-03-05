@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Sign PDF Online for Free | PDFImageTools",
@@ -72,6 +73,8 @@ dangerouslySetInnerHTML={{__html: JSON.stringify({
 Signing PDF documents digitally saves time and ensures authenticity.
 With PDFImageTools, you can upload your PDF and signature image, and get a signed document in seconds — all for free.
 </p>
+
+  <BlogAd />
 
 <h2>How PDF Signing Works</h2>
 <ol>
