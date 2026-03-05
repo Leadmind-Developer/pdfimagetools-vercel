@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import BlogFooter from "../../../components/BlogFooter";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Combine PDFs for Visa Application – Step-by-Step Guide 2026 | PDFImageTools",
@@ -85,6 +86,8 @@ export default function CombinePdfVisa() {
         <p>
           Visa portals (VFS Global, TLScontact, iDATA, BLS International, online embassy systems) usually impose strict rules:
         </p>
+
+        <BlogAd />
 
         <ul style={{ listStyleType: "disc", paddingLeft: "1.5rem", marginTop: "0.75rem", marginBottom: "0.75rem" }}>
           <li style={{ marginBottom: "0.75rem" }}>Only one supporting document upload field is provided</li>
@@ -189,6 +192,8 @@ export default function CombinePdfVisa() {
         <p style={{ marginTop: "1.5rem" }}>
           Aim for 3–7 MB final size — small enough for fast upload but still readable when printed or viewed by visa officers.
         </p>
+
+        <BlogAd />
 
         <h2 style={{ fontSize: "1.875rem", fontWeight: "bold", marginTop: "3rem", marginBottom: "1.5rem" }}>
           Pro Tips for Perfect Visa PDF Submission (2026)
