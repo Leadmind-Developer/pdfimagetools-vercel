@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Smallpdf vs PDFImageTools – Which PDF Tool is Better? | 2026",
@@ -93,6 +94,8 @@ export default function SmallpdfVsPdfImageTools() {
           time and money.
         </p>
 
+        <BlogAd />
+
         <p>
           Two popular options today are Smallpdf and PDFImageTools. While both
           offer browser-based PDF editing, they differ significantly in pricing,
@@ -165,6 +168,8 @@ export default function SmallpdfVsPdfImageTools() {
           Smallpdf offers a polished interface but frequently prompts users to
           sign in or upgrade plans after limited usage.
         </p>
+
+       <BlogAd />
 
         <p>
           PDFImageTools removes friction entirely. You simply upload a file,
