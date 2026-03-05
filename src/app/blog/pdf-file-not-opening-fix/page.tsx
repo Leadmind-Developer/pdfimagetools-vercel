@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title:
@@ -105,6 +106,8 @@ export default function PdfNotOpeningFix() {
           reports, PDF issues can interrupt important work.
         </p>
 
+        <BlogAd />
+
         <p>
           The good news is that most PDF opening problems have simple solutions.
           This guide explains the most common causes and how to fix them quickly.
@@ -154,6 +157,8 @@ export default function PdfNotOpeningFix() {
           Converting a problematic PDF can rebuild its internal structure and
           fix hidden errors.
         </p>
+
+        <BlogAd />
 
         <p>
           Use the <Link href="/pdf-to-word">PDF to Word converter</Link> to
