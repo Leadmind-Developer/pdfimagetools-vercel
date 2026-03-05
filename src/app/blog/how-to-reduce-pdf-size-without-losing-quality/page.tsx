@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "How to Reduce PDF Size Without Losing Quality – Free | PDFImageTools",
@@ -104,6 +105,8 @@ export default function ReducePdfSize() {
           fail to upload or take too long to send.
         </p>
 
+        <BlogAd />
+
         <p>
           The good news is that you can significantly reduce PDF file size
           without damaging readability or visual quality. With modern compression
@@ -178,6 +181,8 @@ export default function ReducePdfSize() {
           Perfect for email attachments or portal uploads with strict size
           limits. Slight image softness may occur but text remains readable.
         </p>
+
+        <BlogAd />
 
         <h2>Best Use Cases for PDF Compression</h2>
 
