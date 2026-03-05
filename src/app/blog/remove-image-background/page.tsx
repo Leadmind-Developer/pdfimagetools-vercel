@@ -1,6 +1,7 @@
 // src/app/blog/remove-image-background/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Remove Image Background Online for Free | PDFImageTools",
@@ -106,6 +107,8 @@ export default function RemoveImageBackgroundBlogPage() {
         Easily remove unwanted backgrounds from your images with PDFImageTools.  
         Upload your JPG, PNG, or other image files, and the background is removed automatically — fast, free, and secure.
       </p>
+
+     <BlogAd />
 
       <h2>Why Remove Image Backgrounds?</h2>
       <ul>
