@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-<BlogAd />
+import BlogAd from "@/components/ads/BlogAd";
 
 
 export const metadata = {
