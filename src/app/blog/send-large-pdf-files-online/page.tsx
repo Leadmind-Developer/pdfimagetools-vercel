@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "How to Send Large PDF Files Online (Without Email Limits) | PDFImageTools",
@@ -104,6 +105,8 @@ export default function SendLargePdfFiles() {
           <strong> “File exceeds attachment size limit.”</strong>
         </p>
 
+        <BlogAd />
+
         <p>
           Most email platforms restrict attachments to around 20–25MB, while many
           PDFs easily exceed this size due to high-resolution images, scanned
@@ -140,6 +143,8 @@ export default function SendLargePdfFiles() {
           </Link>{" "}
           to understand what increases document size and how optimization works.
         </p>
+
+        <BlogAd />
 
         <h2>Best Method: Compress the PDF Before Sending</h2>
 
