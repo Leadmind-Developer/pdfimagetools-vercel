@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "How to Merge PDF Files Online for Free (Fast & Secure) | PDFImageTools",
@@ -106,6 +107,9 @@ export default function MergePdfBlogPage() {
         and bundle important records. With PDFImageTools Merge PDF, you can combine multiple
         PDFs into one clean document in seconds — no watermark, no signup, and completely free.
       </p>
+
+      <BlogAd />
+
 
       <h2>Why People Merge PDF Files</h2>
 
