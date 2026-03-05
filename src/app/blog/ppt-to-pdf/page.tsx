@@ -1,6 +1,7 @@
 // src/app/blog/ppt-to-pdf/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert PowerPoint to PDF Online for Free | PDFImageTools",
@@ -106,6 +107,8 @@ export default function PptToPdfBlogPage() {
         Turn your PPT slides into shareable PDF documents instantly.  
         PDFImageTools makes PowerPoint to PDF conversion fast, secure, and completely free.
       </p>
+
+      <BlogAd />
 
       <h2>Why Convert PPT to PDF?</h2>
       <ul>
