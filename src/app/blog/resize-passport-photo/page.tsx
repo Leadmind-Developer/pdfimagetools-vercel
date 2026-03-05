@@ -1,6 +1,7 @@
 // src/app/blog/resize-passport-photo/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Resize Passport Photo Online for Free | PDFImageTools",
@@ -113,6 +114,8 @@ export default function ResizePassportPhotoBlogPage() {
         <li>35×45 mm (common international size)</li>
         <li>Custom dimensions for local passport or visa applications</li>
       </ul>
+
+      <BlogAd />
 
       <h2>How to Resize a Passport Photo</h2>
       <ol>
