@@ -1,6 +1,7 @@
 // src/app/blog/excel-to-pdf/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert Excel to PDF Online for Free | PDFImageTools",
@@ -137,6 +138,8 @@ export default function ExcelToPdfBlogPage() {
           that formatting, charts, and data are preserved in the PDF file, all
           without installing software or signing up.
         </p>
+
+        <BlogAd />
 
         <h2>Why Convert Excel to PDF?</h2>
         <ul>
