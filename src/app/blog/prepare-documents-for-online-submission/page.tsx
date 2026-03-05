@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title:
@@ -105,6 +106,8 @@ export default function PrepareDocumentsSubmission() {
           prepared correctly.
         </p>
 
+        <BlogAd />
+
         <p>
           File size limits, incorrect formats, missing signatures, and poor
           organization are among the most common reasons uploads get rejected.
@@ -158,6 +161,8 @@ export default function PrepareDocumentsSubmission() {
           Many portals restrict uploads to 1–10 MB. Large scans often exceed
           limits.
         </p>
+
+        <BlogAd />
 
         <p>
           Use <Link href="/compress-pdf">Compress PDF</Link> before uploading.
