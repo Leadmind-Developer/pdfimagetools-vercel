@@ -182,9 +182,7 @@ export default function BestFreePdfTools() {
           <li style={{ marginBottom: '2rem' }}>Soda PDF Online – Solid free tier</li>
           <li style={{ marginBottom: '2rem' }}>PDF2Edit – Focused on editing & conversion</li>
           <li>Xodo – Strong mobile/web experience</li>
-        </ol>
-
-        <BlogAd />
+        </ol>  
 
         <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginTop: '3rem', marginBottom: '1.5rem' }}>
           Quick Comparison Table – Free PDF Tools 2026
