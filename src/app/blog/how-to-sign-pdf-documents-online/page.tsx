@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title:
@@ -127,6 +128,8 @@ export default function SignPdfPage() {
             instantly from your phone or computer while remaining legally
             valid in most countries.
           </p>
+
+          <BlogAd />
 
           <p className="updated">Last updated: February 2026</p>
         </header>
