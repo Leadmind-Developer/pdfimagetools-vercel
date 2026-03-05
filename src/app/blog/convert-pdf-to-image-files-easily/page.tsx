@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import BlogAd from "@/components/ads/BlogAd"; <BlogAd />
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert PDF to Image Files Easily – Free Tool | PDFImageTools",
