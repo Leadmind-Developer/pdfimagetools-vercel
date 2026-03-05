@@ -1,6 +1,7 @@
 // src/app/blog/password-pdf/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Lock & Unlock PDF Files Online | PDFImageTools",
@@ -90,6 +91,8 @@ export default function PasswordPdfBlog() {
           Protect your PDF files with a password to secure sensitive information, or remove password protection to edit or share your PDFs.
           PDFImageTools allows you to do it online, fast, and for free.
         </p>
+
+        <BlogAd />
 
         <h2>How PDF Password Protection Works</h2>
         <ol>
