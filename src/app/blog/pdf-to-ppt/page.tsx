@@ -1,6 +1,7 @@
 // src/app/blog/pdf-to-ppt/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert PDF to PowerPoint Online for Free | PDFImageTools",
@@ -107,6 +108,8 @@ export default function PdfToPptBlogPage() {
         PDFImageTools makes it easy to convert PDFs into PPT slides — fast, free, and secure.
       </p>
 
+      <BlogAd />
+
       <h2>Why Convert PDF to PowerPoint?</h2>
       <ul>
         <li>Reuse content from reports, handouts, or guides</li>
@@ -142,6 +145,8 @@ export default function PdfToPptBlogPage() {
         <li>Fast and accurate conversion</li>
         <li>Privacy-first service</li>
       </ul>
+
+      <BlogAd />
 
       <h2>Try Our Related Tools</h2>
       <ul className="space-y-1">
