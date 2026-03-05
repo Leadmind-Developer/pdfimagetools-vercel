@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd"; 
 
 export const metadata = {
   title: "Convert Phone Photos to PDF Online | PDFImageTools",
@@ -63,6 +64,8 @@ export default function ConvertPhonePhotosToPdf() {
         <p>
           Transforming phone photos into PDFs is essential for applications, submissions, or creating organized digital records. Whether you’re a student, freelancer, or professional, PDFImageTools allows fast, browser-based conversion.
         </p>
+
+        <BlogAd />
 
         <h2>Step-by-Step Guide</h2>
         <ol>
