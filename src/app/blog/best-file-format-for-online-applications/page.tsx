@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title:
@@ -104,6 +105,8 @@ export default function BestFileFormatApplications() {
           platforms require digital document submission. One common question
           applicants face is:
         </p>
+
+        <BlogAd />
 
         <p>
           <strong>Which file format should I upload — PDF, JPG, or DOCX?</strong>
@@ -222,6 +225,8 @@ export default function BestFileFormatApplications() {
           <li>Ignoring file size limits</li>
           <li>Using editable formats for final submissions</li>
         </ul>
+
+        <BlogAd />
 
         <h2>How to Prepare Documents Professionally</h2>
 
