@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd"; 
 
 export const metadata = {
   title: "Convert PDF to Word Online for Free | PDFImageTools",
@@ -116,6 +117,8 @@ With PDFImageTools PDF to Word converter, you can turn PDFs into DOCX files inst
 no watermark, no signup, and completely free.
 </p>
 
+  <BlogAd />
+
 <h2>Why Convert PDF to Word?</h2>
 
 <ul>
@@ -149,6 +152,8 @@ no watermark, no signup, and completely free.
 Your files are processed securely and deleted automatically after conversion.
 No documents are stored permanently or shared.
 </p>
+
+  <BlogAd />
 
 <h2>Why Use PDFImageTools?</h2>
 
