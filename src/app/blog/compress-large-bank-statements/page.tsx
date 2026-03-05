@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd"; <BlogAd />
 
 export const metadata = {
   title: "How to Compress Large Bank Statements – 2026 | PDFImageTools",
@@ -89,6 +90,8 @@ export default function CompressLargeBankStatements() {
           <li><strong>Save Storage Space:</strong> Large PDFs can take up significant space on your computer or cloud drive. Compression helps you manage storage efficiently.</li>
           <li><strong>Organization:</strong> Compressed PDFs are easier to archive and manage alongside other documents like invoices or receipts.</li>
         </ul>
+
+        <BlogAd />
 
         <h2>Step-by-Step Guide to Compress Large Bank Statements</h2>
 
