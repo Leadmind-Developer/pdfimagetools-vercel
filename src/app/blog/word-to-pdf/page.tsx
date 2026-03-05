@@ -1,6 +1,7 @@
 // src/app/blog/word-to-pdf/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert Word to PDF Online for Free | PDFImageTools",
@@ -106,6 +107,8 @@ export default function WordToPdfBlogPage() {
         Turn DOCX and DOC documents into professional PDFs instantly.  
         PDFImageTools makes Word to PDF conversion fast, free, and secure.
       </p>
+
+      <BlogAd />
 
       <h2>Why Convert Word to PDF</h2>
       <ul>
