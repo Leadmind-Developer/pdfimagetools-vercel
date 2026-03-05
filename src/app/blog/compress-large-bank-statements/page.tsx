@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import BlogAd from "@/components/ads/BlogAd"; <BlogAd />
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "How to Compress Large Bank Statements – 2026 | PDFImageTools",
