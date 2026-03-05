@@ -1,6 +1,7 @@
 // src/app/blog/image-converter/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert Images Online for Free | PDFImageTools",
@@ -99,6 +100,8 @@ export default function ImageConverterBlogPage() {
       <p>
         PDFImageTools makes it easy to convert images between popular formats like JPG, PNG, GIF, and BMP online. Whether you need to compress, change formats, or prepare images for presentations or documents, our tool is free, fast, and secure.
       </p>
+
+      <BlogAd />
 
       <h2>Why Convert Images?</h2>
       <ul>
