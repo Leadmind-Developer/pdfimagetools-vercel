@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Compress PDF Online for Free | PDFImageTools",
@@ -102,6 +103,8 @@ export default function CompressPdfBlog() {
           Compressing PDF files helps reduce size while keeping quality high.
           PDFImageTools offers free PDF compression in seconds.
         </p>
+
+        <BlogAd />
 
         <h2>How PDF Compression Works</h2>
         <ol>
