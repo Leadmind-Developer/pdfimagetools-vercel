@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd"; <BlogAd />
 
 export const metadata = {
   title:
@@ -103,6 +104,8 @@ export default function ConvertPDFToWordFormatting() {
           opens with broken layouts, misplaced images, or distorted fonts.
         </p>
 
+        <BlogAd />
+
         <p>
           Formatting problems are the biggest frustration users face when
           converting PDFs. The good news is that modern tools can preserve
@@ -146,6 +149,8 @@ export default function ConvertPDFToWordFormatting() {
           Advanced converters analyze spacing, typography, and document
           hierarchy to recreate the original design accurately.
         </p>
+
+        <BlogAd />
 
         <h2>Tips to Preserve Perfect Formatting</h2>
 
