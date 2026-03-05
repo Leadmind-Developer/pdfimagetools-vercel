@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+<BlogAd />
 
 export const metadata = {
   title: "Merge PDFs for Job Applications – Free & Easy | PDFImageTools",
@@ -105,6 +106,8 @@ export default function MergeJobApplications() {
           information.
         </p>
 
+        <BlogAd />
+
         <p>
           Merging PDFs into one professional document ensures your application
           appears clean, structured, and easy to review. With PDFImageTools, you
@@ -175,6 +178,8 @@ export default function MergeJobApplications() {
           The sequence of documents matters. Recruiters expect information in a
           logical order.
         </p>
+
+        <BlogAd />
 
         <ol>
           <li>Cover Letter</li>
