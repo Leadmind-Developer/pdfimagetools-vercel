@@ -1,6 +1,7 @@
 // src/app/blog/image-to-pdf/page.jsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert Images to PDF Online for Free | PDFImageTools",
@@ -92,6 +93,8 @@ export default function ImageToPdfBlogPage() {
       <p>
         Converting images to PDF makes it easy to share multiple images in a single document, preserve layout and quality, and ensure compatibility across devices. PDFImageTools allows you to create PDFs from JPG, PNG, and other image formats instantly — no signup required.
       </p>
+
+      <BlogAd />
 
       <h2>Why Convert Images to PDF?</h2>
       <ul>
