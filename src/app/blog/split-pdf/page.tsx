@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Split PDF Online for Free | PDFImageTools",
@@ -73,6 +74,8 @@ Splitting PDF files makes it easy to extract only the pages you need from a docu
 Instead of sharing large files, you can divide PDFs into smaller sections in seconds.
 PDFImageTools lets you split PDFs online for free with no sign-up required.
 </p>
+
+  <BlogAd />
 
 <h2>How PDF Splitting Works</h2>
 <ol>
