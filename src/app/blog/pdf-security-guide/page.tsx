@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "PDF Security Guide: When to Encrypt, Sign, or Lock a PDF | 2026",
@@ -75,6 +76,8 @@ export default function PdfSecurityGuide() {
         <p>
           PDFs often contain sensitive information — financial records, contracts, legal documents, or academic files. Securing these files is essential to prevent unauthorized access, tampering, or data breaches.
         </p>
+
+        <BlogAd />
 
         <h2>1. Password Protection (Encryption)</h2>
         <p>
