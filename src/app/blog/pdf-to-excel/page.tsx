@@ -1,6 +1,7 @@
 // src/app/blog/pdf-to-excel/page.tsx
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Convert PDF to Excel Online for Free | PDFImageTools",
@@ -102,6 +103,8 @@ export default function PdfToExcelBlogPage() {
         PDFImageTools allows you to quickly transform PDF tables and data into editable Excel spreadsheets (XLSX). Keep your data intact and ready for analysis or reporting, all in a fast, secure, and free online environment.
       </p>
 
+      <BlogAd />
+
       <h2>Why Convert PDF to Excel?</h2>
       <ul>
         <li>Extract data from invoices, reports, and statements</li>
@@ -135,6 +138,8 @@ export default function PdfToExcelBlogPage() {
         <li>Fast and accurate conversion</li>
         <li>Privacy-focused service</li>
       </ul>
+
+      <BlogAd />
 
       <h2>Try Our Related Tools</h2>
       <ul className="space-y-1">
