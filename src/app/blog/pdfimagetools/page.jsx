@@ -1,5 +1,6 @@
 // pages/pdf-image-tools.jsx (Next.js example)
 import React from "react";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "PDFImageTools - Free Online PDF and Image Tools",
@@ -31,6 +32,9 @@ const PDFImageToolsPage = () => {
           no account creation, and no complicated steps. Everything works directly
           from your browser.
         </p>
+
+       <BlogAd />
+        
         <p>
           <a href="https://pdfimagetools.app" target="_blank" rel="noopener noreferrer">
             pdfimagetools.app
@@ -63,6 +67,8 @@ const PDFImageToolsPage = () => {
           The system is optimized for speed, and in most cases, conversions finish
           almost instantly.
         </p>
+
+        <BlogAd />
 
         <h2 style={{ color: "#007bff", marginTop: "25px" }}>Tools Available on PDFImageTools</h2>
         <p>PDFImageTools contains a growing list of utilities, and more tools are still being added. Below is an overview of the currently available features.</p>
