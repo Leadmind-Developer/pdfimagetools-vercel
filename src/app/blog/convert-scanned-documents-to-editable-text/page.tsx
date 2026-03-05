@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title:
@@ -104,6 +105,8 @@ export default function ConvertScannedDocumentsOCR() {
           or images. While these files look digital, their text cannot normally
           be edited, searched, or copied.
         </p>
+
+        <BlogAd />
 
         <p>
           Fortunately, modern <strong>OCR (Optical Character Recognition)</strong>
