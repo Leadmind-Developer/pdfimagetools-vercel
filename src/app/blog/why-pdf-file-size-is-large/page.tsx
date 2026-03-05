@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Why PDFs Become Large (And How to Reduce Size) – 2026 | PDFImageTools",
@@ -73,6 +74,8 @@ export default function WhyPdfLarge() {
           In 2026 most Nigerian visa applicants, university students, small business owners, accountants, and remote workers still struggle with oversized PDFs: files rejected by visa portals (VFS, TLScontact, iDATA), WhatsApp “file too large” errors, slow email attachments, or cloud storage eating up space.
         </p>
 
+        <BlogAd />
+
         <p>
           A single 20-page scanned bank statement can easily reach 80–150 MB. A lecturer’s slide deck exported from PowerPoint can hit 50–200 MB. Even “digital-born” PDFs from Canva, Google Docs, or Adobe can bloat unexpectedly.
         </p>
@@ -142,6 +145,8 @@ export default function WhyPdfLarge() {
         <p style={{ marginTop: "1.5rem" }}>
           Goal for visa portals, email, WhatsApp: keep under 5–10 MB. Most users achieve this with “balanced” compression.
         </p>
+
+        <BlogAd />
 
         <h2 style={{ fontSize: "1.875rem", fontWeight: "bold", marginTop: "3rem", marginBottom: "1.5rem" }}>
           Step-by-Step: How to Shrink PDFs Effectively in 2026
