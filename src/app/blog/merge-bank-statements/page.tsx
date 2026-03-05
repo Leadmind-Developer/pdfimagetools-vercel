@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd"; <BlogAd />
 
 export const metadata = {
   title: "Merge Bank Statements into One PDF – Step-by-Step Guide 2026 | PDFImageTools",
@@ -94,6 +95,8 @@ export default function MergeBankStatements() {
           <li><strong>Quick Sharing:</strong> Whether sending to accountants, banks, or colleagues, one file is much easier to share.</li>
         </ul>
 
+        <BlogAd />
+
         <h2>Step-by-Step Guide to Merge Bank Statements</h2>
 
         <p>
@@ -175,6 +178,8 @@ export default function MergeBankStatements() {
           <li><Link href="/pdf-to-excel">PDF to Excel</Link> – Extract transactions into spreadsheets.</li>
           <li><Link href="/remove-image-background">Remove Image Background</Link> – Useful if statements have images or logos you want to clean.</li>
         </ul>
+
+        <BlogAd />
 
         <h2>Why Choose PDFImageTools?</h2>
 
