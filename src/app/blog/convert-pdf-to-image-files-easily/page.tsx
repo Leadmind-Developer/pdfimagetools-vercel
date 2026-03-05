@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd"; <BlogAd />
 
 export const metadata = {
   title: "Convert PDF to Image Files Easily – Free Tool | PDFImageTools",
@@ -105,6 +106,8 @@ export default function PdfToImage() {
           visuals for reports, converting PDFs to image files can save time and
           improve flexibility.
         </p>
+
+        <BlogAd />
 
         <p>
           With the free online PDFImageTools converter, you can quickly transform
@@ -283,6 +286,8 @@ export default function PdfToImage() {
           requires manual cropping. Proper conversion provides cleaner results
           and saves time.
         </p>
+
+        <BlogAd />
 
         <ul>
           <li>Higher resolution output</li>
