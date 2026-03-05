@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title:
@@ -134,6 +135,8 @@ export default function CompressForEmail() {
             easily exceed platform limits. Compression reduces file size
             while preserving readability.
           </p>
+
+          <BlogAd />
 
           <ul>
             <li>Gmail attachment limit: 25 MB</li>
