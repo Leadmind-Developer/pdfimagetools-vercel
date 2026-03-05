@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "15 Best Free PDF Tools Online (No Signup, Tested 2026) | PDFImageTools",
