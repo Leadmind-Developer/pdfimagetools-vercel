@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BlogAd from "@/components/ads/BlogAd";
 
 export const metadata = {
   title: "Best Free Smallpdf Alternative (No Signup Required) – 2026 | PDFImageTools",
@@ -90,6 +91,8 @@ export default function SmallpdfAlternative() {
           Smallpdf has been one of the most popular online PDF tools for years — clean design, reliable conversions, good mobile support. But in 2026 its free tier still comes with daily task limits, slower processing speeds, occasional premium walls, and the constant nudge to upgrade to Pro (around $12–15/month or higher).
         </p>
 
+       <BlogAd />
+
         <p>
           If you're tired of hitting limits while merging visa documents, compressing large lecture notes, converting invoices to Word, or signing contracts — especially on Nigerian networks (MTN, Glo, Airtel) — there's a better free alternative: <strong>PDFImageTools</strong>.
         </p>
@@ -178,6 +181,8 @@ export default function SmallpdfAlternative() {
           <li style={{ marginBottom: "0.75rem" }}>Same popular tools people need: Merge PDFs, Compress PDF, PDF to Word, JPG to PDF, Sign PDF, Rotate, Protect</li>
           <li>No forced account creation just to get your result</li>
         </ul>
+
+        <BlogAd />
 
         <h2 style={{ fontSize: "1.875rem", fontWeight: "bold", marginTop: "3rem", marginBottom: "1.5rem" }}>
           Popular Use Cases Where PDFImageTools Beats Smallpdf Free Tier
