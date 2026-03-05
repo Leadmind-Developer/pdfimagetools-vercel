@@ -118,6 +118,8 @@ const PDFImageToolsPage = () => {
         <h2 style={{ color: "#007bff", marginTop: "25px" }}>Why PDFImageTools Is a Better Alternative</h2>
         <p>No subscription fees, no ads, fast cloud-based file processing, and a clean, minimal design make PDFImageTools ideal for users who need powerful PDF and image tools without spending money.</p>
 
+        <BlogAd />
+
         <h2 style={{ color: "#007bff", marginTop: "25px" }}>Example Use Cases</h2>
         <ul>
           <li>Students convert lecture notes from PDF to PowerPoint.</li>
